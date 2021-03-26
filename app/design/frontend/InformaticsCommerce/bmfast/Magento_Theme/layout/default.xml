@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="header.panel">
+			<block class="Magento\Cms\Block\Block" name="header_contact_block" >
+				<arguments>
+					<argument name="block_id" xsi:type="string">header_contact_block</argument>
+				</arguments>
+			</block>
+			<block class="Magento\Cms\Block\Block" name="header_quote" >
+				<arguments>
+					<argument name="block_id" xsi:type="string">header_quote</argument>
+				</arguments>
+			</block>
+		</referenceBlock>
+
+		<referenceContainer name="footer">
+           <block class="Magento\Cms\Block\Block" name="footer_bottom_links" >
+				<arguments>
+					<argument name="block_id" xsi:type="string">footer_bottom_links</argument>
+				</arguments>
+			</block>
+        </referenceContainer>
+
+
+        <referenceBlock name="header.links" remove="true"/>
+		<referenceBlock name="footer_links" remove="true"/>
+		<referenceBlock name="form.subscribe" remove="true"/>
+		<!-- <move element="authorization-link" destination = "header-wrapper" after="minicart" /> -->
+		
+		<!-- <referenceContainer name="header-wrapper">
+			<block class="Magento\Cms\Block\Block" name="header_login" after="block.search">
+				<arguments>
+					<argument name="block_id" xsi:type="string">header_login</argument>
+				</arguments>
+			</block>
+		</referenceContainer> -->
+
+
+    </body>
+</page>
