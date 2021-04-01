@@ -65,17 +65,19 @@
             transition: left 1s;
             .minisearch {
                 .control {
-                    border-bottom: 1px solid #c2c2c2;
+                    border-bottom: 1px solid #000;
                     input{
                         border: 0;
                         font-size: 36px;
                         padding-bottom: 25px;
                         padding-top: 25px;
+                        padding-left: 0;
                         box-shadow: 0 !important;
                     }
                 }   
                 .actions {
                     .search {
+                        display: none;
                         right: 15%;
                         top: 25px;    
                         &:before {
@@ -84,6 +86,26 @@
                             content: '\f00d';
                             font-family: @font-family-name__FontAwesome;
                         }
+                    }
+                    .close {
+                        position: absolute;
+                        right: 15%;
+                        top: 25px;
+                        font-size: 0; 
+                        background: transparent;
+                        border: 0;
+                        &:before {
+                            font-size: 25px;
+                            color: #000;
+                            content: '\f00d';
+                            font-family: @font-family-name__FontAwesome;
+                        }
+                    }
+                }
+                .password-option {
+                    margin: 5px 0;
+                    span {
+                        color: #c2c2c2;
                     }
                 }
             }

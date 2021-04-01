@@ -55,6 +55,10 @@ $configProvider = $block->getData('configProvider');
                     <div id="search_autocomplete" class="search-autocomplete"></div>
                     <?= $block->getChildHtml() ?>
                 </div>
+                <div class="password-option">
+                    <span><?= $block->escapeHtml(__('#Type atleast 8 character to search')) ?></span>
+                    <span style="margin-left:20px;"><?= $block->escapeHtml(__('#Hit enter to search')) ?></span>           
+                </div>
             </div>
             <div class="actions">
                 <button type="submit"
