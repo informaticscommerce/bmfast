@@ -287,6 +287,40 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .block-search {
         margin-top: @indent__s;
+
+        .block-content {
+            padding: 0 15px;
+            min-height: 80px;
+            position: absolute;
+            top: 0;
+            z-index: 100;
+            .label {
+                visibility: hidden;
+            }
+            .minisearch {
+                .control {
+                    border: 0;
+                    input{
+                        font-size: 14px;
+                        position: relative;
+                        left: 0;
+                        border-bottom: 1px solid #000;
+                    }
+                }   
+                .actions {
+                    .close {
+                        right: 0;
+                        top: 0;
+                        &:before {
+                            font-size: 22px;
+                        }
+                    }
+                }
+                .password-option {
+                    display: none;
+                }
+            }
+        }
     }
 }
 
@@ -341,6 +375,11 @@
                 &:before {
                     .lib-css(color, @color-gray20);
                 }
+            }
+        }
+        .block-content {
+            .password-option {
+                text-align: left;
             }
         }
     }
