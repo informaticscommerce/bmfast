@@ -1,0 +1,75 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Mage4\CategoryThumbnail\Helper\Data;
+use Magento\Catalog\Helper\Output;
+
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php
+/** @var \Mage4\CategoryThumbnail\Helper\Data $helperThumbnail */
+$helperThumbnail = $this->helper(Mage4\CategoryThumbnail\Helper\Data::class);
+$objectManager = $helperThumbnail->getObjectManager();
+$storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+$currentStore = $storeManager->getStore();
+$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+/** @var \Magento\Catalog\Model\CategoryFactory $categoryFactory */
+$categoryFactory = $objectManager->create(\Magento\Catalog\Model\CategoryFactory::class);
+$currentCategory = $block->getCurrentCategory();
+
+$childrenIds = explode(',', $currentCategory->getChildren());
+$categories = [];
+?>
+<?php if(empty($childrenIds)): ?>
+    <?php return; ?>
+<?php endif; ?>
+
+<div class="row subcategories">
+    <?php foreach ($childrenIds as $subCatId): ?>
+        <?php
+        /** @var \Magento\Catalog\Model\Category $subCategory */
+        $subCategory = $categoryFactory->create()->load($subCatId);
+        $categoryImage = substr($mediaUrl, 0, -1). $subCategory->getThumbnail();
+        ?>
+
+        <div class="item">
+            <div class="item-inner">
+                <div class="images-content">
+                    <a href="<?= $subCategory->getUrl() ?>"
+                       title="<?= $subCategory->getName() ?>"
+                       class="sub-category-image">
+                        <img src="<?= $categoryImage ?>"
+                             alt="<?= $subCategory->getName() ?>" />
+                    </a>
+                </div>
+                <div class="box-content">
+                    <h2 class="category-name">
+                        <a href="<?= $subCategory->getUrl() ?>"
+                           title="<?= $subCategory->getName() ?>">
+                            <?= $subCategory->getName() ?>
+                        </a>
+                    </h2>
+                    <h3 class="category-description">
+                        <?php
+                        $description = strip_tags($subCategory->getDescription());
+                        if (strlen($description) > 70) {
+                            $descriptionCut = substr($description, 0, 70);
+                            $trimmedDescription = substr($descriptionCut, 0, strrpos($descriptionCut, ' ')).'...';
+                        }
+                        echo $trimmedDescription;
+                        ?>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>

@@ -8,7 +8,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block class="Magento\Catalog\Block\Category\View" name="subcategories.alpha" template="Magento_Catalog::product/subcategories.phtml"/>
+            <block class="Magento\Catalog\Block\Category\View" name="category.subcat" template="Magento_Catalog::category/cat-thumbnail.phtml"/>
         </referenceContainer>        
         
         <referenceContainer name="page.top">
@@ -31,16 +31,5 @@
         <move element="breadcrumbs" destination="page.wrapper" before="main.content" />
         <move element="category.view.container" destination="category.view.top.container" />
         <referenceContainer name="page.main.title" remove="true"/>
-        
-        <!--<referenceBlock name="page.main.title" destination="page.top" move="true" />-->
-        <!--<referenceBlock name="category.view.container" destination="page.top" after="page.main.title" move="true" />-->
-
-		<!-- <move element="page.main.title" destination="category.view.container" before="category.description" /> -->
-		
-
-        <!-- <move element="category.image" destination="page.wrapper" before="main.content" />
-        <referenceBlock name="category.image" remove="true"/> 
-        <move element="category.image" destination="page.wrapper" before="main.content" />
-        <move element="category.description" destination="page.wrapper" after="category.image" /> -->
     </body>
 </page>
