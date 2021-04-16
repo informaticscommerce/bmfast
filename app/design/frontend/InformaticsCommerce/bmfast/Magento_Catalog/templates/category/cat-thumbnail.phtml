@@ -41,8 +41,16 @@ $categories = [];
         /** @var \Magento\Catalog\Model\Category $subCategory */
         $subCategory = $categoryFactory->create()->load($subCatId);
         $categoryImage = substr($mediaUrl, 0, -1). $subCategory->getThumbnail();
-        if(!file_exists($directory->getRoot().$subCategory->getThumbnail())) {
-            $categoryImage = $mediaUrl. 'pub/media/catalog/category/no-image.jpeg';
+
+        if (strpos($subCategory->getThumbnail(), 'pub') !== false) {
+            if(empty($subCategory->getThumbnail()) || !file_exists($directory->getRoot().$subCategory->getThumbnail())) {
+                $categoryImage = $mediaUrl. 'pub/media/catalog/category/no-image.jpeg';
+            }
+        }
+        else {
+            if(empty($subCategory->getThumbnail()) || !file_exists($directory->getRoot().'/pub/'.$subCategory->getThumbnail())) {
+                $categoryImage = $mediaUrl. 'pub/media/catalog/category/no-image.jpeg';
+            }
         }
         ?>
 
