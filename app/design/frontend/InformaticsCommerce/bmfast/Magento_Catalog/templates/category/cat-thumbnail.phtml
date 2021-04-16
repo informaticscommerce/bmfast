@@ -63,9 +63,9 @@ $categories = [];
                         $description = strip_tags($subCategory->getDescription());
                         if (strlen($description) > 70) {
                             $descriptionCut = substr($description, 0, 70);
-                            $trimmedDescription = substr($descriptionCut, 0, strrpos($descriptionCut, ' ')).'...';
+                            $description = substr($descriptionCut, 0, strrpos($descriptionCut, ' ')).'...';
                         }
-                        echo $trimmedDescription;
+                        echo $description;
                         ?>
                     </h3>
                 </div>
