@@ -20,6 +20,8 @@ use Magento\Catalog\Helper\Output;
 $helperThumbnail = $this->helper(Mage4\CategoryThumbnail\Helper\Data::class);
 $objectManager = $helperThumbnail->getObjectManager();
 $storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+/** @var \Magento\Framework\Filesystem\DirectoryList $directory */
+$directory = $objectManager->get('\Magento\Framework\Filesystem\DirectoryList');
 $currentStore = $storeManager->getStore();
 $mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
 /** @var \Magento\Catalog\Model\CategoryFactory $categoryFactory */
@@ -39,6 +41,9 @@ $categories = [];
         /** @var \Magento\Catalog\Model\Category $subCategory */
         $subCategory = $categoryFactory->create()->load($subCatId);
         $categoryImage = substr($mediaUrl, 0, -1). $subCategory->getThumbnail();
+        if(!file_exists($directory->getRoot().$subCategory->getThumbnail())) {
+            $categoryImage = $mediaUrl. 'pub/media/catalog/category/no-image.jpeg';
+        }
         ?>
 
         <div class="item">
