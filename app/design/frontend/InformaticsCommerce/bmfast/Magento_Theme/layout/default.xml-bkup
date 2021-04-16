@@ -36,10 +36,12 @@
 			</block>
         </referenceContainer>
 
-
+        <move element="footer_cities" destination="before.body.end"/>
+        <referenceBlock name="copyright" remove="true"/>
         <referenceBlock name="header.links" remove="true"/>
 		<referenceBlock name="footer_links" remove="true"/>
 		<referenceBlock name="form.subscribe" remove="true"/>
+		<referenceBlock name="currency" remove="true" /> 
 
 
 		

@@ -36,7 +36,12 @@
 			</block>
         </referenceContainer>
 
+        
+        <!-- <move element="category.image" destination="page.wrapper" before="main.content" /> -->
+        <move element="breadcrumbs" destination="page.wrapper" before="main.content"/>
         <move element="footer_cities" destination="before.body.end"/>
+        <!-- <referenceBlock name="page.main.title" remove="true"/> -->
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/> 
         <referenceBlock name="copyright" remove="true"/>
         <referenceBlock name="header.links" remove="true"/>
 		<referenceBlock name="footer_links" remove="true"/>
