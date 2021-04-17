@@ -19,7 +19,20 @@ use Magento\Catalog\Helper\Output;
 /** @var \Mage4\CategoryThumbnail\Helper\Data $helperThumbnail */
 $helperThumbnail = $this->helper(Mage4\CategoryThumbnail\Helper\Data::class);
 $objectManager = $helperThumbnail->getObjectManager();
-$storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+$currentCategory = $block->getCurrentCategory();
+?>
+<?php if(!$currentCategory->getChildrenCount()): ?>
+    <?php return; ?>
+<?php endif; ?>
+
+<?php
+$categories = [];
+$childrenIds = explode(',', $currentCategory->getChildren());
+
+/** @var \Magento\Catalog\Model\CategoryFactory $categoryFactory */
+$categoryFactory = $objectManager->create(\Magento\Catalog\Model\CategoryFactory::class);
+/** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
 /** @var \Magento\Framework\Filesystem\DirectoryList $directory */
 $directory = $objectManager->get('\Magento\Framework\Filesystem\DirectoryList');
 $absolutePath = $directory->getRoot();
@@ -29,16 +42,7 @@ $mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_
 if (strpos($mediaUrl, 'pub') == false) {
     $absolutePath .= '/pub';
 }
-/** @var \Magento\Catalog\Model\CategoryFactory $categoryFactory */
-$categoryFactory = $objectManager->create(\Magento\Catalog\Model\CategoryFactory::class);
-$currentCategory = $block->getCurrentCategory();
-
-$childrenIds = explode(',', $currentCategory->getChildren());
-$categories = [];
 ?>
-<?php if(empty($childrenIds)): ?>
-    <?php return; ?>
-<?php endif; ?>
 
 <div class="row subcategories">
     <?php foreach ($childrenIds as $subCatId): ?>
