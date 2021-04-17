@@ -21,11 +21,12 @@ use Magento\Framework\App\Action\Action;
 /** @var \Mage4\CategoryThumbnail\Helper\Data $helperThumbnail */
 $helperThumbnail = $this->helper(Mage4\CategoryThumbnail\Helper\Data::class);
 $objectManager = $helperThumbnail->getObjectManager();
+/** @var \Magento\Framework\Registry $registry */
 $registry = $objectManager->get('\Magento\Framework\Registry');
 /** @var \Magento\Catalog\Model\Category $category */
 $category = $registry->registry('current_category');
 
-if($category->getId() && $category->getChildrenCount() > 0) {
+if(is_object($category) && $category->getId() && $category->getChildrenCount() > 0) {
     return;
 }
 
