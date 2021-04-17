@@ -4,9 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-use Mage4\CategoryThumbnail\Helper\Data;
 use Magento\Framework\App\Action\Action;
-
 ?>
 <?php
 /**
@@ -19,7 +17,7 @@ use Magento\Framework\App\Action\Action;
 ?>
 <?php
 /** @var \Mage4\CategoryThumbnail\Helper\Data $helperThumbnail */
-$helperThumbnail = $this->helper(Mage4\CategoryThumbnail\Helper\Data::class);
+$helperThumbnail = $this->helper(\Mage4\CategoryThumbnail\Helper\Data::class);
 $objectManager = $helperThumbnail->getObjectManager();
 /** @var \Magento\Framework\Registry $registry */
 $registry = $objectManager->get('\Magento\Framework\Registry');
