@@ -111,6 +111,44 @@
         }
     }
 
+    .subcategories {
+        .item {
+            .item-inner {
+                margin-bottom: 15px;
+            }
+            .images-content {
+                max-height: 280px;
+            }
+            .box-content {
+                .category-name {
+                    font-size: 18px;
+                    font-weight: 400;
+                    font-family: @font-family-name__roboto-Medium;
+                    margin-bottom: 12px;
+                    a {
+                        color: #222;
+                        text-decoration: none;
+                    }
+                }
+                .category-description {
+                    color: #444;
+                    font-size: 13px;
+                    margin-top: 12px;
+                }
+            }
+            .sub-category-image {
+                img {
+                    border: 1px solid #b0b2b6;
+                    &:hover {
+                        border: 2px solid #6a95dc !important;
+                        background: rgba(246, 249, 255, 0.5);
+                        box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.1);
+                    }
+                }
+            }
+        }    
+    }
+
     
     //
     //  Product images general container
@@ -650,6 +688,13 @@
             .lib-vendor-prefix-order(-1);
         }
     }
+    .subcategories {
+        padding-left: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 25px;
+        grid-auto-rows: max-content;
+    }
 }
 
 //
@@ -802,6 +847,17 @@
         grid-column-gap: 25px;
         grid-auto-rows: max-content;
     }
+
+    .subcategories {
+        .item {
+            .sub-category-image {
+                img {
+                    min-height: 276px;
+                }
+            }
+        }    
+    }
+
 
     //
     //  Category page 1 column layout
