@@ -19,40 +19,41 @@ use Magento\Catalog\Helper\Output;
 /** @var \Mage4\CategoryThumbnail\Helper\Data $helperThumbnail */
 $helperThumbnail = $this->helper(Mage4\CategoryThumbnail\Helper\Data::class);
 $objectManager = $helperThumbnail->getObjectManager();
-$storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
-/** @var \Magento\Framework\Filesystem\DirectoryList $directory */
-$directory = $objectManager->get('\Magento\Framework\Filesystem\DirectoryList');
-$currentStore = $storeManager->getStore();
-$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
-/** @var \Magento\Catalog\Model\CategoryFactory $categoryFactory */
-$categoryFactory = $objectManager->create(\Magento\Catalog\Model\CategoryFactory::class);
 $currentCategory = $block->getCurrentCategory();
-
-$childrenIds = explode(',', $currentCategory->getChildren());
-$categories = [];
 ?>
-<?php if(empty($childrenIds)): ?>
+<?php if(!$currentCategory->getChildrenCount()): ?>
     <?php return; ?>
 <?php endif; ?>
+
+<?php
+$categories = [];
+$childrenIds = explode(',', $currentCategory->getChildren());
+
+/** @var \Magento\Catalog\Model\CategoryFactory $categoryFactory */
+$categoryFactory = $objectManager->create(\Magento\Catalog\Model\CategoryFactory::class);
+/** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+/** @var \Magento\Framework\Filesystem\DirectoryList $directory */
+$directory = $objectManager->get('\Magento\Framework\Filesystem\DirectoryList');
+$absolutePath = $directory->getRoot();
+$currentStore = $storeManager->getStore();
+$baseUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+if (strpos($mediaUrl, 'pub') == false) {
+    $absolutePath .= '/pub';
+}
+?>
 
 <div class="row subcategories">
     <?php foreach ($childrenIds as $subCatId): ?>
         <?php
         /** @var \Magento\Catalog\Model\Category $subCategory */
         $subCategory = $categoryFactory->create()->load($subCatId);
-        $categoryImage = substr($mediaUrl, 0, -1). $subCategory->getThumbnail();
-
-        if (strpos($subCategory->getThumbnail(), 'pub') !== false) {
-            if(empty($subCategory->getThumbnail()) || !file_exists($directory->getRoot().$subCategory->getThumbnail())) {
-                $categoryImage = $mediaUrl. 'pub/media/catalog/category/no-image.jpeg';
-            }
+        $categoryImage = substr($baseUrl, 0, -1). $subCategory->getThumbnail();
+        if(empty($subCategory->getThumbnail()) || !file_exists($absolutePath.$subCategory->getThumbnail())) {
+            $categoryImage = $mediaUrl. 'catalog/category/no-image.jpeg';
         }
-        else {
-            if(empty($subCategory->getThumbnail()) || !file_exists($directory->getRoot().'/pub/'.$subCategory->getThumbnail())) {
-                $categoryImage = $mediaUrl. 'pub/media/catalog/category/no-image.jpeg';
-            }
-        }
-        ?>
+        ?>        
 
         <div class="item">
             <div class="item-inner">
