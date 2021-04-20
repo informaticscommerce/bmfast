@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mage4
+ *
+ * NOTICE OF LICENSE
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Mage4_ExtendMagentoCatalog" setup_version="1.0.2">
+        <sequence>
+            <module name="Magento_Catalog"/>
+        </sequence>
+    </module>
+</config>
