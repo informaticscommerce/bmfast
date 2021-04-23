@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php
+/** @var \Mage4\CategoryThumbnail\Helper\Data $helperThumbnail */
+
+?>
+
+
+<div class="banner-content">
+    <span class="banner-description">
+        <?php if ($_topDescription = $block->getCurrentCategory()->gettopDescription()): ?>
+            <div class="top-description">
+                <div class="category-top-description">
+                    <?= $_topDescription ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </span>
+</div>

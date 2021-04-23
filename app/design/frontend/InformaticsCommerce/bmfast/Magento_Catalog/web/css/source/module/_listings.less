@@ -71,6 +71,14 @@
 
                 .page-products & {
                     width: 240px;
+
+                    background: #ffffff;
+                    box-shadow: none;
+                    border: 1px solid #bbbbbb;
+                    margin: -10px;
+                    padding: 9px;
+                    position: relative;
+                    z-index: 9;
                 }
             }
 
@@ -299,8 +307,8 @@
         .products-grid & {
             &:hover,
             &.active {
-                .lib-css(background, @product-item__hover__background-color);
-                .lib-css(box-shadow, @product-item__hover__box-shadow);
+                //.lib-css(background, @product-item__hover__background-color);
+                //.lib-css(box-shadow, @product-item__hover__box-shadow);
                 border: 1px solid @color-gray-light2;
                 margin: -10px;
                 padding: 9px;
@@ -388,12 +396,31 @@
             &:not(:hover) {
                 &:not(.active) {
                     .product-item-inner {
-                        &:extend(.abs-visually-hidden-desktop-s all);
+                        //&:extend(.abs-visually-hidden-desktop-s all);
                     }
                 }
             }
         }
     }
+    .product-items {
+        .product-item {
+            margin: 20px;
+            .product-item-info {
+                .product-item-details {
+                    .product-item-inner {
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                        box-shadow: none;
+                        overflow: visible;
+                        border: 0;
+                        margin: 0;
+                        padding: 0;
+                    }
+                }    
+            }
+        }    
+    }    
 
     .products-grid {
         .product-item {

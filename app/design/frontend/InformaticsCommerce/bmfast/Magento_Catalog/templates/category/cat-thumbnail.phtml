@@ -21,7 +21,7 @@ $helperThumbnail = $this->helper(Mage4\CategoryThumbnail\Helper\Data::class);
 $objectManager = $helperThumbnail->getObjectManager();
 $currentCategory = $block->getCurrentCategory();
 ?>
-<?php if(!$currentCategory->getChildrenCount()): ?>
+<?php if (!$currentCategory->getChildrenCount()): ?>
     <?php return; ?>
 <?php endif; ?>
 
@@ -44,16 +44,29 @@ if (strpos($mediaUrl, 'pub') == false) {
 }
 ?>
 
+
+
+<?php if ($_middleDescription = $block->getCurrentCategory()->getMiddleDescription()): ?>
+    <div class="middle-description">
+        <div class="category-middle-description">
+            <?= $_middleDescription ?>
+        </div>
+    </div>
+<?php endif; ?>
+
+
+
 <div class="row subcategories">
     <?php foreach ($childrenIds as $subCatId): ?>
         <?php
         /** @var \Magento\Catalog\Model\Category $subCategory */
         $subCategory = $categoryFactory->create()->load($subCatId);
-        $categoryImage = substr($baseUrl, 0, -1). $subCategory->getThumbnail();
-        if(empty($subCategory->getThumbnail()) || !file_exists($absolutePath.$subCategory->getThumbnail())) {
-            $categoryImage = $mediaUrl. 'catalog/category/no-image.jpeg';
+        $categoryImage = substr($baseUrl, 0, -1) . $subCategory->getThumbnail();
+        if (empty($subCategory->getThumbnail()) || !file_exists($absolutePath . $subCategory->getThumbnail())) {
+            $categoryImage = $mediaUrl . 'catalog/category/no-image.jpeg';
         }
-        ?>        
+        ?>
+
 
         <div class="item">
             <div class="item-inner">
@@ -62,8 +75,25 @@ if (strpos($mediaUrl, 'pub') == false) {
                        title="<?= $subCategory->getName() ?>"
                        class="sub-category-image">
                         <img src="<?= $categoryImage ?>"
-                             alt="<?= $subCategory->getName() ?>" />
+                             alt="<?= $subCategory->getName() ?>"/>
+
                     </a>
+                    <div class="roll-0ver-description">
+                        <span class="desc-content">
+                            <p>
+                                <?php
+                                $description = strip_tags($subCategory->getDescription());
+                                if (strlen($description) > 100) {
+                                    $descriptionCut = substr($description, 0, 100);
+                                    $description = substr($descriptionCut, 0, strrpos($descriptionCut, ' ')) . '...';
+                                }
+                                echo $description;
+                                ?>
+                            </p>
+                            <a href="<?= $subCategory->getUrl() ?>">Explore</a>
+
+                        </span>
+                    </div>    
                 </div>
                 <div class="box-content">
                     <h2 class="category-name">
@@ -77,20 +107,33 @@ if (strpos($mediaUrl, 'pub') == false) {
                         $description = strip_tags($subCategory->getDescription());
                         if (strlen($description) > 50) {
                             $descriptionCut = substr($description, 0, 50);
-                            $description = substr($descriptionCut, 0, strrpos($descriptionCut, ' ')).'...';
+                            $description = substr($descriptionCut, 0, strrpos($descriptionCut, ' ')) . '...';
                         }
                         echo $description;
                         ?>
                     </h3>
+
+
                 </div>
             </div>
         </div>
+
+
     <?php endforeach; ?>
 </div>
+
+<?php if ($_bottomDescription = $block->getCurrentCategory()->getBottomDescription()): ?>
+    <div class="bottom-description">
+        <div class="category-bottom-description">
+            <?= $_bottomDescription ?>
+        </div>
+    </div>
+<?php endif; ?>
+
 <script type="text/javascript">
-	require([
-		'jquery'
-	], function ($) {
-		jQuery('body').addClass('page-subcategories');
-	});		
+    require([
+        'jquery'
+    ], function ($) {
+        jQuery('body').addClass('page-subcategories');
+    });
 </script>

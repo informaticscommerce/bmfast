@@ -9,6 +9,10 @@
     <body>
         <referenceContainer name="content">
             <block class="Magento\Catalog\Block\Category\View" name="category.subcat" template="Magento_Catalog::category/cat-thumbnail.phtml"/>
+        </referenceContainer>  
+
+		<referenceContainer name="category.view.container">
+            <block class="Magento\Catalog\Block\Category\View" name="category.title" template="Magento_Catalog::category/cat-banner-desc.phtml"/>
         </referenceContainer>        
         
         <referenceContainer name="page.top">
@@ -16,6 +20,11 @@
 		</referenceContainer>
 
         <referenceContainer name="page.wrapper">
+            <block class="Magento\Cms\Block\Block" name="bm_product_test"  before="bm_blog_news">
+				<arguments>
+					<argument name="block_id" xsi:type="string">bm_product_test</argument>
+				</arguments>
+			</block>
             <block class="Magento\Cms\Block\Block" name="bm_blog_news"  before="pre_footer_logos">
 				<arguments>
 					<argument name="block_id" xsi:type="string">bm_blog_news</argument>
@@ -30,6 +39,9 @@
 
         <move element="breadcrumbs" destination="page.wrapper" before="main.content" />
         <move element="category.view.container" destination="category.view.top.container" />
+
+		<move element="category.image" destination="category.view.top.container" before="-" />
+		<move element="category.description" destination="content" before="-"/>
         <referenceContainer name="page.main.title" remove="true"/>
     </body>
 </page>
