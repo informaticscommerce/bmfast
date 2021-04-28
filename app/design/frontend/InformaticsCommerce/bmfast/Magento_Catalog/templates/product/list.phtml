@@ -31,6 +31,9 @@ if(is_object($category) && $category->getId() && $category->getChildrenCount() >
 $_productCollection = $block->getLoadedProductCollection();
 /** @var \Magento\Catalog\Helper\Output $_helper */
 $_helper = $block->getData('outputHelper');
+
+/** @var \Magento\Catalog\Block\Product\View $productView */
+$productView = $objectManager->get('\Magento\Catalog\Block\Product\View');
 ?>
 <?php if (!$_productCollection->count()): ?>
     <div class="message info empty">
@@ -71,12 +74,6 @@ $_helper = $block->getData('outputHelper');
                             . 'top:' . $productImage->getHeight() . 'px;';
                     }
                     ?>
-                    <?php // Product Image ?>
-                    <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
-                       class="product photo product-item-photo"
-                       tabindex="-1">
-                        <?= $productImage->toHtml() ?>
-                    </a>
                     <div class="product details product-item-details">
                         <?php
                             $_productNameStripped = $block->stripTags($_product->getName(), null, true);
@@ -87,6 +84,34 @@ $_helper = $block->getData('outputHelper');
                                 <?=/* @noEscape */ $_helper->productAttribute($_product, $_product->getName(), 'name')?>
                             </a>
                         </strong>
+                    </div>
+                    <?php // Product Image ?>
+                    <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                       class="product photo product-item-photo"
+                       tabindex="-1">
+                        <?= $productImage->toHtml() ?>
+                    </a>
+                    <div class="product details product-item-details">
+                        <div class="actions-primary">
+                            <?php if ($_product->isSaleable()):?>
+                                <input type="number"
+                                       name="hidden_qty"
+                                       id="hidden_qty_<?php echo $_product->getId(); ?>"
+                                       min="0"
+                                       value="<?= $productView->getProductDefaultQty($_product) * 1 ?>"
+                                       title="<?= $productView->escapeHtmlAttr(__('Qty')) ?>"
+                                       class="input-text qty"
+                                       />
+                            <?php endif; ?>
+
+                            <?php if ($_product->isAvailable()):?>
+                                <div class="stock available">
+                                    <span><?= $escaper->escapeHtml(__('In stock')) ?></span></div>
+                            <?php else:?>
+                                <div class="stock unavailable">
+                                    <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span></div>
+                            <?php endif; ?>
+                        </div>
                         <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
                         <?= /* @noEscape */ $block->getProductPrice($_product) ?>
                         <?php if ($_product->isAvailable()):?>
@@ -111,6 +136,14 @@ $_helper = $block->getData('outputHelper');
                                                    /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED]
                                                     ?>">
                                             <?= $block->getBlockHtml('formkey') ?>
+
+                                            <input type="hidden"
+                                                   name="qty"
+                                                   id="qty_<?php echo $_product->getId(); ?>"
+                                                   value="<?= $productView->getProductDefaultQty($_product) * 1 ?>"
+                                                   class="input-text qty"
+                                                   />
+
                                             <button type="submit"
                                                     title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
                                                     class="action tocart primary">
@@ -118,6 +151,9 @@ $_helper = $block->getData('outputHelper');
                                             </button>
                                         </form>
                                     <?php else:?>
+                                        <?php
+                                        /*
+                                        ?>
                                         <?php if ($_product->isAvailable()):?>
                                             <div class="stock available">
                                                 <span><?= $escaper->escapeHtml(__('In stock')) ?></span></div>
@@ -125,6 +161,9 @@ $_helper = $block->getData('outputHelper');
                                             <div class="stock unavailable">
                                                 <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span></div>
                                         <?php endif; ?>
+                                        <?php
+                                        */
+                                        ?>
                                     <?php endif; ?>
                                 </div>
                                 <?= strpos($pos, $viewMode . '-primary') ?
@@ -180,3 +219,22 @@ $_helper = $block->getData('outputHelper');
         </script>
     <?php endif; ?>
 <?php endif; ?>
+
+
+<script>
+    require([
+        'jquery',
+        'domReady!'
+    ], function ($) {
+        $(document).ready(function () {
+            $('input[id^="hidden_qty_"]').change(function() {
+                var prod = $(this).attr('id');
+                var prodSplit = prod.split('_');
+                if(prodSplit[2] != undefined) {
+                    var prodId = prodSplit[2];
+                    $('#qty_'+prodId).val($(this).val());
+                }
+            });
+        });
+    })
+</script>

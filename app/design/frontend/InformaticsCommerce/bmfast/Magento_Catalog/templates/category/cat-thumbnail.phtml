@@ -6,7 +6,6 @@
 
 use Mage4\CategoryThumbnail\Helper\Data;
 use Magento\Catalog\Helper\Output;
-
 ?>
 <?php
 /**
@@ -44,8 +43,6 @@ if (strpos($mediaUrl, 'pub') == false) {
 }
 ?>
 
-
-
 <?php if ($_middleDescription = $block->getCurrentCategory()->getMiddleDescription()): ?>
     <div class="middle-description">
         <div class="category-middle-description">
@@ -53,8 +50,6 @@ if (strpos($mediaUrl, 'pub') == false) {
         </div>
     </div>
 <?php endif; ?>
-
-
 
 <div class="row subcategories">
     <?php foreach ($childrenIds as $subCatId): ?>
@@ -67,7 +62,6 @@ if (strpos($mediaUrl, 'pub') == false) {
         }
         ?>
 
-
         <div class="item">
             <div class="item-inner">
                 <div class="images-content">
@@ -75,8 +69,8 @@ if (strpos($mediaUrl, 'pub') == false) {
                        title="<?= $subCategory->getName() ?>"
                        class="sub-category-image">
                         <img src="<?= $categoryImage ?>"
-                             alt="<?= $subCategory->getName() ?>"/>
-
+                             alt="<?= $subCategory->getName() ?>"
+                        />
                     </a>
                     <div class="roll-0ver-description">
                         <span class="desc-content">
@@ -125,8 +119,6 @@ if (strpos($mediaUrl, 'pub') == false) {
         </div>
     </div>
 <?php endif; ?>
-
-
 
 <script type="text/javascript">
     require([
