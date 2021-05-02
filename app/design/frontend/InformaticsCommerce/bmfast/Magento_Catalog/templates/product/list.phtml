@@ -96,24 +96,18 @@ $productView = $objectManager->get('\Magento\Catalog\Block\Product\View');
                             <div class="qty-area">
                             <?php if ($_product->isSaleable()):?>
                                <div id="custom-qty" class="control" data-bind="scope: 'qty-counter'">
-                                    <span><?= $escaper->escapeHtml(__('Qty:')) ?></span> <!-- ko template: getTemplate() --><!-- /ko -->
-                                    <script type="text/x-magento-init">
-                                        {
-                                            "#custom-qty": {
-                                                "Magento_Ui/js/core/app": {
-                                                    "components": {
-                                                        "qty-counter": {
-                                                            "component": "qty-counter",
-                                                            "config": {
-                                                                "qty": <?php echo $block->getProductDefaultQty() * 1 ?>,
-                                                                "dataValidate": <?php echo json_encode($block->getQuantityValidators()) ?>
-                                                            }
-                                                        }
-                                                     }
-                                                }
-                                            }
-                                        }
-                                    </script>
+                                    <span><?= $escaper->escapeHtml(__('Qty:')) ?></span>
+                                    <?php $id = "hidden_qty_".$_product->getId(); ?>
+                                    <button id="<?php echo $_product->getId(); ?>" type="button" class="reduced items">-</button>
+                                    <input type="text"
+                                           name="qty"
+                                           id="<?= $id ?>"
+                                           value="1"
+                                           title="<?= /* @escapeNotVerified */ __('Qty') ?>"
+                                           class="input-text qty"
+                                           data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                                           />
+                                    <button id="<?php echo $_product->getId(); ?>" type="button" class="increase items">+</button>
                                 </div>
                             <?php endif; ?>
 
@@ -241,6 +235,27 @@ $productView = $objectManager->get('\Magento\Catalog\Block\Product\View');
         'domReady!'
     ], function ($) {
         $(document).ready(function () {
+
+            $('.reduced.items').click(function () {
+                var result = document.getElementById('hidden_qty_'+$(this).attr('id'));
+                var qty = result.value;
+                if( !isNaN( qty ) && qty > 1 ) {
+                    result.value--;
+                    $('input[id^="hidden_qty_"]').trigger('change');
+                }
+                return false;
+            });
+
+            $('.increase.items').click(function () {
+                var result = document.getElementById('hidden_qty_'+$(this).attr('id'));
+                var qty = result.value;
+                if( !isNaN( qty )) {
+                    result.value++;
+                    $('input[id^="hidden_qty_"]').trigger('change');
+                }
+                return false;
+            });
+
             $('input[id^="hidden_qty_"]').change(function() {
                 var prod = $(this).attr('id');
                 var prodSplit = prod.split('_');
