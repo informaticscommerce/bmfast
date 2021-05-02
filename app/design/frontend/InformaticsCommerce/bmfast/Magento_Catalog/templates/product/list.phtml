@@ -93,15 +93,28 @@ $productView = $objectManager->get('\Magento\Catalog\Block\Product\View');
                     </a>
                     <div class="product details product-item-details">
                         <div class="actions-primary">
+                            <div class="qty-area">
                             <?php if ($_product->isSaleable()):?>
-                                <input type="number"
-                                       name="hidden_qty"
-                                       id="hidden_qty_<?php echo $_product->getId(); ?>"
-                                       min="0"
-                                       value="<?= $productView->getProductDefaultQty($_product) * 1 ?>"
-                                       title="<?= $productView->escapeHtmlAttr(__('Qty')) ?>"
-                                       class="input-text qty"
-                                       />
+                               <div id="custom-qty" class="control" data-bind="scope: 'qty-counter'">
+                                    <span><?= $escaper->escapeHtml(__('Qty:')) ?></span> <!-- ko template: getTemplate() --><!-- /ko -->
+                                    <script type="text/x-magento-init">
+                                        {
+                                            "#custom-qty": {
+                                                "Magento_Ui/js/core/app": {
+                                                    "components": {
+                                                        "qty-counter": {
+                                                            "component": "qty-counter",
+                                                            "config": {
+                                                                "qty": <?php echo $block->getProductDefaultQty() * 1 ?>,
+                                                                "dataValidate": <?php echo json_encode($block->getQuantityValidators()) ?>
+                                                            }
+                                                        }
+                                                     }
+                                                }
+                                            }
+                                        }
+                                    </script>
+                                </div>
                             <?php endif; ?>
 
                             <?php if ($_product->isAvailable()):?>
@@ -111,6 +124,7 @@ $productView = $objectManager->get('\Magento\Catalog\Block\Product\View');
                                 <div class="stock unavailable">
                                     <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span></div>
                             <?php endif; ?>
+                            </div>
                         </div>
                         <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
                         <?= /* @noEscape */ $block->getProductPrice($_product) ?>
