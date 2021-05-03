@@ -23,6 +23,8 @@
 				</arguments>
 			</block>
 		</referenceBlock>
+
+
 		<referenceContainer name="footer">
            <block class="Magento\Cms\Block\Block" name="footer_bottom_links" >
 				<arguments>
@@ -47,6 +49,8 @@
 		<referenceBlock name="footer_links" remove="true"/>
 		<referenceBlock name="form.subscribe" remove="true"/>
 		<referenceBlock name="currency" remove="true" /> 
+		<referenceBlock name="store.links" remove="true" />
+		<referenceBlock name="store.settings" remove="true" />
 
 
 		

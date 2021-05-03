@@ -574,7 +574,6 @@
             }
             .submenu {
                 background: #f8d83c !important;
-                border-top: 5px solid #ea7d18 !important;
                 min-width: 255px !important;
                 a.ui-corner-all {
                     border-bottom: 1px solid #c6ac30;
@@ -584,6 +583,9 @@
                         font-family: @font-family-name__roboto-Medium;
                     }
                 }
+            }
+            .ui-menu-divider {
+                display: none;
             }
         }
     }
@@ -673,7 +675,22 @@
         display: block;
     }
 
+    .sections.nav-sections {
+        background: #f6f9ff;
+    }
+
+    .nav-sections-item-title {
+        text-align: left;
+        .nav-sections-item-switch {
+            padding-left: 15px;
+            font-size: 18px;
+            font-family: @font-family-name__poppins-Bold;
+            color: #2b6b9b !important;
+        }
+    }
+
     .nav-sections-item-content{
+        padding: 0;
         .navigation {
             .parent {
                 .level-top {
@@ -681,9 +698,27 @@
                         content: '\f0da';
                         font-family: @font-family-name__FontAwesome;
                         font-size: 16px;
+                        position: absolute;
+                        right: 10px;
+                    }
+                    &.ui-state-active {
+                        span {
+                            color: #ea7d18;
+                        }
+                        &:after {
+                            color: #ea7d18;
+                        }
                     }
                 }
             }
+            .level0 {
+                .submenu {
+                    .all-category {
+                        border-top: 2px solid #ea7d18 !important;
+                        border-bottom: 2px solid #ea7d18 !important;
+                    }
+                }
+            }	
         }
     }
     .page-footer .footer.content {
@@ -725,7 +760,7 @@
     }
 
     .nav-sections .navigation .level0 > .level-top {
-        padding-right: 15px;
+        padding: 0 12px;
     }
 
     .nav-sections-item-content{
@@ -740,6 +775,36 @@
                         font-size: 18px !important;
                     }
                 }
+            }
+            ol {
+                padding-left: 0;
+            }
+            .submenu {
+                border-top: 5px solid #ea7d18 !important;
+            }    
+            .nav-sections-additional {
+                .level0{
+                    &.nav-1{
+                        &.level-top{
+                            &:hover {
+                                .level0.submenu {
+                                    display: block !important;
+                                }
+                            }
+                        }
+                        .level-top {
+                            &:hover {
+                                color: #ea7d18;
+                            }
+                        }
+                    }
+                }
+            }
+            .level0 > .level-top > .ui-menu-icon {
+                position: absolute;
+                right: 0;
+                display: inline-block;
+                text-decoration: none;
             }
         }
     }
