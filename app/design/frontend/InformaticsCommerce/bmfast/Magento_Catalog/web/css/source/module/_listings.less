@@ -143,23 +143,19 @@
                         border-color: #cdd0d5;
                         height: 27px;
                     }
-                    .input-group__addon {
-                        .input-group__button {
-                            position: absolute;
-                            left: 0;
-                            top: 0;
-                            width: 20px;
-                            border: 1px solid #b0b2b6;
-                            border-radius: 2px;
-                            background: #dee4ed;
-                            padding: 0;
-                            height: 100%;
-                        }
+                    .input-group__button {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 20px;
+                        border: 1px solid #b0b2b6;
+                        border-radius: 2px;
+                        background: #dee4ed;
+                        padding: 0;
+                        height: 100%;
                         &:last-child {
-                            .input-group__button {
-                                left: auto;
-                                right: 0;
-                            }
+                            left: auto;
+                            right: 0;
                         }
                     }
                 }
@@ -403,6 +399,18 @@
     #layered-filter-block {
         .filter-title {
             display: block;
+            strong {
+                width: 100%;
+                box-sizing: border-box;
+                text-align: left;
+                font-size: 16px;
+                font-weight: 700;
+                background: #eef0f5;
+                box-shadow: none;
+                border-radius: 0;
+                border: 0;
+                padding: 15px 20px;
+            }
         }
         .filter-content {
             display: none;

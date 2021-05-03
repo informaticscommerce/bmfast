@@ -98,16 +98,18 @@ $productView = $objectManager->get('\Magento\Catalog\Block\Product\View');
                                <div id="custom-qty" class="control" data-bind="scope: 'qty-counter'">
                                     <span><?= $escaper->escapeHtml(__('Qty:')) ?></span>
                                     <?php $id = "hidden_qty_".$_product->getId(); ?>
-                                    <button id="<?php echo $_product->getId(); ?>" type="button" class="reduced items">-</button>
-                                    <input type="text"
-                                           name="qty"
-                                           id="<?= $id ?>"
-                                           value="1"
-                                           title="<?= /* @escapeNotVerified */ __('Qty') ?>"
-                                           class="input-text qty"
-                                           data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
-                                           />
-                                    <button id="<?php echo $_product->getId(); ?>" type="button" class="increase items">+</button>
+                                    <div class="input-group">
+                                        <button id="<?php echo $_product->getId(); ?>" type="button" class="input-group__button reduced items">-</button>
+                                        <input type="text"
+                                               name="qty"
+                                               id="<?= $id ?>"
+                                               value="1"
+                                               title="<?= /* @escapeNotVerified */ __('Qty') ?>"
+                                               class="input-group__input input-text qty"
+                                               data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                                               />
+                                        <button id="<?php echo $_product->getId(); ?>" type="button" class="input-group__button increase items">+</button>
+                                    </div>
                                 </div>
                             <?php endif; ?>
 
