@@ -73,9 +73,19 @@
 
             &-details {
                 text-align: center;
+                .swatch-label {
+                    display: inline-block;
+                    vertical-align: top;
+                    margin-right: 6px;
+                    font-size: 16px;
+                }
                 .swatch-attribute {
                     &.color {
                         text-align: center;
+                        display: inline-block;
+                        .swatch-attribute-options {
+                            margin: 0;
+                        }
                         .swatch-option {
                             height: 16px;
                             width: 16px;
@@ -86,6 +96,17 @@
                             margin-right: 5px;
                             float: none;
                             display: inline-block;
+                        }
+                    }
+                }
+                .extra {
+                    margin-bottom: 15px;
+                    a {
+                        font-size: 14px;
+                        color: #2b6b9b;
+                        text-decoration: underline;
+                        &:hover {
+                            text-decoration: none;
                         }
                     }
                 }
@@ -300,6 +321,8 @@
                 );
             }
 
+
+
             .tocart {
                 .lib-font-size(13px);
                 border-radius: 0;
@@ -361,9 +384,27 @@
 
     body {
         .products-grid {
+            .product-item-info {
+                &:hover {
+                    border-color: #6a95dc;
+                    margin: 0;
+                }
+            }
             .product-item-actions {
                 margin: 10px 0;
             }
+        }
+    }
+
+    .page-products {
+        .products-grid {
+            .product-items {
+                overflow: hidden;
+            }
+        }
+        .product-item-info {
+            width: auto;
+            margin: 0;
         }
     }
 
@@ -410,6 +451,15 @@
                 border-radius: 0;
                 border: 0;
                 padding: 15px 20px;
+                &:after {
+                    content: '\e622';
+                    font-family: 'luma-icons';
+                    right: 20px;
+                    top: 15px;
+                    z-index: 3;
+                    position: absolute;
+                    font-size: 14px;
+                }
             }
         }
         .filter-content {
@@ -418,6 +468,13 @@
         &.block {
             &.filter {
                 &.active {
+                    .filter-title {
+                        strong {
+                            &:after {
+                                content: '\e621';
+                            }
+                        }
+                    }
                     .filter-content {
                         display: block;
                         border-width: 0 1px 1px;
@@ -638,10 +695,11 @@
     .page-products.page-layout-3columns {
         .products-grid {
             .product-item {
-                margin-left: 0;
-                width: calc(~'(100% - 4%) / 3');
+                margin-left: 1%;
+                width: 24%;
+                float: left;
 
-                &:nth-child(3n + 1) {
+                &:nth-child(4n + 1) {
                     margin-left: 0;
                 }
             }
@@ -666,10 +724,10 @@
     .page-products {
         .products-grid {
             .product-item {
-                margin-left: 2%;
-                width: calc(~'(100% - 4%) / 3');
+                margin-left: 1%;
+                width: 24%;
 
-                &:nth-child(3n + 1) {
+                &:nth-child(4n + 1) {
                     margin-left: 0;
                 }
             }
@@ -679,7 +737,7 @@
     .page-products.page-layout-1column {
         .products-grid {
             .product-item {
-                width: 100%/4;
+                width: 24%;
             }
         }
     }
@@ -729,7 +787,7 @@
                 width: calc(~'(100% - 6%)/4');
 
                 &:nth-child(3n + 1) {
-                    margin-left: 2%;
+                    margin-left: 1%;
                 }
 
                 &:nth-child(4n + 1) {
@@ -743,8 +801,8 @@
         &.page-layout-1column {
             .products-grid {
                 .product-item {
-                    margin-left: 0;
-                    width: 100%/5;
+                    margin-right: 0;
+                    width: 24%;
                 }
             }
         }

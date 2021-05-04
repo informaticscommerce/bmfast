@@ -122,12 +122,16 @@ $productView = $objectManager->get('\Magento\Catalog\Block\Product\View');
                             <?php endif; ?>
                             </div>
                         </div>
+
                         <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
                         <?= /* @noEscape */ $block->getProductPrice($_product) ?>
+                        <div class="extra">
+                            <a href="#"><?= $escaper->escapeHtml(__('See Quantity Breaks')) ?></a>
+                        </div>
                         <?php if ($_product->isAvailable()):?>
                             <?= $block->getProductDetailsHtml($_product) ?>
                         <?php endif; ?>
-
+                        
                         <div class="product-item-inner">
                             <div class="product actions product-item-actions">
                                 <div class="actions-primary">
