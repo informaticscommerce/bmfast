@@ -488,6 +488,13 @@
         }
         .filter-options {
             overflow: hidden;
+            input[type="checkbox"]:checked + .amshopby-choice::after {
+                background: none;
+                content: '\e610';
+                font-family: 'luma-icons';
+                left: 1px;
+                top: -2px;
+            }
         }
         .filter-options-item {
             float: left;
