@@ -59,7 +59,124 @@ $productView = $objectManager->get('\Magento\Catalog\Block\Product\View');
      */
     $pos = $block->getPositioned();
     ?>
-    <div class="products wrapper <?= /* @noEscape */ $viewMode ?> products-<?= /* @noEscape */ $viewMode ?>">
+    <?php 
+        if ($block->getMode() == 'list' && $block->getMode() != 'grid') {
+    ?>
+        <table class="product-list">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th class="center">Diameter</th>
+                    <th class="center">Thread Pitch</th>
+                    <th class="center">Length</th>
+                    <th>Color</th>
+                    <th>Quantity </th>
+                    <th>Price </th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($_productCollection as $_product):?>
+                <tr class="product-item">
+                    <td class="name">
+                        <?php
+                            $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+                        ?>
+                        <strong class="product name product-item-name">
+                            <a class="product-item-link"
+                               href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
+                                <?=/* @noEscape */ $_helper->productAttribute($_product, $_product->getName(), 'name')?>
+                            </a>
+                        </strong>
+                    </td>
+                    <td class="center">
+                        <span class="mob-title">Diameter</span>
+                        1/4"
+                    </td>
+                    <td class="center">
+                        <span class="mob-title">Thread Pitch</span>
+                        14
+                    </td>
+                    <td class="center">
+                        <span class="mob-title">Length</span>
+                        7/8" 
+                    </td>
+                    <td>
+                        <?php if ($_product->isAvailable()):?>
+                            <?= $block->getProductDetailsHtml($_product) ?>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <span class="mob-title">Qty.</span>
+                        <div class="qty-area">
+                            <?php if ($_product->isSaleable()):?>
+                               <div id="custom-qty" class="control" data-bind="scope: 'qty-counter'">
+                                    <span><?= $escaper->escapeHtml(__('Qty:')) ?></span>
+                                    <?php $id = "hidden_qty_".$_product->getId(); ?>
+                                    <div class="input-group">
+                                        <button id="<?php echo $_product->getId(); ?>" type="button" class="input-group__button reduced items">-</button>
+                                        <input type="text"
+                                               name="qty"
+                                               id="<?= $id ?>"
+                                               value="1"
+                                               title="<?= /* @escapeNotVerified */ __('Qty') ?>"
+                                               class="input-group__input input-text qty"
+                                               data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                                               />
+                                        <button id="<?php echo $_product->getId(); ?>" type="button" class="input-group__button increase items">+</button>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="mob-title">Price</span>
+                        <?= /* @noEscape */ $block->getProductPrice($_product) ?>
+                    </td>
+                    <td class="actions">
+                        <div class="product-item-actions">
+                            <div class="actions-primary">
+                            <?php if ($_product->isSaleable()):?>
+                                <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                <form data-role="tocart-form"
+                                      data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
+                                      action="<?= $escaper->escapeUrl($postParams['action']) ?>"
+                                      method="post">
+                                    <input type="hidden"
+                                           name="product"
+                                           value="<?= /* @noEscape */ $postParams['data']['product'] ?>">
+                                    <input type="hidden"
+                                           name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>"
+                                           value="<?=
+                                           /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED]
+                                            ?>">
+                                    <?= $block->getBlockHtml('formkey') ?>
+
+                                    <input type="hidden"
+                                           name="qty"
+                                           id="qty_<?php echo $_product->getId(); ?>"
+                                           value="<?= $productView->getProductDefaultQty($_product) * 1 ?>"
+                                           class="input-text qty"
+                                           />
+
+                                    <button type="submit"
+                                            title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                            class="action tocart primary">
+                                        <span><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
+                                    </button>
+                                </form>
+                            <?php endif; ?>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php
+        } elseif ($block->getMode() == 'grid') {
+    ?>
+      <div class="products wrapper <?= /* @noEscape */ $viewMode ?> products-<?= /* @noEscape */ $viewMode ?>">
         <ol class="products list items product-items">
             <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
             <?php foreach ($_productCollection as $_product):?>
@@ -220,6 +337,10 @@ $productView = $objectManager->get('\Magento\Catalog\Block\Product\View');
             <?php endforeach; ?>
         </ol>
     </div>
+    <?php
+        }
+    ?>
+    
     <?= $block->getToolbarHtml() ?>
     <?php if (!$block->isRedirectToCartEnabled()):?>
         <script type="text/x-magento-init">
