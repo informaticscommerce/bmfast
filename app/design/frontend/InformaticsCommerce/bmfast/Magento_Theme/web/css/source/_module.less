@@ -781,6 +781,17 @@
             }
             .submenu {
                 border-top: 5px solid #ea7d18 !important;
+                a.ui-corner-all {
+                    &:hover {
+                        .ui-menu-icon {
+                            &:after {
+                                content: '\f0da' !important;
+                                font-family: 'FontAwesome' !important;
+                                font-size: 18px !important;
+                            }
+                        }
+                    } 
+                }
             }    
             .nav-sections-additional {
                 .level0{
