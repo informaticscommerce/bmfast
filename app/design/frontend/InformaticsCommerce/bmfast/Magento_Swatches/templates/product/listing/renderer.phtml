@@ -5,13 +5,28 @@
  */
 ?>
 <?php
+$label = '';
+
+$jsonDecode = json_decode($block->getJsonConfig(), true);
+if(!empty($jsonDecode['attributes'])) {
+    foreach($jsonDecode['attributes'] as $eachAttr) {
+        if(!empty($eachAttr['label'])) {
+            $label = $eachAttr['label'];
+        }
+    }
+}
+
 /** @var $block \Magento\Swatches\Block\Product\Renderer\Listing\Configurable */
 $productId = $block->getProduct()->getId();
 /** @var \Magento\Swatches\ViewModel\Product\Renderer\Configurable $configurableViewModel */
 $configurableViewModel = $block->getConfigurableViewModel()
 ?>
 <div class="swatch-opt-<?= $block->escapeHtmlAttr($productId) ?>"
-     data-role="swatch-option-<?= $block->escapeHtmlAttr($productId) ?>"><label class="swatch-label"><?= $escaper->escapeHtml(__('Colors:')) ?></label></div>
+     data-role="swatch-option-<?= $block->escapeHtmlAttr($productId) ?>">
+    <?php if(!empty($label)): ?>
+        <label class="swatch-label"><?= $block->escapeHtml(__($label.':')) ?></label>
+    <?php endif; ?>
+</div>
 
 <script type="text/x-magento-init">
     {

@@ -91,18 +91,24 @@ $productView = $objectManager->get('\Magento\Catalog\Block\Product\View');
                     </td>
                     <td class="center">
                         <span class="mob-title">Diameter</span>
-                        1/4"
+                        <?php
+                        echo $_product->getAttributeText('diameter');
+                        ?>
                     </td>
                     <td class="center">
                         <span class="mob-title">Thread Pitch</span>
-                        14
+                        <?php
+                        echo $_product->getAttributeText('thread_pitch');
+                        ?>
                     </td>
                     <td class="center">
                         <span class="mob-title">Length</span>
-                        7/8" 
+                        <?php
+                        echo $_product->getAttributeText('length');
+                        ?>
                     </td>
                     <td>
-                        <?php if ($_product->isAvailable()):?>
+                        <?php if ($_product->isAvailable()): ?>
                             <?= $block->getProductDetailsHtml($_product) ?>
                         <?php endif; ?>
                     </td>
