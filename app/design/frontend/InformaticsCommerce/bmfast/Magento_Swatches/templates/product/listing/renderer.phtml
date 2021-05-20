@@ -97,15 +97,9 @@ if($toolbar->getCurrentMode() == 'list'): ?>
                 * hide swatches on page load
                 * */
                 $('.swatch-attribute.color').hide();
-                setTimeout(function() { //in case, if not hides on page load
-                    $('.swatch-attribute.color').hide();
-                }, 2000);
                 // setTimeout(function() { //in case, if not hides on page load
                 //     $('.swatch-attribute.color').hide();
-                // }, 3000);
-                // setTimeout(function() { //in case, if not hides on page load
-                //     $('.swatch-attribute.color').hide();
-                // }, 4000);
+                // }, 2000);
 
                 $(window).load(function () {
                     $('.swatch-attribute.color').hide();
