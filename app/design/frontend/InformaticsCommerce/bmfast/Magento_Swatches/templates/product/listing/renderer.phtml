@@ -92,18 +92,10 @@ if($toolbar->getCurrentMode() == 'list'): ?>
             'jquery',
             'domReady!'
             ], function ($) {
-
                 /*
                 * hide swatches on page load
                 * */
-                $('.swatch-attribute.color').hide();
-                // setTimeout(function() { //in case, if not hides on page load
-                //     $('.swatch-attribute.color').hide();
-                // }, 2000);
-
-                $(window).load(function () {
-                    $('.swatch-attribute.color').hide();
-                });
+                hideSwatchesForListMode();
 
                 /*
                 * ID starts with,
@@ -118,6 +110,20 @@ if($toolbar->getCurrentMode() == 'list'): ?>
                     $(swatchId).trigger('click');
                     console.log(swatchId);
                 });
+
+                function hideSwatchesForListMode() {
+                    setTimeout(function() { //in case, if not hides on page load
+                        $('.swatch-attribute.color').hide();
+                    }, 2000);
+                    setTimeout(function() { //in case, if not hides on page load
+                        $('.swatch-attribute.color').hide();
+                    }, 4000);
+
+                    $(window).load(function () {
+                        console.log('after load');
+                        $('.swatch-attribute.color').hide();
+                    });
+                }
             });
     </script>
 <?php endif; ?>
