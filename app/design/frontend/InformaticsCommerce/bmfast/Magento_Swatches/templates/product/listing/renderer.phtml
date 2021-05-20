@@ -3,10 +3,16 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-?>
-<?php
-$label = '';
 
+use Magento\Catalog\Model\Product\ProductList\Toolbar as ToolbarModel; ?>
+<?php
+$generalHelper = $this->helper(Mage4\General\Helper\Data::class);
+$objectManager = $generalHelper->getObjectManager();
+
+/** @var \Magento\Catalog\Block\Product\ProductList\Toolbar $toolbar */
+$toolbar = $objectManager->get(\Magento\Catalog\Block\Product\ProductList\Toolbar::class);
+
+$label = '';
 $jsonDecode = json_decode($block->getJsonConfig(), true);
 if(!empty($jsonDecode['attributes'])) {
     foreach($jsonDecode['attributes'] as $eachAttr) {
@@ -25,6 +31,26 @@ $configurableViewModel = $block->getConfigurableViewModel()
      data-role="swatch-option-<?= $block->escapeHtmlAttr($productId) ?>">
     <?php if(!empty($label)): ?>
         <label class="swatch-label"><?= $block->escapeHtml(__($label.':')) ?></label>
+
+        <?php if($toolbar->getCurrentMode() == 'list'): ?>
+            <?php $swatchToArray = json_decode($block->getJsonSwatchConfig(), true); ?>
+            <?php if(!empty($swatchToArray)): ?>
+                <div class="swatches-main">
+                    <select class="swatch-options" id="swatch-options-clone-<?php echo $productId; ?>">
+                        <?php foreach ($swatchToArray as $attr=>$eachSwatch): ?>
+                            <?php $attrId = $attr; ?>
+                            <?php foreach($eachSwatch as $key=>$val): ?>
+                                <?php if(empty($val['label']) || empty($val['value'])): ?>
+                                    <?php continue; ?>
+                                <?php endif; ?>
+                                <option value="<?php echo $key.'_'.$attrId; ?>" title="<?php echo $val['label']; ?>" class="swatch"><?php echo $val['value']; ?></option>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+
     <?php endif; ?>
 </div>
 
@@ -58,3 +84,36 @@ $configurableViewModel = $block->getConfigurableViewModel()
         }
     }
 </script>
+
+<?php
+if($toolbar->getCurrentMode() == 'list'): ?>
+    <script type="text/javascript">
+        require([
+            'jquery',
+            'domReady!'
+            ], function ($) {
+
+                /*
+                * hide swatches on page load
+                * */
+                $('.swatch-attribute.color').hide();
+                setTimeout(function() { //in case, if not hides on page load
+                    $('.swatch-attribute.color').hide();
+                }, 2000);
+
+                /*
+                * ID starts with,
+                * on change select value click swatch option
+                * */
+                $('select[id^="swatch-options-clone-"]').on('change', function (e) {
+                    e.stopImmediatePropagation();
+
+                    var selectedAttr = $(this).val();
+                    var splitSelectedAttr = selectedAttr.split('_');
+                    var swatchId = '#option-label-color-'+splitSelectedAttr[1]+'-item-'+splitSelectedAttr[0];
+                    $(swatchId).trigger('click');
+                    console.log(swatchId);
+                });
+            });
+    </script>
+<?php endif; ?>
