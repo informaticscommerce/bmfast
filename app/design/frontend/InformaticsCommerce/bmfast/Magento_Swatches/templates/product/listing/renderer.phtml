@@ -100,6 +100,16 @@ if($toolbar->getCurrentMode() == 'list'): ?>
                 setTimeout(function() { //in case, if not hides on page load
                     $('.swatch-attribute.color').hide();
                 }, 2000);
+                // setTimeout(function() { //in case, if not hides on page load
+                //     $('.swatch-attribute.color').hide();
+                // }, 3000);
+                // setTimeout(function() { //in case, if not hides on page load
+                //     $('.swatch-attribute.color').hide();
+                // }, 4000);
+
+                $(window).load(function () {
+                    $('.swatch-attribute.color').hide();
+                });
 
                 /*
                 * ID starts with,
