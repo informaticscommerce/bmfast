@@ -10,7 +10,7 @@
         <move element="page.main.title" destination="content" before="-"/>
         <move element="product.info.stock.sku" destination="product.info.price" after="product.price.final"/>
         <!-- <move element="product.info.review" destination="product.info.main" before="product.info.price"/> -->
-        <move element="product.info.overview" destination="content" after="product.info.media"/>
+       
 
          <referenceContainer name="product.info.main">
             <block class="Magento\Cms\Block\Block" name="shipping_quote_pdp"  after="-">
@@ -28,7 +28,8 @@
         </referenceContainer>
 
 
-        
+        <referenceBlock name="reviews.tab" remove="true" />
+        <referenceBlock name="product.info.overview" remove="true" />
         <referenceBlock name="product.info.review" remove="true" />
         <referenceBlock name="view.addto.wishlist" remove="true"/>
         <referenceBlock name="view.addto.compare" remove="true" />

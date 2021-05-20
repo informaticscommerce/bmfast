@@ -538,16 +538,12 @@
                 .label {
                     display: none;
                 }
-                .control {
-                    .super-attribute-select {
-                        height: 52px;
-                        font-size: 18px;
-                        border: 2px solid #b2b2b3;
-                    }  
-                    select {
-                        background: #ffffff url('../images/select-opt-arrow.png') no-repeat 97% 50%;
-                    }
-                }
+            }
+            select {
+                height: 52px;
+                font-size: 18px;
+                border: 2px solid #b2b2b3;
+                background: #ffffff url('../images/select-opt-arrow.png') no-repeat 97% 50%;
             }
         }
 
@@ -602,6 +598,7 @@
         .swatch-opt {
             font-family: @font-family-name__roboto-Bold;
             .swatch-attribute {
+                margin-bottom: 20px;
                 .swatch-attribute-options {                    
                     .swatch-option {
                         height: 34px;
@@ -609,7 +606,7 @@
                         border-radius: 100px;
                         padding: 0;
                         box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.1);
-                        margin: 0 10px !important;
+                        margin: 5px !important;
                         &:hover {
                             outline: 0 !important;
                         }
@@ -635,17 +632,27 @@
                         }
                     }
                 }
-                .swatch-attribute-label {
-                    font-size: 0;
+                &.color {
                     &:before {
                         content: 'Choose Color -';
                         font-size: 20px;
                         font-weight: 400;
                     }
+                    span {
+                        &:nth-child(2n+1) {
+                            display: none;
+                        }
+                    }
+                }
+                .swatch-attribute-label {
+                    font-size: 0;
                 }
                 .swatch-attribute-selected-option {
                     font-size: 20px;
                     padding-left: 5px;
+                }
+                span {
+                    display: none;
                 }
             }
         }
@@ -909,6 +916,9 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .catalog-product-view {
+        .page-wrapper {
+            overflow: hidden;
+        }
         .column.main {
             .lib-vendor-prefix-display(flex);
             .lib-vendor-prefix-flex-direction(column);
@@ -1125,6 +1135,22 @@
             }
         }
     }
+    .block {
+        &.related {
+            #block-related-heading {
+                font-size: 30px;
+                font-weight: 400;
+                font-family: @font-family-name__roboto-Bold;
+            }
+            .products-related {
+                .product-items {
+                    .product-item {
+                        width: auto !important;
+                    }
+                }
+            }
+        }
+    }
 
     //
     //  Category page layout
@@ -1248,6 +1274,9 @@
     //  ---------------------------------------------
 
     .catalog-category-view.page-layout-1column {
+        .page-wrapper {
+            overflow: hidden;
+        }
         .column.main {
             min-height: inherit;
         }
@@ -1528,6 +1557,7 @@
                 .actions {
                     text-align: right;
                     padding-top: 44px;
+                    margin-left: 150px;
                     .action {
                         &.tocart {
                             font-size: 26px;
@@ -1536,7 +1566,7 @@
                             border-radius: 0;
                             font-weight: normal;
                             text-transform: uppercase;
-                            width: 62%;
+                            width: 100%;
                             padding-top: 17px;
                             padding-bottom: 17px;
                             font-family: @font-family-name__poppins-Bold;
@@ -1544,10 +1574,7 @@
                     }
                 }
             }
-        }
-        .product.attribute.overview {
-            display: none;
-        }   
+        }  
     }
 }
 
