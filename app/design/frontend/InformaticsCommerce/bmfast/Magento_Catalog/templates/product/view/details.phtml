@@ -19,7 +19,7 @@
                 $alias = $layout->getElementAlias($name);
                 $label = $block->getChildData($alias, 'title');
                 ?>
-                <div class="main desc col">
+                <div class="main desc col prod-desc prod-info">
                     <div class="data item title"
                          data-role="collapsible" id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>">
                         <a class="data switch"
@@ -34,7 +34,7 @@
                          aria-labelledby="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title" id="<?= $block->escapeHtmlAttr($alias) ?>" data-role="content">
                         <?= /* @noEscape */ $html ?>
                     </div>
-            </div>
+                </div>
             <?php endforeach;?>
         </div>
     </div>

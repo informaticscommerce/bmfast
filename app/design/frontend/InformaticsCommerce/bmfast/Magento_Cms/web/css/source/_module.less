@@ -1107,6 +1107,30 @@
         }
     }
 
+    .bm-pdp-info { 
+        width: 100%;
+        padding: 20px 15px;
+        margin-top: 20px;
+        h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .pdp-info {
+            grid-column-gap: 10px;
+            .image { 
+                span {
+                    font-size: 11px;
+                }
+            }
+        }
+        .col:not(:first-child) {
+            &:before {
+                top: 10px;
+                left: -10px;
+                height: 30px;
+            }
+        }
+    }    
 }
 
 //

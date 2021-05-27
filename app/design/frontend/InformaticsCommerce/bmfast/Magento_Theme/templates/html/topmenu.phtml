@@ -36,3 +36,20 @@ $_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit)
         </li>
     </ul>
 </nav>
+
+<script type="text/javascript">
+require([ "jquery" ], function($){
+
+    $(window).scroll(function () {
+        if( $(window).scrollTop() > $('.panel.wrapper').offset().top && !($('.panel.wrapper').hasClass('sticky')) 
+            && $(window).scrollTop() > $('.nav-sections').offset().top && !($('.nav-sections').hasClass('sticky'))){
+        $('.panel.wrapper').addClass('sticky');
+        $('.nav-sections').addClass('sticky');
+        
+        } else if ($(window).scrollTop() == 0){
+        $('.panel.wrapper').removeClass('sticky');
+        $('.nav-sections').removeClass('sticky');
+        }
+    });
+    });
+</script>

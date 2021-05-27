@@ -120,6 +120,14 @@
         .panel.wrapper {
             background-color: #2b6b9b;
             .lib-css(color, @header-panel__text-color);
+            &.sticky {
+                margin: 0 auto;
+                max-width: 100%;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 100;
+            }
         }
     }
 
@@ -553,6 +561,14 @@
 
     .nav-sections {
         margin-bottom: 0 !important;
+        &.sticky {
+            margin: 0 auto;
+            max-width: 100%;
+            position: fixed;
+            top: 42px;
+            width: 100%;
+            z-index: 99;
+        } 
     }
 
     .nav-sections-item-content{
