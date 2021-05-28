@@ -2,17 +2,11 @@
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
- */
-
-use Magento\Catalog\Model\Product\ProductList\Toolbar as ToolbarModel; ?>
+ */use Magento\Catalog\Model\Product\ProductList\Toolbar as ToolbarModel; ?>
 <?php
 $generalHelper = $this->helper(Mage4\General\Helper\Data::class);
-$objectManager = $generalHelper->getObjectManager();
-
-/** @var \Magento\Catalog\Block\Product\ProductList\Toolbar $toolbar */
-$toolbar = $objectManager->get(\Magento\Catalog\Block\Product\ProductList\Toolbar::class);
-
-$label = '';
+$objectManager = $generalHelper->getObjectManager();/** @var \Magento\Catalog\Block\Product\ProductList\Toolbar $toolbar */
+$toolbar = $objectManager->get(\Magento\Catalog\Block\Product\ProductList\Toolbar::class);$label = '';
 $jsonDecode = json_decode($block->getJsonConfig(), true);
 if(!empty($jsonDecode['attributes'])) {
     foreach($jsonDecode['attributes'] as $eachAttr) {
@@ -20,40 +14,11 @@ if(!empty($jsonDecode['attributes'])) {
             $label = $eachAttr['label'];
         }
     }
-}
-
-/** @var $block \Magento\Swatches\Block\Product\Renderer\Listing\Configurable */
+}/** @var $block \Magento\Swatches\Block\Product\Renderer\Listing\Configurable */
 $productId = $block->getProduct()->getId();
 /** @var \Magento\Swatches\ViewModel\Product\Renderer\Configurable $configurableViewModel */
 $configurableViewModel = $block->getConfigurableViewModel()
 ?>
-<div class="swatch-opt-<?= $block->escapeHtmlAttr($productId) ?>"
-     data-role="swatch-option-<?= $block->escapeHtmlAttr($productId) ?>">
-    <?php if(!empty($label)): ?>
-        <label class="swatch-label"><?= $block->escapeHtml(__($label.':')) ?></label>
-
-        <?php if($toolbar->getCurrentMode() == 'list'): ?>
-            <?php $swatchToArray = json_decode($block->getJsonSwatchConfig(), true); ?>
-            <?php if(!empty($swatchToArray)): ?>
-                <div class="swatches-main">
-                    <select class="swatch-options" id="swatch-options-clone-<?php echo $productId; ?>">
-                        <?php foreach ($swatchToArray as $attr=>$eachSwatch): ?>
-                            <?php $attrId = $attr; ?>
-                            <?php foreach($eachSwatch as $key=>$val): ?>
-                                <?php if(empty($val['label']) || empty($val['value'])): ?>
-                                    <?php continue; ?>
-                                <?php endif; ?>
-                                <option value="<?php echo $key.'_'.$attrId; ?>" title="<?php echo $val['label']; ?>" class="swatch"><?php echo $val['value']; ?></option>
-                            <?php endforeach; ?>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            <?php endif; ?>
-        <?php endif; ?>
-
-    <?php endif; ?>
-</div>
-
 <script type="text/x-magento-init">
     {
         "[data-role=swatch-option-<?= $block->escapeJs($productId) ?>]": {
@@ -70,9 +35,7 @@ $configurableViewModel = $block->getConfigurableViewModel()
             }
         }
     }
-</script>
-
-<script type="text/x-magento-init">
+</script><script type="text/x-magento-init">
     {
         "[data-role=priceBox][data-price-box=product-id-<?= $block->escapeJs($productId) ?>]": {
             "priceBox": {
@@ -84,7 +47,31 @@ $configurableViewModel = $block->getConfigurableViewModel()
         }
     }
 </script>
-
+<div class="swatch-opt-<?= $block->escapeHtmlAttr($productId) ?> swatch-new"
+     data-role="swatch-option-<?= $block->escapeHtmlAttr($productId) ?>">
+    <?php if(!empty($label)): ?>
+        <label class="swatch-label"><?= $block->escapeHtml(__($label.':')) ?></label>       
+        <?php if($toolbar->getCurrentMode() == 'list'): ?>
+            <?php $swatchToArray = json_decode($block->getJsonSwatchConfig(), true); ?>
+            <?php if(!empty($swatchToArray)): ?>
+                <div class="swatches-main">
+                    <div class="swatch-options" id="swatch-options-clone-<?php echo $productId; ?>">
+                        <?php foreach ($swatchToArray as $attr=>$eachSwatch): ?>
+                            <?php $attrId = $attr; ?>
+                            <?php foreach($eachSwatch as $key=>$val): ?>
+                                <?php if(empty($val['label']) || empty($val['value'])): ?>
+                                    <?php continue; ?>
+                                <?php endif; ?>
+                                <span id="swatch-options-clone-<?php echo $productId.'-'.$key; ?>" value="<?php echo $key.'_'.$attrId; ?>" title="<?php echo $val['label']; ?>" class="swatch swatch-dot" style="background-color: <?php echo $val['value']; ?>">
+                                    &nbsp;
+                                </span>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>    <?php endif; ?>
+</div>
 <?php
 if($toolbar->getCurrentMode() == 'list'): ?>
     <script type="text/javascript">
@@ -95,35 +82,45 @@ if($toolbar->getCurrentMode() == 'list'): ?>
                 /*
                 * hide swatches on page load
                 * */
-                hideSwatchesForListMode();
-
+                //hideSwatchesForListMode();                
                 /*
                 * ID starts with,
                 * on change select value click swatch option
                 * */
+                $('.swatch-new .swatch-label').on('click', function (e) {
+                    $('.swatch-new').removeClass("active");
+                    $(this).parent().addClass("active");
+                }); 
+                $('.swatch.swatch-dot').on('click', function (e) {
+                    $(this).parent().parent().parent().removeClass("active");
+                });
                 $('select[id^="swatch-options-clone-"]').on('change', function (e) {
-                    e.stopImmediatePropagation();
-
-                    var selectedAttr = $(this).val();
+                    e.stopImmediatePropagation();                    var selectedAttr = $(this).val();
                     var splitSelectedAttr = selectedAttr.split('_');
                     var swatchId = '#option-label-color-'+splitSelectedAttr[1]+'-item-'+splitSelectedAttr[0];
                     $(swatchId).trigger('click');
                     console.log(swatchId);
-                });
-
+                }); 
                 function hideSwatchesForListMode() {
                     setTimeout(function() { //in case, if not hides on page load
                         $('.swatch-attribute.color').hide();
                     }, 2000);
                     setTimeout(function() { //in case, if not hides on page load
                         $('.swatch-attribute.color').hide();
-                    }, 4000);
-
-                    $(window).load(function () {
+                    }, 4000);                    $(window).load(function () {
                         console.log('after load');
                         $('.swatch-attribute.color').hide();
                     });
                 }
+                $('span[id^="swatch-options-clone-"]').on('click', function (e) {
+                    e.stopImmediatePropagation();                    
+                    var selectedAttr = $(this).attr('value');
+                    var splitSelectedAttr = selectedAttr.split('_');
+                    var swatchId = '#option-label-color-'+splitSelectedAttr[1]+'-item-'+splitSelectedAttr[0];
+                    $(swatchId).trigger('click');
+                    console.log(swatchId);
+                });
+                
             });
     </script>
 <?php endif; ?>

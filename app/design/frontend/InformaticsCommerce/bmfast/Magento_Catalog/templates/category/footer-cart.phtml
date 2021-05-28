@@ -1,0 +1,52 @@
+
+<div class="footer-cart">
+	<div class="cart-item-qty">
+        <span class="number">1</span> 
+        <span class="title">Item(s) in your cart</span>
+    </div>
+	<div class="container-cart">
+		<div class="footer-cart-items">
+			<ul>
+				<li class="item-thumb">
+					<div class="thumb"
+						<span class="item-qty">1</span>
+						<img>
+						<span class="edit-icon">edit</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+        <div class="footer-cart-additional">
+            <div class="footer-cart-summary">
+                <div class="summary-content">
+                    <div class="row">
+                        <span class="label">Total Item</span>
+                        <span class="value">2</span> 
+                    </div>
+                    <div class="row">
+                        <span class="label">Subtotal</span>
+                        <span class="value">230</span>
+                    </div>	
+                </div>
+            </div>    
+            <div class="footer-cart-actions">
+                <div class="primary">
+                    <button id="footer-cart-btn-checkout" type="button" class="action primary checkout">Go to Checkout</button>
+                </div>
+            </div>	
+        </div>
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+require([ "jquery" ], function($){
+
+    $(".footer-cart .cart-item-qty").click(function() {
+    $(this).next('.container-cart').stop(true, false).slideToggle().toggleClass('close');
+  });
+});
+</script>
+
+

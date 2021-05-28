@@ -61,6 +61,89 @@
                 .mob-title {
                     display: none;
                 }
+                .swatch-new { 
+                    position: relative; 
+                    padding-top: 28px; 
+                    width: 52px; 
+                    &:before { 
+                        position: absolute; 
+                        height: 100%; 
+                        width: 20px; 
+                        border-left: 1px solid #ccc; 
+                        background: #dee4ed; 
+                        top: 0; 
+                        right: 0; 
+                        content: '\e607'; 
+                        font-family: 'luma-icons'; 
+                        font-size: 10px; 
+                        text-align: center; 
+                        line-height: 30px;
+                    }
+                    .swatch-label { 
+                        font-size: 0; 
+                        position: absolute; 
+                        left: 0; 
+                        right: 0; 
+                        top: 0; 
+                        bottom: 0; 
+                        cursor: pointer; 
+                        z-index: 10; 
+                    }
+                    .swatches-main { 
+                        border: 1px solid #ccc; 
+                        margin-top: -1px; 
+                        display: none; 
+                        width: 100px; 
+                        padding: 8px; 
+                        position: absolute; 
+                        background: #fff; 
+                        right: 0; 
+                        top: 28px;
+                    }
+                    &.active {
+                        .swatches-main { 
+                            display: block; 
+                        }
+                    }
+                    .swatch-attribute {
+                        &.color {
+                            height: 26px;
+                            border: 1px solid #ccc;
+                            width: 50px;
+                            position: absolute;
+                            top: 0;
+                            left: 0; 
+                            .swatch-attribute-options { 
+                                margin: 0; 
+                                padding: 5px;
+                            }
+                            .swatch-option { 
+                                display: none; 
+                                border: 0; 
+                                outline: 0; 
+                                &.color {
+                                    &.selected { 
+                                        display: block; 
+                                        border: 0; 
+                                        height: 17px; 
+                                        width: 17px; 
+                                        border-radius: 100px; 
+                                        min-width: auto; 
+                                        padding: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .swatch-dot { 
+                        height: 17px; 
+                        width: 17px; 
+                        display: inline-block; 
+                        border-radius: 100px; 
+                        margin: 2px; 
+                        cursor: pointer; 
+                    }
+                }
             }
             tbody {
                 tr {
