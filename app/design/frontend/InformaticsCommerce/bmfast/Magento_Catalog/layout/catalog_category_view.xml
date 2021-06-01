@@ -25,6 +25,20 @@
                                     <item name="template" xsi:type="string">Magento_Checkout/minicart/content-footer</item>
                                 </item>
                                 <item name="children" xsi:type="array">
+                                    <item name="summary.container" xsi:type="array">
+                                        <item name="component" xsi:type="string">uiComponent</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="displayArea" xsi:type="string">summaryContainer</item>
+                                        </item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="summary" xsi:type="array">
+                                                <item name="component" xsi:type="string">uiComponent</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="template" xsi:type="string">Magento_Checkout/minicart/summary-footer</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
                                     <item name="subtotal.container" xsi:type="array">
                                         <item name="component" xsi:type="string">uiComponent</item>
                                         <item name="config" xsi:type="array">
