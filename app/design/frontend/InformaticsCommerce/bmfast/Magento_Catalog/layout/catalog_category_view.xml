@@ -11,7 +11,41 @@
             <block class="Magento\Catalog\Block\Category\View" name="category.subcat" template="Magento_Catalog::category/cat-thumbnail.phtml"/>
 			
 			<block class="Magento\Checkout\Block\Cart\Sidebar" name="footercart" as="footercart" template="Magento_Catalog::category/footer-cart.phtml" />
-        </referenceContainer>  
+        </referenceContainer>
+
+        <referenceContainer name="content">
+            <block class="Magento\Checkout\Block\Cart\Sidebar" name="minicart.footer" as="minicart.footer" template="Magento_Checkout::cart/minicart-footer.phtml" after="footercart">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="types" xsi:type="array"/>
+                        <item name="components" xsi:type="array">
+                            <item name="minicart_content_footer" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Checkout/js/view/minicart-footer</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">Magento_Checkout/minicart/content-footer</item>
+                                </item>
+                                <item name="children" xsi:type="array">
+                                    <item name="subtotal.container" xsi:type="array">
+                                        <item name="component" xsi:type="string">uiComponent</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="displayArea" xsi:type="string">subtotalContainer</item>
+                                        </item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="subtotal" xsi:type="array">
+                                                <item name="component" xsi:type="string">uiComponent</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="template" xsi:type="string">Magento_Checkout/minicart/subtotal-footer</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
 
 		<referenceContainer name="category.view.container">
             <block class="Magento\Catalog\Block\Category\View" name="category.title" template="Magento_Catalog::category/cat-banner-desc.phtml"/>

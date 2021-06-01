@@ -8,21 +8,23 @@
 /** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
 ?>
 
-<div data-block="minicart-footer" class="minicart-wrapper">
-    <a class="action showcart-footer" href="javascript:void(0)"
-       data-bind="scope: 'minicart_content_footer'">
-        <span class="text"><?= $block->escapeHtml(__('Total Item')) ?></span>
-        <span class="counter qty empty"
-              data-bind="css: { empty: !!getCartParam('summary_count') == false && !isLoading() },
-               blockLoader: isLoading">
-            <span class="counter-number"><!-- ko text: getCartParam('summary_count') --><!-- /ko --></span>
-        </span>
-    </a>
+<div data-block="minicart-footer" class="minicart-footer-wrapper">
+
     <?php if ($block->getIsNeedToDisplaySideBar()):?>
         <div class="block block-minicart-footer">
             <div id="minicart-footer-content-wrapper" data-bind="scope: 'minicart_content_footer'">
                 <!-- ko template: getTemplate() --><!-- /ko -->
             </div>
+            
+            <a class="action showcart-footer" href="javascript:void(0)"
+               data-bind="scope: 'minicart_content_footer'">
+                <span class="text"><?= $block->escapeHtml(__('Total Item')) ?></span>
+                <span class="counter qty empty"
+                      data-bind="css: { empty: !!getCartParam('summary_count') == false && !isLoading() },
+                       blockLoader: isLoading">
+                    <span class="counter-number"><!-- ko text: getCartParam('summary_count') --><!-- /ko --></span>
+                </span>
+            </a>
         </div>
     <?php else: ?>
         <?php $scriptString = <<<script
