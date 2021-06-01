@@ -922,7 +922,7 @@
                 }
             }
             .qty-area {
-                padding: 10px 0;
+                padding: 0 0 10px;
                 margin-left: 0;
                 margin-right: 0;
                 background: none;
@@ -1003,8 +1003,25 @@
                     width: 100%;
                     max-width: none;
                 }
+                &.swatch-color {
+                    position: relative;
+                    .color-label {
+                        display: block !important;
+                        font-size: 12px;
+                        color: #2b6b9b;
+                        margin-bottom: 10px;
+                    }
+                }
                 &.actions {
                     width: 50%;
+                    .product-item-actions {
+                        .actions-primary {
+                            .tocart {
+                                width: 100%;
+                                max-width: 150px;
+                            }
+                        }
+                    }
                 }
             }
         }
