@@ -1193,6 +1193,86 @@
         }
     }
     
+    .footer-cart {
+        .cart-item-qty {
+            font-size: 18px;
+            background: #2b6b9b;
+            color: #ffd200;
+            max-width: 240px;
+            text-align: center;
+            padding: 11px 0px;
+            font-family: @font-family-name__poppins-Bold;
+            .title {
+                &:after {
+                    content: '\f107';
+                    font-family: 'FontAwesome';
+                    font-weight: 600;
+                    margin-left: 12px;
+                }
+            }
+        }
+        .container-cart {
+            background: #f8f9fb;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #e5e5e5;
+            .col {
+                width: 50%;
+            }
+            li {
+                list-style: none;
+            }
+
+            .footer-cart-items {
+                float: left;
+                width: calc(~"100% - 650px");
+                overflow-x: auto;
+                overflow-y: hidden;
+                min-height: 100px;
+            }
+            .footer-cart-additional {
+                float: right;
+                width: 650px;
+                .footer-cart-summary {
+                    float: left;
+                    width: 320px;
+                    padding: 30px 10px;
+                    font-size: 16px;
+                    border-left: 1px solid #e5e5e5;
+                    min-height: 25px;
+                    .row {
+                        .label {
+                            float: left;
+                            font-family: @font-family-name__poppins-Regular;
+                        }
+                        .value {
+                            float: right;
+                            font-family: @font-family-name__poppins-Bold;
+                        }
+                    }
+                }
+                .footer-cart-actions {
+                    float: right;
+                    padding: 30px 15px;
+                    border-left: 1px solid #e5e5e5;
+                    min-height: 25px;
+                    .action.primary {
+                        font-size: 18px;
+                        background: #e96626;
+                        border: #e96626;
+                        text-transform: uppercase;
+                        border-radius: 0;
+                        padding: 15px 25px;
+                        &:before {
+                            content: '\f00c';
+                            font-family: 'FontAwesome';
+                            margin-right: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     //
     //  Category page layout
@@ -1743,6 +1823,10 @@
                 }
             }
         }
+    }
+
+    .footer-cart {
+        display: none;
     }
 }
 

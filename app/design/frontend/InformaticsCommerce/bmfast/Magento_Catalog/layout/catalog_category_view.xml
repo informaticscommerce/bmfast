@@ -9,6 +9,9 @@
     <body>
         <referenceContainer name="content">
             <block class="Magento\Catalog\Block\Category\View" name="category.subcat" template="Magento_Catalog::category/cat-thumbnail.phtml"/>
+			
+			<block class="Magento\Checkout\Block\Cart\Sidebar" name="footercart" as="footercart" template="Magento_Catalog::category/footer-cart.phtml" />
+
         </referenceContainer>  
 
 		<referenceContainer name="category.view.container">
