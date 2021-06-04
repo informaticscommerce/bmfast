@@ -39,3 +39,23 @@
         </div>
     </div>
 <?php endif; ?>
+
+<script type="text/javascript">
+    require([
+        'jquery'
+        ], function ($) {
+            /*
+            * hide swatches on page load
+            * */
+            //hideSwatchesForListMode();                
+            /*
+            * ID starts with,
+            * on change select value click swatch option
+            * */
+            $('.desc .data.item.title').on('click', function (e) {
+                var self = $(this).parent();
+                self.toggleClass("collapsed");
+            }); 
+            
+        });
+</script>

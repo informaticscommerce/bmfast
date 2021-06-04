@@ -99,6 +99,7 @@
                         background: #fff; 
                         right: 0; 
                         top: 28px;
+                        z-index: 1;
                     }
                     &.active {
                         .swatches-main { 
@@ -708,6 +709,84 @@
             }
         }
     }
+
+    body {
+    	.block {
+    		&.crosssell,
+    		&.upsell,
+    		&.related {
+    			.products-crosssell,
+    			.products-upsell,
+    			.products-related {
+    				margin: 0 -15px;
+    				.product-items {
+    					.product-item {
+    						width: 100% !important;
+    						text-align: center;
+    						padding: 5px 15px;
+    						.qty-area {
+    							margin-left: -9px;
+								margin-right: -9px;
+    						}
+    					}
+    				}
+    				.owl-nav {
+    					.owl-prev {
+    						left: -50px;
+    					}
+    					.owl-next {
+    						right: -50px;
+    					}
+    				}
+    			}
+    			.products-grid {
+    				.product-item-info {
+    					border: 1px solid #bbbbbb;
+    					padding: 9px;
+    					width: 100%;
+						box-sizing: border-box;
+    				}
+    			}
+    		}
+    	}
+    	.product.info.detailed .product.data.items .prod-desc {
+    		margin-top: 20px;
+    	}
+    	.product.info.detailed .product.data.items .prod-desc:nth-child(2n) {
+    		width: 42% !important;
+			float: right;
+    	}
+    	.product.info.detailed .product.data.items .desc .data.item.title {
+    		position: relative;
+    		cursor: pointer;
+    	}
+    	.product.info.detailed .product.data.items .desc .data.item.title:after {
+    		content: '-';
+			position: absolute;
+			top: 14px;
+			right: 14px;
+			font-size: 30px;
+			background: #888c8f;
+			padding: 0;
+			border-radius: 100px;
+			height: 16px;
+			width: 16px;
+			text-align: center;
+			line-height: 13px;
+			color: #fff;
+    	}
+    	.product.info.detailed .product.data.items .desc.prod-desc.collapsed .data.item.title:after {
+    		content: '+';
+    		font-size: 18px;
+    	}
+    	.product.info.detailed .product.data.items .desc.prod-desc .data.item.content {
+    		display: block !important;
+    	}
+    	.product.info.detailed .product.data.items .desc.prod-desc.collapsed .data.item.content {
+    		display: none !important;
+    	}
+
+    }
 }
 
 //
@@ -922,7 +1001,7 @@
                 }
             }
             .qty-area {
-                padding: 10px 0;
+                padding: 0 0 10px;
                 margin-left: 0;
                 margin-right: 0;
                 background: none;
@@ -1003,8 +1082,25 @@
                     width: 100%;
                     max-width: none;
                 }
+                &.swatch-color {
+                    position: relative;
+                    .color-label {
+                        display: block !important;
+                        font-size: 12px;
+                        color: #2b6b9b;
+                        margin-bottom: 10px;
+                    }
+                }
                 &.actions {
                     width: 50%;
+                    .product-item-actions {
+                        .actions-primary {
+                            .tocart {
+                                width: 100%;
+                                max-width: 150px;
+                            }
+                        }
+                    }
                 }
             }
         }
