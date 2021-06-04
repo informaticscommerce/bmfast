@@ -10,11 +10,11 @@
         <referenceContainer name="content">
             <block class="Magento\Catalog\Block\Category\View" name="category.subcat" template="Magento_Catalog::category/cat-thumbnail.phtml"/>
 			
-			<block class="Magento\Checkout\Block\Cart\Sidebar" name="footercart" as="footercart" template="Magento_Catalog::category/footer-cart.phtml" />
+<!--			<block class="Magento\Checkout\Block\Cart\Sidebar" name="footercart" as="footercart" template="Magento_Catalog::category/footer-cart.phtml" />-->
         </referenceContainer>
 
         <referenceContainer name="content">
-            <block class="Magento\Checkout\Block\Cart\Sidebar" name="minicart.footer" as="minicart.footer" template="Magento_Checkout::cart/minicart-footer.phtml" after="footercart">
+            <block class="Magento\Checkout\Block\Cart\Sidebar" name="minicart.footer" as="minicart.footer" template="Magento_Checkout::cart/minicart-footer.phtml" after="category.subcat">
                 <arguments>
                     <argument name="jsLayout" xsi:type="array">
                         <item name="types" xsi:type="array"/>

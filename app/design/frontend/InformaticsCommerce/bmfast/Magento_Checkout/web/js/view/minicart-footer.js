@@ -168,6 +168,9 @@ define([
          * @returns {*}
          */
         getCartParam: function (name) {
+            if(name == 'summary_count' && this.getCartParamUnsanitizedHtml(name) == undefined) {
+                return 0;
+            }
             return this.getCartParamUnsanitizedHtml(name);
         },
 

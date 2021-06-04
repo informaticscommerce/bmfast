@@ -8,8 +8,8 @@
 /** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
 ?>
 <div class="footer-cart">
-	<div class="cart-item-qty">
-        <span class="number">1</span> 
+	<div class="cart-item-qty" data-bind="scope: 'minicart_content_footer'">
+        <span class="number"><!-- ko text: getCartParam('summary_count') --><!-- /ko --></span>
         <span class="title">Item(s) in your cart</span>
     </div>
     <div data-block="minicart-footer" class="minicart-footer-wrapper">
@@ -27,7 +27,7 @@
 
                     });
                 });
-    script;
+script;
             ?>
             <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>
         <?php endif ?>
