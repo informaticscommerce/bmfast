@@ -33,8 +33,10 @@
             <translate args="'of'" if="maxItemsToDisplay < getCartLineItemsCount()"/>
         </div>
 
-        <each args="getRegion('summaryContainer')" render=""/>
-        <each args="getRegion('subtotalContainer')" render=""/>
+        <div class="summary-subtotal">
+            <each args="getRegion('summaryContainer')" render=""/>
+            <each args="getRegion('subtotalContainer')" render=""/>
+        </div>
 
         <div class="actions" if="getCartParam('possible_onepage_checkout')">
             <div class="primary">
