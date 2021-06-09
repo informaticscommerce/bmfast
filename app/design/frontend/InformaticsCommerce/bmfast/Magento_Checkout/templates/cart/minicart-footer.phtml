@@ -7,52 +7,55 @@
 /** @var $block \Magento\Checkout\Block\Cart\Sidebar */
 /** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
 ?>
-<div class="footer-cart">
-	<div class="cart-item-qty" data-bind="scope: 'minicart_content_footer'">
-        <span class="number"><!-- ko text: getCartParam('summary_count') --><!-- /ko --></span>
-        <span class="title">Item(s) in your cart</span>
-    </div>
-    <div data-block="minicart-footer" class="minicart-footer-wrapper">
+<div data-bind="scope: 'minicart_content_footer'">
+	<div class="footer-cart"  style="display:none" data-bind="style: { display: getCartParam('summary_count') == 0 ? 'none' : 'block' }">
+		<div class="cart-item-qty" data-bind="scope: 'minicart_content_footer'">
+			<span class="number"><!-- ko text: getCartParam('summary_count') --><!-- /ko --></span>
+			<span class="title">Item(s) in your cart</span>
+		</div>
+		<div data-block="minicart-footer" class="minicart-footer-wrapper">
 
-        <?php if ($block->getIsNeedToDisplaySideBar()):?>
-            <div class="block block-minicart-footer">
-                <div id="minicart-footer-content-wrapper" data-bind="scope: 'minicart_content_footer'">
-                    <!-- ko template: getTemplate() --><!-- /ko -->
-                </div>
-            </div>
-        <?php else: ?>
-            <?php $scriptString = <<<script
-                require(['jquery'], function ($) {
-                    $('a.action.showcart.footer').click(function() {
+			<?php if ($block->getIsNeedToDisplaySideBar()):?>
+				<div class="block block-minicart-footer">
+					<div id="minicart-footer-content-wrapper" data-bind="scope: 'minicart_content_footer'">
+						<!-- ko template: getTemplate() --><!-- /ko -->
+					</div>
+				</div>
+			<?php else: ?>
+				<?php $scriptString = <<<script
+					require(['jquery'], function ($) {
+						$('a.action.showcart.footer').click(function() {
 
-                    });
-                });
-script;
-            ?>
-            <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>
-        <?php endif ?>
-        <?= /* @noEscape */ $secureRenderer->renderTag('script', [], 'window.checkout = ' .
-        /* @noEscape */ $block->getSerializedConfig(), false); ?>
-        <script type="text/x-magento-init">
-        {
-            "[data-block='minicart-footer']": {
-                "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
-            },
-            "*": {
-                "Magento_Ui/js/block-loader": "<?= $block->escapeJs(
-                    $block->escapeUrl($block->getViewFileUrl('images/loader-1.gif'))
-                ) ?>"
-            }
-        }
-        </script>
-    </div>
-</div>    
+						});
+					});
+	script;
+				?>
+				<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>
+			<?php endif ?>
+			<?= /* @noEscape */ $secureRenderer->renderTag('script', [], 'window.checkout = ' .
+			/* @noEscape */ $block->getSerializedConfig(), false); ?>
+			<script type="text/x-magento-init">
+			{
+				"[data-block='minicart-footer']": {
+					"Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
+				},
+				"*": {
+					"Magento_Ui/js/block-loader": "<?= $block->escapeJs(
+						$block->escapeUrl($block->getViewFileUrl('images/loader-1.gif'))
+					) ?>"
+				}
+			}
+			</script>
+		</div>
+	</div>
+</div>
 
 <script type="text/javascript">
 require([ "jquery" ], function($){
 
-    $(".footer-cart .cart-item-qty").on("click",function() {
-    $(this).next('.minicart-footer-wrapper').stop(true, false).slideToggle().toggleClass('close');
-  });
+    jQuery(document).on("click", ".footer-cart .cart-item-qty", function() {    
+    jQuery(this).next('.minicart-footer-wrapper').stop(true, false).slideToggle().toggleClass('close');   
+        
+    });
 });
 </script>

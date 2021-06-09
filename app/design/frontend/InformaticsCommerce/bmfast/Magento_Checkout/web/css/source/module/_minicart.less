@@ -111,7 +111,15 @@
             text-align: center;
         }
     }
+    
     .footer-cart {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 999;
+        
         .minicart-footer-wrapper {
             background: #f8f9fb;
             border: 1px solid #e5e5e5;
@@ -204,7 +212,7 @@
                                 background: #000;
                                 margin-left: 2px;
                                 border-radius: 15px;
-                                padding: 0px 8px;
+                                padding: 0px 6px;
                                 font-family: @font-family-name__poppins-Bold;
                             }
                         }
@@ -390,6 +398,10 @@
 
         .product-item-details {
             padding-left: 88px;
+            text-align: left;
+            .product-item-name {
+                text-align: left;
+            }
 
             .price {
                 font-weight: @font-weight__bold;

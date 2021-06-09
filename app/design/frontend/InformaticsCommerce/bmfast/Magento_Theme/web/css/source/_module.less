@@ -133,7 +133,7 @@
 
     .header.panel {
         > .header.links {
-            display: none;
+            //display: none;
             .lib-list-inline();
             float: right;
             font-size: 0;
@@ -228,6 +228,7 @@
 
     .header {
         &.content {
+            position: relative;
             .minicart-wrapper {
                 .action.showcart {
                     &:before {
@@ -250,6 +251,31 @@
             }
             .block-search {
                 text-align: right;
+            }
+            .header {
+                &.links {
+                    padding: 0;
+                    margin: 0;
+                    position: relative;
+                    li {
+                        display: none;
+                    }
+                }
+            }
+            .authorization-link {
+                float: right;
+                display: block;
+                list-style: none;
+                .login-customer {
+                    font-size: 16px;
+                    line-height: 28px;
+                    padding: 7px 20px;
+                    background: #44924f;
+                    color: #fff;
+                    text-transform: uppercase;
+                    text-decoration: none;
+                    cursor: pointer;                                
+                }
             }
         }
     }
@@ -853,6 +879,109 @@
             }
         }
     }
+    
+    .modals-wrapper {
+        .modal-popup {
+            &.account-popup {
+                .modal-inner-wrap {
+                    max-width: 480px;
+                    margin-top: 10%;
+                    .modal-content {
+                        padding: 0;
+                        .block-customer-login {
+                            &.login-popup {
+                                margin-bottom: 0;
+                                .block-title {
+                                    text-align: center;
+                                    background: #2b6b9b;
+                                    padding: 25px 50px;
+                                    strong {
+                                        font-size: 24px;
+                                        color: #ffd200;
+                                        text-transform: uppercase;
+                                        font-weight: 400;
+                                        font-family: @font-family-name__poppins-Bold;
+                                    }
+                                    .field.note {
+                                        font-size: 16px;
+                                        color: #fff;
+                                    }
+                                }
+                                .block-content {
+                                    padding: 25px 30px;
+                                    .form {
+                                        .label {
+                                            font-size: 18px;
+                                            color: #282828;
+                                            font-family: @font-family-name__roboto-Medium;
+                                        }
+                                        .control {
+                                            .input-text {
+                                                font-size: 16px;
+                                                height: 42px;
+                                                border: 1px solid #d4d4d4;
+                                            }
+                                        }
+                                        .fieldset.login {
+                                            margin-bottom: 0;
+                                        }
+                                    }
+                                    .actions-toolbar {
+                                        .primary {
+                                            padding-top: 20px;
+                                            border-top: 1px solid #ccc;
+                                            width: 100%;
+                                            .action.login {
+                                                float: right;
+                                                font-size: 16px;
+                                                padding: 15px 25px;
+                                                margin-right: 0; 
+                                                border-radius: 0;
+                                                max-width: 130px;
+                                                border: #e96626;
+                                                background: #e96626;   
+                                                text-transform: uppercase;
+                                                font-family: @font-family-name__poppins-Regular;
+                                                span {
+                                                    &:after {
+                                                    content: '\f061';
+                                                    font-family: @font-family-name__FontAwesome;
+                                                    margin-left: 10px;
+                                                    }
+                                                }                                          
+                                            }
+                                            .new-customer {
+                                                float: left;
+                                                display: block;
+                                                padding-top: 15px;
+                                            }
+                                        }
+                                        .secondary {
+                                            float: right;
+                                            margin-bottom: 20px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .modal-header {
+                        padding-top: 0;
+                        padding-bottom: 0;
+                        .action-close {
+                            &:before {
+                                color: #fff;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                    .modal-footer {
+                        display: none;
+                    }
+                }
+            }
+        }    
+    }
 
     .page-header {
         border: 0;
@@ -1065,6 +1194,7 @@
             }
         }
     }
+      
 
     .footer {
         &.content {

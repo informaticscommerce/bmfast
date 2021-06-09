@@ -11,12 +11,17 @@
 		<css src="Magento_Theme::css/owl.theme.min.css"/>
 	</head>
     <body>
+
         <referenceBlock name="header.panel">
 			<block class="Magento\Cms\Block\Block" name="header_contact_block" >
 				<arguments>
 					<argument name="block_id" xsi:type="string">header_contact_block</argument>
 				</arguments>
 			</block>
+
+			<block class="Magento\Customer\Block\Form\Login" name="login.popup" after="-" template="Magento_Theme::html/loginpopup.phtml"/>
+
+
 			<block class="Magento\Cms\Block\Block" name="header_quote" >
 				<arguments>
 					<argument name="block_id" xsi:type="string">header_quote</argument>
@@ -40,6 +45,7 @@
 
         
         <!-- <move element="category.image" destination="page.wrapper" before="main.content" /> -->
+		<move element="authorization-link-login" destination="header-wrapper" after="minicart"/>
         <move element="breadcrumbs" destination="page.wrapper" before="main.content"/>
         <move element="footer_cities" destination="before.body.end"/>
         <!-- <referenceBlock name="page.main.title" remove="true"/> -->
@@ -51,6 +57,7 @@
 		<referenceBlock name="currency" remove="true" /> 
 		<referenceBlock name="store.links" remove="true" />
 		<referenceBlock name="store.settings" remove="true" />
+		<referenceBlock name="register-link" remove="true" />
 
 
 		
