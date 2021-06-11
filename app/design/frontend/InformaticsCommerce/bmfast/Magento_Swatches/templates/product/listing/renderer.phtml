@@ -6,7 +6,8 @@
 ?>
 <?php
 $generalHelper = $this->helper(Mage4\General\Helper\Data::class);
-$objectManager = $generalHelper->getObjectManager();/** @var \Magento\Catalog\Block\Product\ProductList\Toolbar $toolbar */
+$objectManager = $generalHelper->getObjectManager();
+/** @var \Magento\Catalog\Block\Product\ProductList\Toolbar $toolbar */
 $toolbar = $objectManager->get(\Magento\Catalog\Block\Product\ProductList\Toolbar::class);
 /** @var \Magento\Framework\App\RequestInterface $request */
 $request = $objectManager->get(\Magento\Framework\App\RequestInterface::class);
