@@ -107,7 +107,7 @@ $productView = $objectManager->get('\Magento\Catalog\Block\Product\View');
                         echo $_product->getAttributeText('length');
                         ?>
                     </td>
-                    <td>
+                    <td class="product-item-details">
                         <?php if ($_product->isAvailable()): ?>
                             <?= $block->getProductDetailsHtml($_product) ?>
                         <?php endif; ?>

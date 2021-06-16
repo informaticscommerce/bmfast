@@ -260,6 +260,11 @@ $_item = null;
                                     <?php if ($_item->isAvailable()):?>
                                         <?= $block->getProductDetailsHtml($_item) ?>
                                     <?php endif; ?>
+                                    <?php if($_item->getTypeId() == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE){
+
+ $swatchBlock = $this->getLayout()->createBlock("Magento\Swatches\Block\Product\Renderer\Listing\Configurable")->setTemplate("Magento_Swatches::product/listing/renderer_custom.phtml");
+   echo $swatchBlock->setProduct($_item)->toHtml();                           
+} ?>
                                 </div>
 
                                     
