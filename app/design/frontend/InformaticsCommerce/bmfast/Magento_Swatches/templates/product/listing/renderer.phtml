@@ -16,7 +16,7 @@ $label = '';
 $jsonDecode = json_decode($block->getJsonConfig(), true);
 if(!empty($jsonDecode['attributes'])) {
     foreach($jsonDecode['attributes'] as $eachAttr) {
-        if(!empty($eachAttr['label'])) {
+        if(!empty($eachAttr['label']) && strtolower($eachAttr['label']) == 'color') {
             $label = $eachAttr['label'];
         }
     }
