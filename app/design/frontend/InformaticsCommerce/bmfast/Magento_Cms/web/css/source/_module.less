@@ -1202,4 +1202,61 @@
         }
     }
   
+    .acct-filter {
+        border: 1px solid #e0e1e2;
+        font-family: @font-family-name__poppins-Regular;
+        .title {
+            font-size: 16px;
+            color: #fff;
+            padding: 15px 20px;
+            margin: 0;
+            background: #1a1a1a;
+        }
+        ul {
+            padding: 30px 20px;
+            margin: 0;
+            background: #eff1f1;
+        }
+        .field {
+            list-style: none;
+            margin-bottom: 20px;
+            &.msg {
+                text-align: center;
+                margin-bottom: 40px;
+                span {
+                    color: #2b6b9b;
+                }
+            }
+            &.purchase-order {
+                margin-bottom: 30px;
+            }
+            &.order-end {
+                margin-bottom: 30px;
+            }
+            label {
+                font-size: 15px;  
+                color: #282828;             
+            }
+            input {
+                border: 2px solid #c7c7c7;
+                height: 40px;
+                margin-top: 12px;
+            }
+            button {
+                color: #fff;
+                border-radius: 0;
+                &.submit {
+                    background: #3d8c49;
+                    border: #3d8c49;
+                    padding: 8px 15px;
+                }
+                &.clear-filter {
+                    background: #e96626;
+                    border: #e96626;
+                    padding: 9px 12px;
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
 }

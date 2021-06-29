@@ -61,6 +61,9 @@
                 .mob-title {
                     display: none;
                 }
+                &.product-item-details {
+                    width: 100px; 
+                }
                 .swatch-new { 
                     position: relative; 
                     padding-top: 28px; 
@@ -244,7 +247,7 @@
                         .swatch-option {
                             height: 16px;
                             width: 16px;
-                            border: 0;
+                            border: 1px solid #eee;
                             border-radius: 100px;
                             min-width: auto;
                             padding: 0;
@@ -554,6 +557,8 @@
                 &:hover {
                     border-color: #6a95dc;
                     margin: 0;
+                    padding: 20px 25px;
+                    border: 0;
                 }
             }
             .product-item-actions {
@@ -979,6 +984,29 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
 
+    body {
+        &.page-products {
+            &.page-layout-1column {
+                .product-item {
+                    width: auto !important;
+                    margin-left: -15px !important;
+                    float: none !important;
+                    margin-bottom: 0;
+                    margin-top: 0;
+                }
+                .products-grid {
+                    .product-item-inner {
+                        background: none;
+                        box-shadow: none;
+                        &:before {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .page-products {
         .sorter {
             position: static;
@@ -1007,6 +1035,9 @@
                 &:first-child {
                     padding-left: 0;
                     margin-bottom: 15px;
+                }
+                .mob-title {
+                    display: none;
                 }
             }
             .qty-area {
@@ -1099,6 +1130,12 @@
                 &.name {
                     width: 100%;
                     max-width: none;
+                }
+                &.product-item-details {
+                    width: 25%;
+                    .mob-title {
+                        display: block !important;
+                    }
                 }
                 &.swatch-color {
                     position: relative;

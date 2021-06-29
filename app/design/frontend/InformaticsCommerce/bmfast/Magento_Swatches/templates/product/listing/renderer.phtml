@@ -26,7 +26,7 @@ $productId = $block->getProduct()->getId();
 /** @var \Magento\Swatches\ViewModel\Product\Renderer\Configurable $configurableViewModel */
 $configurableViewModel = $block->getConfigurableViewModel();
 ?>
-
+<span class="mob-title">Color</span>
 <div class="swatch-opt-<?= $block->escapeHtmlAttr($productId) ?>"
      data-role="swatch-option-<?= $block->escapeHtmlAttr($productId) ?>">
     <?php if($toolbar->getCurrentMode() == 'grid' || $request->getParam('product_list_mode') == 'grid'): ?>
