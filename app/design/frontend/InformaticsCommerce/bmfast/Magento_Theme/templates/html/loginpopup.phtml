@@ -49,7 +49,7 @@
                     <div class="primary">
                         <div class="new-customer">
 							<span><?= $block->escapeHtml(__('Not a member?')) ?></span>
-							<a href="#" id="click-me" class="action create"><?= $block->escapeHtml(__('Create an Account')) ?></a>
+							<a href="#" id="create-btn" class="action create"><?= $block->escapeHtml(__('Create an Account')) ?></a>
 						</div>
                         <button type="submit" class="action login primary" name="send" id="send2"><span><?= $block->escapeHtml(__('Log In')) ?></span></button>
                     </div>
@@ -57,15 +57,15 @@
             </fieldset>
         </form>
     </div>
-    <div id="popup-modal">
+    <div id="create-modal">
         <div class="new-customer">
-            <a href="/customer/account/create" class="action create">
+            <a href="/customer/account/create" class="action create"><?= $block->escapeHtml(__('Individual')) ?>
                 <img src="" alt="">
-                <?= $block->escapeHtml(__('Individual')) ?>
             </a>
         </div>
         <div class="new-customer">
             <a href="/customer/account/create/business" class="action create"><?= $block->escapeHtml(__('Organization')) ?>
+                <img src="" alt="">
             </a>
         </div>
     </div>
@@ -110,10 +110,10 @@
 				$(".login-popup").modal("openModal");
             });
 
-            var popup2 = modal(options2, $('#popup-modal'));
-            $("#click-me").on('click',function(){
+            var popup2 = modal(options2, $('#create-modal'));
+            $("#create-btn").on('click',function(){
                 $(".login-popup").modal("closeModal");
-                $("#popup-modal").modal("openModal");
+                $("#create-modal").modal("openModal");
             });
         }
     );
