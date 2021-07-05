@@ -16,6 +16,7 @@
         "amasty/shopby": "^2.16",
         "magento/composer-root-update-plugin": "~1.0",
         "magento/product-community-edition": "2.4.1",
+        "mageplaza/module-lazy-loading": "^1.0",
         "smile/elasticsuite": "~2.10.0"
     },
     "autoload": {

@@ -247,7 +247,11 @@ $productView = $objectManager->get('\Magento\Catalog\Block\Product\View');
                         </div>
 
                         <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
-                        <?= /* @noEscape */ $block->getProductPrice($_product) ?>
+						
+						<div class="extra-price">
+							<span class="mob-title">Price</span>
+							<?= /* @noEscape */ $block->getProductPrice($_product) ?>
+						</div>
                         <div class="extra">
                             <a href="#"><?= $escaper->escapeHtml(__('See Quantity Breaks')) ?></a>
                         </div>

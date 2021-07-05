@@ -27,7 +27,7 @@ $productId = $block->getProduct()->getId();
 $configurableViewModel = $block->getConfigurableViewModel();
 ?>
 <span class="mob-title">Color</span>
-<div class="swatch-opt-<?= $block->escapeHtmlAttr($productId) ?>"
+<div class="swatch-opt-<?= $block->escapeHtmlAttr($productId) ?> extra-swatch"
      data-role="swatch-option-<?= $block->escapeHtmlAttr($productId) ?>">
     <?php if($toolbar->getCurrentMode() == 'grid' || $request->getParam('product_list_mode') == 'grid'): ?>
         <label class="swatch-label"><?= $block->escapeHtml(__($label.':')) ?></label>
