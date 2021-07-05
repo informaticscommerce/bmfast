@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-// phpcs:disable Generic.Files.LineLength.TooLong   
+// phpcs:disable Generic.Files.LineLength.TooLong
 
 /** @var \Magento\Customer\Block\Form\Login $block */
 ?>
@@ -13,7 +13,7 @@
         <strong id="block-customer-login-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('Login or Create an Account')) ?></strong>
         <div class="field note"><?= $block->escapeHtml(__('If you have an account, please login.')) ?></div>
     </div>
-    
+
     <div class="block-content" aria-labelledby="block-customer-login-heading">
         <form class="form form-login"
               action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>"
@@ -44,18 +44,30 @@
                     </div>
                 </div>
                 <?= $block->getChildHtml('form_additional_info') ?>
-                <div class="actions-toolbar">                   
+                <div class="actions-toolbar">
                     <div class="secondary"><a class="action remind" href="<?= $block->escapeUrl($block->getForgotPasswordUrl()) ?>"><span><?= $block->escapeHtml(__('Forgot Your Password?')) ?></span></a></div>
                     <div class="primary">
                         <div class="new-customer">
 							<span><?= $block->escapeHtml(__('Not a member?')) ?></span>
-							<a href="/customer/account/create" class="action create"><?= $block->escapeHtml(__('Create an Account')) ?></a>
+							<a href="#" id="click-me" class="action create"><?= $block->escapeHtml(__('Create an Account')) ?></a>
 						</div>
                         <button type="submit" class="action login primary" name="send" id="send2"><span><?= $block->escapeHtml(__('Log In')) ?></span></button>
                     </div>
                 </div>
             </fieldset>
         </form>
+    </div>
+    <div id="popup-modal">
+        <div class="new-customer">
+            <a href="/customer/account/create" class="action create">
+                <img src="" alt="">
+                <?= $block->escapeHtml(__('Individual')) ?>
+            </a>
+        </div>
+        <div class="new-customer">
+            <a href="/customer/account/create/business" class="action create"><?= $block->escapeHtml(__('Organization')) ?>
+            </a>
+        </div>
     </div>
     <script type="text/x-magento-init">
         {
@@ -86,11 +98,23 @@
 				modalClass: 'account-popup'
             };
 
+            var options2 = {
+                type: 'popup',
+                modalClass: 'create-account-popup',
+                responsive: true,
+                title: 'SELECT ACCOUNT TYPE'
+            };
+
             var popup = modal(options, $('.login-popup'));
-            $(".login-popup-btn").on('click',function(){ 
-				$(".login-popup").modal("openModal");  
+            $(".login-popup-btn").on('click',function(){
+				$(".login-popup").modal("openModal");
             });
 
+            var popup2 = modal(options2, $('#popup-modal'));
+            $("#click-me").on('click',function(){
+                $(".login-popup").modal("closeModal");
+                $("#popup-modal").modal("openModal");
+            });
         }
     );
 </script>
