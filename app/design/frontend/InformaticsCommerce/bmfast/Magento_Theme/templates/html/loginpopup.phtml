@@ -58,14 +58,16 @@
         </form>
     </div>
     <div id="create-modal">
-        <div class="new-customer">
-            <a href="/customer/account/create" class="action create"><?= $block->escapeHtml(__('Individual')) ?>
-                <img src="" alt="">
+        <div class="new-customer customer-left">
+            <a href="/customer/account/create" class="action create">
+				<img src='<?php echo $this->getViewFileUrl('images/icon-ind-user.png'); ?>' alt="Individual">
+				<p><?= $block->escapeHtml(__('Individual')) ?></p>
             </a>
         </div>
         <div class="new-customer">
-            <a href="/customer/account/create/business" class="action create"><?= $block->escapeHtml(__('Organization')) ?>
-                <img src="" alt="">
+            <a href="/customer/account/create/business" class="action create">
+				<img src='<?php echo $this->getViewFileUrl('images/icon-org.png'); ?>' alt="Organization">
+				<p><?= $block->escapeHtml(__('Organization')) ?></p>
             </a>
         </div>
     </div>
