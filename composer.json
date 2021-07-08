@@ -85,7 +85,7 @@
         "magento-force": "override",
         "patches": {
             "magento/module-customer": {
-                "MC-38509 - Create New Customer Account patch": "bmfast/MC-38509-Customer.diff"
+                "MC-38509 - Create New Customer Account patch": "magento/MC-38509-Customer.diff"
             }
         }
     }
