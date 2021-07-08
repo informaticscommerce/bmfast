@@ -27,6 +27,18 @@ $formData = $block->getFormData();
         $type = $params['type'];
     }
 ?>
+
+
+<div class="login-page-title">
+    <div class="col-left">
+        <h2><?= $block->escapeHtml(__('LOGIN OR CREATE AN ACCOUNT')) ?></h2>
+        <p><?= $block->escapeHtml(__('Please enter your details below to complete your purchase.')) ?></p>
+    </div>
+    <div class="col-right">
+        <p>Already have an account? <a href="#" class="action create">Click here to login</a></p>
+    </div>
+</div>
+
 <form class="form create account form-create-account"
       action="<?= $escaper->escapeUrl($block->getPostActionUrl()) ?>"
       method="post"
@@ -34,35 +46,41 @@ $formData = $block->getFormData();
       enctype="multipart/form-data"
       autocomplete="off">
     <?= /* @noEscape */ $block->getBlockHtml('formkey') ?>
+    
     <?php if ($type === 'business'): ?>
         <?php $cityValidationClass = $addressHelper->getAttributeValidationClass('city'); ?>
         <?php $postcodeValidationClass = $addressHelper->getAttributeValidationClass('postcode'); ?>
         <?php $regionValidationClass = $addressHelper->getAttributeValidationClass('region'); ?>
-
-        <?php $_company = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Company::class) ?>
-        <?= $_company->setCompany($formData->getCompany())->toHtml() ?>
-        <div class="field company_email ">
-            <label for="company_email" class="label"><span>Company Email</span></label>
-            <div class="control">
-                <input type="text" name="company_email" id="company_email" value="" title="Company Email" class="input-text " autocomplete="off">
-            </div>
+        <div class="form-title cutomer-type-company">
+            <h2>ORGANIZATION INFORMATION</h2>
+            <p>If you have an account with us, please log In.</p>
         </div>
-        <div class="field ein_id ">
-            <label for="ein_id" class="label"><span>EIN ID</span></label>
-            <div class="control">
-                <input type="text" name="ein_id" id="ein_id" value="" title="EIN ID" class="input-text " autocomplete="off">
+        <fieldset class="fieldset organization">
+            <?php $_company = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Company::class) ?>
+            <?= $_company->setCompany($formData->getCompany())->toHtml() ?>
+            <div class="field company_email ">
+                <label for="company_email" class="label"><span>Company Email</span></label>
+                <div class="control">
+                    <input type="text" name="company_email" id="company_email" value="" title="Company Email" class="input-text " autocomplete="off">
+                </div>
             </div>
-        </div>
-        <div class="field reseller_id ">
-            <label for="reseller_id" class="label"><span>RESELLER ID</span></label>
-            <div class="control">
-                <input type="text" name="reseller_id" id="reseller_id" value="" title="RESELLER ID" class="input-text " autocomplete="off">
+            <div class="field ein_id ">
+                <label for="ein_id" class="label"><span>EIN ID</span></label>
+                <div class="control">
+                    <input type="text" name="ein_id" id="ein_id" value="" title="EIN ID" class="input-text " autocomplete="off">
+                </div>
             </div>
-        </div>
+            <div class="field reseller_id ">
+                <label for="reseller_id" class="label"><span>Reseller ID</span></label>
+                <div class="control">
+                    <input type="text" name="reseller_id" id="reseller_id" value="" title="RESELLER ID" class="input-text " autocomplete="off">
+                </div>
+            </div>
+        </fieldset>
         <?php
         $_streetValidationClass = $addressHelper->getAttributeValidationClass('street');
         ?>
-        <fieldset class="fieldset address">
+        <fieldset class="fieldset address clear">
             <input type="hidden" name="create_address" value="1" />
             <div class="field street required">
                 <label for="street_1" class="label">
@@ -166,6 +184,16 @@ $formData = $block->getFormData();
             <input type="hidden" name="default_billing" value="1">
             <input type="hidden" name="default_shipping" value="1">
         </fieldset>
+    <?php endif; ?>
+    <?php if ($type === 'business'): ?>
+        <div class="company-admin">
+            <h2>Company Administrator</h2>
+        </div>
+    <?php else: ?>
+        <div class="form-title cutomer-type-ind">
+            <h2>PERSONAL INFORMATION</h2>
+            <p>If you have an account with us, please log In.</p>
+        </div>
     <?php endif; ?>
     <fieldset class="fieldset create info">
         <legend class="legend"><span><?= $escaper->escapeHtml(__('Personal Information')) ?></span></legend><br>
@@ -286,19 +314,21 @@ $formData = $block->getFormData();
     </fieldset>
 
     <div class="actions-toolbar">
+        <div class="secondary">
+            Already a Member?
+            <a class="action back"
+               href="<?= $escaper->escapeUrl($block->getBackUrl()) ?>">
+                <span><?= $escaper->escapeHtml(__('Login')) ?></span>
+            </a>
+        </div>
         <div class="primary">
             <button type="submit"
                     class="action submit primary"
                     title="<?= $escaper->escapeHtmlAttr(__('Create an Account')) ?>">
-                <span><?= $escaper->escapeHtml(__('Create an Account')) ?></span>
+                <span><?= $escaper->escapeHtml(__('Register')) ?></span>
             </button>
         </div>
-        <div class="secondary">
-            <a class="action back"
-               href="<?= $escaper->escapeUrl($block->getBackUrl()) ?>">
-                <span><?= $escaper->escapeHtml(__('Back')) ?></span>
-            </a>
-        </div>
+        
     </div>
 </form>
 <?php $ignore = /* @noEscape */ $_dob->isEnabled() ? '\'input[id$="full"]\'' : 'null';
