@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6e3b812286f85615985ec768a4120b8",
+    "content-hash": "44d729082d1583132a47459f37055c89",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -48,11 +48,36 @@
             "time": "2019-08-22T19:21:35+00:00"
         },
         {
-            "name": "amasty/base",
-            "version": "1.12.5",
+            "name": "amasty/aminvisiblecaptcha",
+            "version": "2.4.0",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.amasty.com/community/packages/base-1.12.5.zip"
+                "url": "https://composer.amasty.com/community/packages/aminvisiblecaptcha-2.4.0.zip"
+            },
+            "require": {
+                "amasty/base": ">=1.12.8",
+                "php": "^7.1.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Amasty\\InvisibleCaptcha\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "Amasty Google Invisible Captcha"
+        },
+        {
+            "name": "amasty/base",
+            "version": "1.12.9",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.amasty.com/community/packages/base-1.12.9.zip"
             },
             "require": {
                 "php": "^7.1.0"
@@ -70,6 +95,31 @@
                 "Commercial"
             ],
             "description": "Amasty Base"
+        },
+        {
+            "name": "amasty/geoip",
+            "version": "1.5.5",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.amasty.com/community/packages/geoip-1.5.5.zip"
+            },
+            "require": {
+                "amasty/base": ">=1.12.8",
+                "php": "^7.1.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Amasty\\Geoip\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "Amasty Geoip Data"
         },
         {
             "name": "amasty/module-improved-layered-navigation-page",
@@ -121,6 +171,26 @@
                 "Commercial"
             ],
             "description": "Fix for Magento 2.4.0 by Amasty"
+        },
+        {
+            "name": "amasty/module-one-step-checkout-pro-package",
+            "version": "1.0.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.amasty.com/community/packages/module-one-step-checkout-pro-package-1.0.0.zip"
+            },
+            "require": {
+                "amasty/aminvisiblecaptcha": ">=2.4.0",
+                "amasty/base": ">=1.12.9",
+                "amasty/module-single-step-checkout": ">=3.1.1",
+                "amasty/orderattr": ">=3.7.3",
+                "php": "^7.1.0"
+            },
+            "type": "metapackage",
+            "license": [
+                "Commercial"
+            ],
+            "description": "One Step Checkout Pro Package by Amasty"
         },
         {
             "name": "amasty/module-shop-by-base",
@@ -176,6 +246,67 @@
                 "Commercial"
             ],
             "description": "Shop by Brand by Amasty"
+        },
+        {
+            "name": "amasty/module-single-step-checkout",
+            "version": "3.1.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.amasty.com/community/packages/module-single-step-checkout-3.1.1.zip"
+            },
+            "require": {
+                "amasty/base": ">=1.12.8",
+                "amasty/geoip": ">=1.5.5",
+                "php": "^7.1.0"
+            },
+            "suggest": {
+                "amasty/checkout-graph-ql": "Install checkout-graph-ql module to be able to use One Step Checkout GraphQL queries.",
+                "amasty/module-mixin-rewrite-patch": "Install mixin rewrite patch if you have a problem with extension on Magento 2.4.2 version on Checkout",
+                "amasty/module-single-step-checkout-mftf-2": "Install module-single-step-checkout-mftf-2 module to be able to run One Step Checkout MFTF tests for Magento 2.3.5+ version.",
+                "amasty/module-single-step-checkout-mftf-3": "Install module-single-step-checkout-mftf-3 module to be able to run One Step Checkout MFTF tests for Magento 2.4.0+ version."
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Amasty\\Checkout\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "One Step Checkout by Amasty"
+        },
+        {
+            "name": "amasty/orderattr",
+            "version": "3.7.3",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.amasty.com/community/packages/orderattr-3.7.3.zip"
+            },
+            "require": {
+                "amasty/base": ">=1.12.8",
+                "php": "^7.1.0"
+            },
+            "suggest": {
+                "amasty/module-orderattr-mftf-2": "Install module-orderattr-mftf-2 module to be able to run Order Attribute MFTF tests for Magento 2.3.5+ version.",
+                "amasty/module-orderattr-mftf-3": "Install module-orderattr-mftf-3 module to be able to run Order Attribute MFTF tests for Magento 2.4.0+ version."
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Amasty\\Orderattr\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "Order Attributes by Amasty"
         },
         {
             "name": "amasty/shopby",
@@ -16025,6 +16156,85 @@
             "time": "2020-05-19T23:25:07+00:00"
         },
         {
+            "name": "mageplaza/module-core",
+            "version": "1.4.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mageplaza/module-core.git",
+                "reference": "d050c9f35b04197e97b6747d7dbf1f164b1f26fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mageplaza/module-core/zipball/d050c9f35b04197e97b6747d7dbf1f164b1f26fe",
+                "reference": "d050c9f35b04197e97b6747d7dbf1f164b1f26fe",
+                "shasum": ""
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Mageplaza\\Core\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Mageplaza",
+                    "email": "support@mageplaza.com",
+                    "homepage": "https://www.mageplaza.com",
+                    "role": "Technical Support"
+                }
+            ],
+            "description": "Mageplaza Core for Magento 2",
+            "time": "2020-12-07T08:10:17+00:00"
+        },
+        {
+            "name": "mageplaza/module-lazy-loading",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mageplaza/magento-2-lazy-loading.git",
+                "reference": "4ffd7c717d84504c0b60a4fc41432935c632d5a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mageplaza/magento-2-lazy-loading/zipball/4ffd7c717d84504c0b60a4fc41432935c632d5a0",
+                "reference": "4ffd7c717d84504c0b60a4fc41432935c632d5a0",
+                "shasum": ""
+            },
+            "require": {
+                "mageplaza/module-core": "^1.4.5"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Mageplaza\\LazyLoading\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Mageplaza",
+                    "email": "support@mageplaza.com",
+                    "homepage": "https://www.mageplaza.com",
+                    "role": "Technical Support"
+                }
+            ],
+            "description": "Mageplaza Lazy Loading Images Extension",
+            "time": "2021-02-17T03:31:18+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.25.5",
             "source": {
@@ -24694,4 +24904,3 @@
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
 }
-
