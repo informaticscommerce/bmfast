@@ -5,7 +5,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Mage4\CustomB2BCustomer\Controller\Account;
+namespace Mage4\ExtendMagentoCustomer\Controller\Account;
 
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Model\AddressRegistry;

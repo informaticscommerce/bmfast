@@ -1,5 +1,5 @@
 <?php
-namespace Mage4\CustomB2BCustomer\Setup;
+namespace Mage4\ExtendMagentoCustomer\Setup;
 
 use Magento\Eav\Setup\EavSetup;
 use Magento\Eav\Setup\EavSetupFactory;
@@ -72,7 +72,7 @@ class InstallData implements InstallDataInterface
                 'system'=> false,
                 'group'=> 'General',
                 'global' => true,
-                'position' => 1002,
+                'position' => 1003,
                 'visible_on_front' => true,
             ],
         ];

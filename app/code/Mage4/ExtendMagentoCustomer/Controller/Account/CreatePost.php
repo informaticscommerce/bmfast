@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Mage4\CustomB2BCustomer\Controller\Account;
+namespace Mage4\ExtendMagentoCustomer\Controller\Account;
 
 use Magento\Customer\Api\CustomerRepositoryInterface as CustomerRepository;
 use Magento\Framework\App\Action\HttpPostActionInterface as HttpPostActionInterface;
