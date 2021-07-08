@@ -14,12 +14,12 @@
     <div class="col-right">
         <p>Already have an account? <a href="#">Click here to login</a></p>
     </div>
- </div>   
+ </div>
 
 <div class="block block-customer-login">
     <div class="block-title">
         <strong id="block-customer-login-heading" class="block-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('LOGIN')) ?></strong>
-		
+
     </div>
     <div class="block-content" aria-labelledby="block-customer-login-heading">
         <form class="form form-login"
@@ -30,7 +30,7 @@
             <?= $block->getBlockHtml('formkey') ?>
 			 <div class="field note"><?= $block->escapeHtml(__('If you have an account with us, please login.')) ?></div>
             <fieldset class="fieldset login">
-               
+
                 <div class="field email required">
                     <label class="label" for="email"><span><?= $block->escapeHtml(__('Email Address')) ?></span></label>
                     <div class="control">
@@ -49,13 +49,51 @@
                     <div class="primary">
                         <div class="new-customer">
 							<span><?= $block->escapeHtml(__('Not a member?')) ?></span>
-							<a href="/customer/account/create" class="action create"><?= $block->escapeHtml(__('Create an Account')) ?></a>
+							<a href="#" id="page-btn" class="action create"><?= $block->escapeHtml(__('Create an Account')) ?></a>
 						</div>
                         <button type="submit" class="action login primary" name="send" id="send2"><span><?= $block->escapeHtml(__('LOGIN')) ?></span></button>
-                    </div>                    
+                    </div>
                 </div>
             </fieldset>
         </form>
     </div>
 </div>
+<div id="create-modal">
+    <div class="new-customer customer-left">
+        <a href="/customer/account/create" class="action create">
+            <img src='<?php echo $this->getViewFileUrl('images/icon-ind-user.png'); ?>' alt="Individual">
+            <p><?= $block->escapeHtml(__('Individual')) ?></p>
+        </a>
+    </div>
+    <div class="new-customer">
+        <a href="/customer/account/create?type=business" class="action create">
+            <img src='<?php echo $this->getViewFileUrl('images/icon-org.png'); ?>' alt="Organization">
+            <p><?= $block->escapeHtml(__('Organization')) ?></p>
+        </a>
+    </div>
+</div>
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                modalClass: 'create-account-popup',
+                responsive: true,
+                title: 'SELECT ACCOUNT TYPE'
+            };
 
+            var popup = modal(options, $('#create-modal'));
+            $("#page-btn").on('click',function(){
+                $(".login-popup").modal("closeModal");
+                $("#create-modal").modal("openModal");
+            });
+        }
+    );
+</script>
