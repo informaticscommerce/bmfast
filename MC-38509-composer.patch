@@ -3,7 +3,7 @@ index b941ec7a254..75f4ee60976 100644
 --- a/vendor/magento/module-customer/view/frontend/web/js/block-submit-on-send.js
 +++ b/vendor/magento/module-customer/view/frontend/web/js/block-submit-on-send.js
 @@ -14,9 +14,15 @@ define([
-
+ 
          dataForm.submit(function () {
              $(this).find(':submit').attr('disabled', 'disabled');
 +
@@ -18,4 +18,3 @@ index b941ec7a254..75f4ee60976 100644
          });
      };
  });
-
