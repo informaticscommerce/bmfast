@@ -18,6 +18,18 @@
 @amcheckout-modern-2column-gap__width: 60px;
 @amcheckout-modern-edit-icon__background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMi42MTMgMGwtMS43MDYgMS43MTYgMi4zODggMi40TDE1IDIuNDAzIDEyLjYxMyAwek0xLjcgMTAuOThsMi4zODYgMi40IDguMTg3LTguMjMzLTIuMzg3LTIuNDAxTDEuNyAxMC45OHpNMCAxNWwyLjg5LS43NjMtMi4xMy0yLjE0NEwwIDE1eiIgZmlsbD0iIzRFNEU0RSIvPjwvc3ZnPg==) center no-repeat;
 @amcheckout-modern-edit-icon__hover__background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMi42MTMgMGwtMS43MDYgMS43MTYgMi4zODggMi40TDE1IDIuNDAzIDEyLjYxMyAwek0xLjcgMTAuOThsMi4zODYgMi40IDguMTg3LTguMjMzLTIuMzg3LTIuNDAxTDEuNyAxMC45OHpNMCAxNWwyLjg5LS43NjMtMi4xMy0yLjE0NEwwIDE1eiIgZmlsbD0iIzE5NzlDMyIvPjwvc3ZnPg==) center no-repeat;
+@font-family-name__FontAwesome: 'FontAwesome';
+@font-family-name__roboto-Black: 'Roboto-Black';
+@font-family-name__roboto-Bold: 'Roboto-Bold';
+@font-family-name__roboto-Medium: 'Roboto-Medium';   
+@font-family-name__roboto-Regular: 'Roboto-Regular';
+@font-family-name__poppins-Regular: 'Poppins-Regular';
+@font-family-name__poppins-Bold: 'Poppins-Bold';
+@font-family-name__PTSans-Regular: 'PTSans-Regular';
+@font-family-name__PTSans-Bold: 'PTSans-Bold';
+@font-family__base: @font-family-name__roboto-Regular;
+
+
 
 //
 //  Common
@@ -63,7 +75,7 @@
             clear: both;
             color: #363636;
             font-weight: 400;
-            font-family: 'PTSans-Regular';
+            font-family: @font-family-name__PTSans-Regular;
         }
 
         .amcheckout-block:not(:first-of-type) {
@@ -109,7 +121,7 @@
             font-size: 16px;
             cursor: pointer;
             text-transform: uppercase;
-            font-family: 'PTSans-Regular';
+            font-family: @font-family-name__PTSans-Regular;
         }
 
         .amcheckout-title > .amcheckout-icon {
@@ -760,6 +772,7 @@
         .minicart-items .product-image-container {
             margin: 0;
             border: 1px solid @amcheckout-modern__border-color;
+            float: left;
         }
 
         .minicart-items .product-item-details {
@@ -767,7 +780,7 @@
         }
 
         .minicart-items .minicart-items-wrapper {
-            padding: 15px 10px;
+            padding: 15px 20px;
             .product-item {
                 border: 0;
             }
@@ -848,6 +861,14 @@
             border-top: none;
         }
 
+        .table-totals .totals .mark {
+            padding-left: 20px !important;
+        }
+
+        .table-totals .totals .amount {
+            padding-right: 20px !important;
+        }
+
         .item-options .label {
             display: block;
             margin-bottom: 10px;
@@ -921,7 +942,7 @@
             h2 {
                 font-size: 30px;
                 color: #1b1b1b;
-                font-family: 'Poppins-Bold';
+                font-family: @font-family-name__poppins-Bold;
             }
             p {
                 color: #444444;
@@ -942,6 +963,77 @@
                 background: #1a1a1a !important;
                 color: #fff;
             }
+        }
+    }
+
+    .content {
+        &.minicart-items {
+            .product-item {
+                thead {
+                    &:nth-child(n+1) {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    .opc-block-summary {
+        .minicart-items-wrapper {
+            max-height: none;
+            padding: 0;
+            margin: 0;
+            .product-item {
+                &:first-child {
+                    thead {
+                        display: table-header-group;
+                    }
+                }
+                th {
+                    font-size: 16px;
+                    line-height: 24px;
+                    font-weight: 400;
+                    font-family: 'Roboto-Bold';
+                    color: #4a4a4a;
+                    padding: 12px 15px;
+                }
+                td {
+                    border: none;
+                    padding: 11px 20px;
+                    box-sizing: border-box;
+                    &.product-item-info {
+                        padding: 11px 5px 11px 67px;
+                        position: relative;
+                        text-align: left;
+                        width: 59%;
+                    }
+                    &.product-item-qty {
+                        width: 45px;
+                    }
+                }
+            }
+        }
+    }
+    .minicart-items {
+        .product-item-details {
+            text-align: center;
+            &:before,
+            &:after {
+                display: none !important;
+            }
+        }
+    }
+    .product-item-details {
+        .product-image-container {
+            border: 2px solid #cacaca;
+            position: absolute;
+            top: 11px;
+            left: 20px;
+            width: 33px !important;
+            height: 33px !important;
+        }
+        .product-item-name {
+            display: inline-block;
+            color: #4a4a4a;
         }
     }
 }
