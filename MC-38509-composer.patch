@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 diff --git a/vendor/magento/module-customer/view/frontend/web/js/block-submit-on-send.js b/vendor/magento/module-customer/view/frontend/web/js/block-submit-on-send.js
 index b941ec7a254..75f4ee60976 100644
 --- a/vendor/magento/module-customer/view/frontend/web/js/block-submit-on-send.js
@@ -18,3 +20,8 @@ index b941ec7a254..75f4ee60976 100644
          });
      };
  });
+<<<<<<< HEAD
+
+>>>>>>> e09af59e9023f51ad86ed7d158255868a15ef7f0
+=======
+>>>>>>> 00dcae6cde60cba1dc1b3334b7fcb2362769beeb
