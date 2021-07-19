@@ -11,6 +11,102 @@
 ?>
 <?php $_orders = $block->getOrders(); ?>
 <?= $block->getChildHtml('info') ?>
+<?php
+$compelteUrl = $block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+$urlArr    = explode("?",$compelteUrl);
+?>
+
+<?php
+$customerName = ($this->getRequest()->getParam('customer-name') !== '') ? $this->getRequest()->getParam('customer-name') : null;
+$dateStart = ($this->getRequest()->getParam('date-start') !== '') ? $this->getRequest()->getParam('date-start') : null;
+$dateEnd = ($this->getRequest()->getParam('date-end') !== '') ? $this->getRequest()->getParam('date-end') : null;
+$poNumber = ($this->getRequest()->getParam('po-num') !== '') ? $this->getRequest()->getParam('po-num') : null;
+$searchKey = ($this->getRequest()->getParam('search-keyword') !== '') ? $this->getRequest()->getParam('search-keyword') : null;
+$sortOption = ($this->getRequest()->getParam('sort-order') !== '') ? $this->getRequest()->getParam('sort-order') : null;
+?>
+<?php if($customerName != null || $dateStart != null || $dateEnd != null || $poNumber != null || $searchKey != null): ?>
+    <div class="filter-label">
+        <span class="filter-heading">Filters Applied :</span>
+    </div>
+    <ul class="admin__current-filters-list" data-role="filter-list">
+        <?php if($customerName != null): ?>
+            <li>
+                <span class="filterLabel">Customer:</span>
+                <span class="filterValue"><?= $customerName ?></span>
+                <button class="action-remove" type="button" id="customer-btn">
+                    <span data-bind="i18n: 'Remove'">Remove</span>
+                </button>
+            </li>
+        <?php endif; ?>
+        <?php if($dateStart != null): ?>
+            <li>
+                <span class="filterLabel">Date Start:</span>
+                <span class="filterValue"><?= $dateStart ?></span>
+                <button class="action-remove" type="button" id="dateStart-btn">
+                    <span data-bind="i18n: 'Remove'">Remove</span>
+                </button>
+            </li>
+        <?php endif; ?>
+        <?php if($dateEnd != null): ?>
+            <li>
+                <span class="filterLabel">Date End:</span>
+                <span class="filterValue"><?= $dateEnd ?></span>
+                <button class="action-remove" type="button" id="dateEnd-btn">
+                    <span data-bind="i18n: 'Remove'">Remove</span>
+                </button>
+            </li>
+        <?php endif; ?>
+        <?php if($poNumber != null): ?>
+            <li>
+                <span class="filterLabel">PO Number:</span>
+                <span class="filterValue"><?= $poNumber ?></span>
+                <button class="action-remove" type="button" id="po-btn">
+                    <span data-bind="i18n: 'Remove'">Remove</span>
+                </button>
+            </li>
+        <?php endif; ?>
+        <?php if($searchKey != null): ?>
+            <li>
+                <span class="filterLabel">search-keyword:</span>
+                <span class="filterValue"><?= $searchKey ?></span>
+                <button class="action-remove" type="button" id="search-rm-btn">
+                    <span data-bind="i18n: 'Remove'">Remove</span>
+                </button>
+            </li>
+        <?php endif; ?>
+    </ul>
+<?php endif; ?>
+
+<div class="search-sort">
+    <form id="search_sort" method="GET">
+        <div class="search-bar">
+                <input id="customer-name-bar" name="customer-name" type="hidden" value="<?= $customerName ?>">
+                <input id="date-start-bar" name="date-start" type="hidden" value="<?= $dateStart ?>">
+                <input id="date-end-bar" name="date-end" type="hidden" value="<?= $dateEnd ?>">
+                <input id="po-num-bar" name="po-num" type="hidden" value="<?= $poNumber ?>">
+                <input id="search-order-bar"
+                       type="text"
+                       placeholder="<?= $block->escapeHtmlAttr(__('Search open orders')) ?>"
+                       class="search-keyword"
+                       name="search-keyword"
+                       role="combobox"
+                       aria-haspopup="false"
+                       aria-autocomplete="both"
+                       autocomplete="off"
+                       aria-expanded="false"
+                       value="<?= $searchKey ?>">
+                <button class="search" id="search-btn" type="submit" value=""></button>
+        </div>
+        <div class="sort-bar">
+            <select name="sort-order" id="sort-order">
+                <option value="">Sort By</option>
+                <option value="created-asc" <?php if($sortOption ==='created-asc'){ echo 'selected';} ?>>Order Date ASC</option>
+                <option value="created-desc" <?php if($sortOption ==='created-desc'){ echo 'selected';} ?>>Order Date DESC</option>
+            </select>
+        </div>
+    </form>
+</div>
+
 <?php if ($_orders && count($_orders)) : ?>
     <?php if ($block->getPagerHtml()) : ?>
         <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml() ?></div>
@@ -21,44 +117,114 @@
             <thead>
                 <tr>
                     <th scope="col" class="col id"><?= $block->escapeHtml(__('Order #')) ?></th>
+                    <th scope="col" class="col customer_name"><?= $block->escapeHtml(__('Customer Name')) ?></th>
+                    <th scope="col" class="col customer_po"><?= $block->escapeHtml(__('Customer PO#')) ?></th>
                     <th scope="col" class="col date"><?= $block->escapeHtml(__('Order Date')) ?></th>
                     <?= $block->getChildHtml('extra.column.header') ?>
-                    <th scope="col" class="col total"><?= $block->escapeHtml(__('Order Total')) ?></th>
-                    <th scope="col" class="col status"><?= $block->escapeHtml(__('Status')) ?></th>
-                    <th scope="col" class="col actions"><?= $block->escapeHtml(__('Action')) ?></th>
+                    <th scope="col" class="col open_lines"><?= $block->escapeHtml(__('Open Lines')) ?></th>
+                    <th scope="col" class="col complete_lines"><?= $block->escapeHtml(__('Complete Lines')) ?></th>
+                    <th scope="col" class="col shipping"><?= $block->escapeHtml(__('Ship To')) ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($_orders as $_order) : ?>
                     <tr>
                         <td data-th="<?= $block->escapeHtml(__('Order #')) ?>" class="col id"><?= $block->escapeHtml($_order->getRealOrderId()) ?></td>
+                        <td data-th="<?= $block->escapeHtml(__('Customer Name')) ?>" class="col customer_name"><?= $block->escapeHtml($_order->getCustomerName()) ?></td>
+                        <td data-th="<?= $block->escapeHtml(__('Customer PO#')) ?>" class="col customer_po"><?= $block->escapeHtml($_order->getPayment()->getPoNumber()) ?></td>
                         <td data-th="<?= $block->escapeHtml(__('Date')) ?>" class="col date"><?= /* @noEscape */ $block->formatDate($_order->getCreatedAt()) ?></td>
                         <?php $extra = $block->getChildBlock('extra.container'); ?>
                         <?php if ($extra) : ?>
                             <?php $extra->setOrder($_order); ?>
                             <?= $extra->getChildHtml() ?>
                         <?php endif; ?>
-                        <td data-th="<?= $block->escapeHtml(__('Order Total')) ?>" class="col total"><?= /* @noEscape */ $_order->formatPrice($_order->getGrandTotal()) ?></td>
-                        <td data-th="<?= $block->escapeHtml(__('Status')) ?>" class="col status"><?= $block->escapeHtml($_order->getStatusLabel()) ?></td>
-                        <td data-th="<?= $block->escapeHtml(__('Actions')) ?>" class="col actions">
-                            <a href="<?= $block->escapeUrl($block->getViewUrl($_order)) ?>" class="action view">
-                                <span><?= $block->escapeHtml(__('View Order')) ?></span>
-                            </a>
-                            <?php if ($this->helper(\Magento\Sales\Helper\Reorder::class)->canReorder($_order->getEntityId())) : ?>
-                                <a href="#" data-post='<?= /* @noEscape */
-                                $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)
-                                    ->getPostData($block->getReorderUrl($_order))
-                                ?>' class="action order">
-                                    <span><?= $block->escapeHtml(__('Reorder')) ?></span>
-                                </a>
-                            <?php endif ?>
-                        </td>
+                        <td data-th="<?= $block->escapeHtml(__('Customer PO#')) ?>" class="col open_lines">2</td>
+                        <td data-th="<?= $block->escapeHtml(__('Customer PO#')) ?>" class="col complete_lines">3</td>
+                        <td data-th="<?= $block->escapeHtml(__('Ship To')) ?>" class="col shipping"><?= $_order->getShippingAddress() ? $block->escapeHtml($_order->getShippingAddress()->getName()) : '&nbsp;' ?>
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-    
+
 <?php else : ?>
     <div class="message info empty"><span><?= $block->escapeHtml($block->getEmptyOrdersMessage()) ?></span></div>
 <?php endif ?>
+
+<script>
+    require([
+        "jquery",
+        "mage/calendar"
+    ], function ($) {
+
+        $(".calendar_date").dateRange({
+            buttonText: 'Select Date',
+            from: {
+                id: 'date-start'
+            },
+            to: {
+                id: 'date-end'
+            }
+        });
+        $( document ).ready(function() {
+            var customer_name = "<?= $this->getRequest()->getParam('customer-name')?>";
+            var date_start = "<?= $this->getRequest()->getParam('date-start')?>";
+            var date_end = "<?= $this->getRequest()->getParam('date-end')?>";
+            var po_number = "<?= $this->getRequest()->getParam('po-num')?>";
+            var search_keyword = "<?= $this->getRequest()->getParam('search-keyword')?>";
+
+            if(customer_name) {
+                $('#customer-name').val(customer_name);
+            }
+            if(date_start) {
+                $('#date-start').val(date_start);
+            }
+            if(date_end) {
+                $('#date-end').val(date_end);
+            }
+            if(po_number) {
+                $('#po-num').val(po_number);
+            }
+            if(search_keyword) {
+                $('#search-order').val(search_keyword);
+            }
+
+            $( "#customer-btn" ).click(function() {
+                $('#customer-name').val('');
+                $( "#submit-btn" ).trigger( "click" );
+            });
+            $( "#dateStart-btn" ).click(function() {
+                $('#date-start').val('');
+                $( "#submit-btn" ).trigger( "click" );
+            });
+            $( "#dateEnd-btn" ).click(function() {
+                $('#date-end').val('');
+                $( "#submit-btn" ).trigger( "click" );
+            });
+            $( "#po-btn" ).click(function() {
+                $('#po-num').val('');
+                $( "#submit-btn" ).trigger( "click" );
+            });
+            $("#search-rm-btn").click(function() {
+                $('.search-keyword').val('');
+                $( "#submit-btn" ).trigger( "click" );
+            });
+
+            $( "#clear-btn" ).click(function() {
+                $('#customer-name').val('');
+                $('#date-start').val('');
+                $('#date-end').val('');
+                $('#po-num').val('');
+                setTimeout(function() {
+                    $( "#submit-btn" ).trigger( "click" );
+                }, 2000);
+                window.location.href = "<?= $urlArr[0] ?>";
+            });
+
+            $('#sort-order').change(function () {
+                $("#search_sort").submit();
+            });
+        });
+    });
+</script>
