@@ -98,10 +98,10 @@ $sortOption = ($this->getRequest()->getParam('sort-order') !== '') ? $this->getR
                 <button class="search" id="search-btn" type="submit" value=""></button>
         </div>
         <div class="sort-bar">
+            <label class="sorter-label" for="sorter">Sort By</label>
             <select name="sort-order" id="sort-order">
-                <option value="">Sort By</option>
-                <option value="created-asc" <?php if($sortOption ==='created-asc'){ echo 'selected';} ?>>Order Date ASC</option>
                 <option value="created-desc" <?php if($sortOption ==='created-desc'){ echo 'selected';} ?>>Order Date DESC</option>
+                <option value="created-asc" <?php if($sortOption ==='created-asc'){ echo 'selected';} ?>>Order Date ASC</option>
             </select>
         </div>
     </form>
@@ -168,6 +168,23 @@ $sortOption = ($this->getRequest()->getParam('sort-order') !== '') ? $this->getR
             }
         });
         $( document ).ready(function() {
+
+            $("#search_sort").submit(function() {
+                $(this).find('input').each(function() {
+                    // alert($(this).attr('name'));
+                    if($(this).val() == '') {
+                        $(this).remove();
+                    }
+                });
+            });
+            $("#order-filter").submit(function() {
+                $(this).find('input').each(function() {
+                    if($(this).val() == '') {
+                        $(this).remove();
+                    }
+                });
+            });
+
             var customer_name = "<?= $this->getRequest()->getParam('customer-name')?>";
             var date_start = "<?= $this->getRequest()->getParam('date-start')?>";
             var date_end = "<?= $this->getRequest()->getParam('date-end')?>";
