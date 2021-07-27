@@ -22,6 +22,129 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
+
+    body {
+        &.account {
+            &.sales-order-history {
+                .column {
+                    &.main {
+                        .page-title-wrapper {
+                            .page-title {
+                                margin-bottom: 20px;
+                                font-size: 24px;
+                                color: #e96626;
+                                text-transform: uppercase;
+                                font-family: @font-family-name__poppins-Bold;
+                            }
+                        }
+                        > .filter-label {
+                            &:after {
+                                display: none;
+                            }
+                            .filter-heading {
+                                font-family: @font-family-name__roboto-Medium;
+                                font-size: 16px;
+                                color: #444;
+                                text-transform: capitalize;
+                            }
+                        }
+                        .admin__current-filters-list {
+                            padding: 0;
+                            margin: 10px 0;
+                            list-style: none;
+                            li {
+                                position: relative;
+                                display: inline-block;
+                            }
+                            .filterLabel {
+                                font-family: @font-family-name__roboto-Regular;
+                                font-size: 16px;
+                                color: #444;
+                                text-transform: capitalize;
+                            }
+                            .filterValue {
+                                font-family: @font-family-name__roboto-Regular;
+                                padding: 5px 25px 5px 10px;
+                                background: #eef0f5;
+                                text-transform: uppercase;
+                                font-size: 12px;
+                                margin-left: 10px;
+                            }
+                            .action-remove {
+                                background: no-repeat;
+                                border: 0;
+                                padding: 0;
+                                width: 10px;
+                                height: 10px;
+                                line-height: normal;
+                                position: absolute;
+                                right: 10px;
+                                top: 4px;
+                                > span {
+                                    display: none;
+                                }
+                                &:after {
+                                    content: '\e616';
+                                    font-family: 'luma-icons';
+                                    font-size: 10px;
+                                }
+                            }
+                        }
+                        .search-sort {
+                            margin-bottom: 20px;
+                            form {
+                                &:after {
+                                    content: '';
+                                    display: table;
+                                    clear: both;
+                                }
+                            }
+                            .search-bar {
+                                position: relative;
+                                max-width: 270px;
+                                width: 100%;
+                                border: 2px solid #c7c7c7;
+                                float: left;
+                                input {
+                                    border: 0;
+                                    height: 40px;
+                                }
+                                .search {
+                                    position: absolute;
+                                    right: 0;
+                                    top: 0;
+                                    bottom: 0;
+                                    background: none;
+                                    border: 0;
+                                    padding: 0 10px;
+                                    &:after {
+                                        content: '\e615';
+                                        font-family: 'luma-icons';
+                                        font-size: 18px;
+                                        color: #2b6b9b;
+                                    }
+                                }
+                            }
+                            .sort-bar {
+                                max-width: 190px;
+                                width: 100%;
+                                float: right;
+                                border: 2px solid #c7c7c7;
+                                select {
+                                    height: 40px;
+                                    border: 0;
+                                    font-family: @font-family-name__roboto-Regular;
+                                    font-size: 16px;
+                                    color: #444;
+                                    text-transform: capitalize;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     .login-container {
         .block {
             background: #fff;
@@ -835,7 +958,7 @@
                                 vertical-align: top;
                                 width: 39px;
                                 height: 46px;
-                                background-position: -146px 0;
+                                background-position: left top;
                                 margin-bottom: 10px;
                             }
                             &:hover {
@@ -856,65 +979,71 @@
                             border-bottom: 4px solid #ba9900;
                         }
                         &.my-account {
-                            strong,
-                            a {
+                            > strong,
+                            > a {
                                 &:before {
                                     background-image: url('../images/icon-bill.png');
                                     width: 33px;
-                                    height: 43px;
-                                    background-position: -165px 0;
+                                    height: 46px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
                                 }
                             }
                         }
                         &.my-orders {
-                            strong,
-                            a {
+                            > strong,
+                            > a {
                                 &:before {
                                     background-image: url('../images/icon-order.png');
+                                    background-repeat: no-repeat;
                                 }
                             }
                         }
                         &.address-book {
-                            strong,
-                            a {
+                            > strong,
+                            > a {
                                 &:before {
                                     background-image: url('../images/icon-certf.png');
                                     width: 50px;
-                                    height: 43px;
-                                    background-position: -150px 1px;
+                                    height: 46px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
                                 }
                             }
                         }
                         &.account-information {
-                            strong,
-                            a {
+                            > strong,
+                            > a {
                                 &:before {
                                     background-image: url('../images/icon-invoice.png');
                                     width: 33px;
-                                    height: 43px;
-                                    background-position: -165px 0px;
+                                    height: 46px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
                                 }
                             }
                         }
                         &.stored-payment-methods {
-                            strong,
-                            a {
+                            > strong,
+                            > a {
                                 &:before {
                                     background-image: url('../images/icon-pack.png');
                                     width: 52px;
-                                    height: 33px;
-                                    background-position: -156px 0px;
+                                    height: 46px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
                                 }
                             }
                         }
                         &.my-product-reviews {
-                            strong,
-                            a {
+                            > strong,
+                            > a {
                                 &:before {
                                     background-image: url('../images/icon-cart.png');
                                     width: 45px;
-                                    height: 40px;
-                                    background-position: -180px 0px;
+                                    height: 46px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
                                 }
                             }
                         }
