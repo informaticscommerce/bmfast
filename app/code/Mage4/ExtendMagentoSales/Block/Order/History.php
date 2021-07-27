@@ -14,7 +14,7 @@ use \Magento\Sales\Model\ResourceModel\Order\CollectionFactoryInterface;
  * @api
  * @since 100.0.2
  */
-class History extends \Magento\Framework\View\Element\Template
+class History extends \Magento\Sales\Block\Order\History
 {
     /**
      * @var string
@@ -60,19 +60,7 @@ class History extends \Magento\Framework\View\Element\Template
         \Magento\Sales\Model\Order\Config $orderConfig,
         array $data = []
     ) {
-        $this->_orderCollectionFactory = $orderCollectionFactory;
-        $this->_customerSession = $customerSession;
-        $this->_orderConfig = $orderConfig;
-        parent::__construct($context, $data);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function _construct()
-    {
-        parent::_construct();
-        $this->pageConfig->getTitle()->set(__('My Orders'));
+        parent::__construct($context, $orderCollectionFactory, $customerSession, $orderConfig, $data);
     }
 
     /**
@@ -94,14 +82,14 @@ class History extends \Magento\Framework\View\Element\Template
      *
      * @return bool|\Magento\Sales\Model\ResourceModel\Order\Collection
      */
-    public function getOrders()
+    public function getOrderlist()
     {
         if (!($customerId = $this->_customerSession->getCustomerId())) {
             return false;
         }
         if (!$this->orders) {
             $orderlist = $this->getOrderActive($customerId);
-        }else{
+        } else {
             $orderlist = $this->getOrderFilterList($customerId);
         }
         $page = $this->getRequest()->getParam('p') ?: 1;
@@ -130,12 +118,12 @@ class History extends \Magento\Framework\View\Element\Template
         $this->orders = $this->getOrderCollectionFactory()->create($customerId);
         $post=$this->getRequest()->getParams();
 
-        if(isset($post)){
-            if(!empty($post['customer-name'])) {
+        if (isset($post)) {
+            if (!empty($post['customer-name'])) {
                 $customer_name  = trim($post['customer-name']," ");
                 $customerArr    = explode(" ",$customer_name);
 
-                if(isset($customerArr[0]) && !isset($customerArr[1])) {
+                if (isset($customerArr[0]) && !isset($customerArr[1])) {
                     $this->orders->addFieldToFilter(
                         ['customer_firstname','customer_lastname'],
                         [
@@ -144,7 +132,7 @@ class History extends \Magento\Framework\View\Element\Template
                         ]
                     );
                 }
-                if(isset($customerArr[0]) && isset($customerArr[1])) {
+                if (isset($customerArr[0]) && isset($customerArr[1])) {
                     $this->orders->addFieldToFilter(
                         'customer_firstname',
                         ['like' => '%'.$customerArr[0].'%']
@@ -156,20 +144,20 @@ class History extends \Magento\Framework\View\Element\Template
                 }
             }
 
-            if(!empty($post['date-start']) && !empty($post['date-end'])){
+            if (!empty($post['date-start']) && !empty($post['date-end'])) {
                 $date=['from' =>date("Y-m-d H:i:s",strtotime( $post['date-start'].' 00:00:00')),'to'=>date("Y-m-d H:i:s",strtotime( $post['date-end'].' 24:00:00'))];
                 $this->orders->addFieldToFilter(
                     'main_table.created_at',
                     $date
                 );
-            }else if(!empty($post['date-start'])){
+            } else if (!empty($post['date-start'])) {
                 $date =['from' =>date("Y-m-d H:i:s",strtotime( $post['date-start'].' 00:00:00')),'to'=>date("Y-m-d H:i:s")];
                 $this->orders->addFieldToFilter(
                     'main_table.created_at',
                     $date
                 );
 
-            }else if(!empty($post['date-end'])){
+            } else if (!empty($post['date-end'])) {
                 $date =['from' =>date("Y-m-d H:i:s",strtotime( '1980-05-10 12:00')),'to' =>date("Y-m-d H:i:s",strtotime($post['date-end'].' 23:59:59'))];
                 $this->orders->addFieldToFilter(
                     'main_table.created_at',
@@ -177,7 +165,7 @@ class History extends \Magento\Framework\View\Element\Template
                 );
             }
 
-            if(!empty($post['po-num'])) {
+            if (!empty($post['po-num'])) {
                 $sales_order_payment_table = $this->orders->getTable("sales_order_payment");
                 $this->orders->join(
                     array('payment' => $sales_order_payment_table),
@@ -188,7 +176,7 @@ class History extends \Magento\Framework\View\Element\Template
                 $this->orders->addFieldToFilter('po_number', array('like' => '%' . trim($post['po-num']," ") . '%'))->distinct(true);
             }
 
-            if(!empty($post['search-keyword'])) {
+            if (!empty($post['search-keyword'])) {
                 $search_keyword  = trim($post['search-keyword']," ");
                 $search_keyArr    = explode(" ",$search_keyword);
                 $sales_order_payment_table = $this->orders->getTable("sales_order_payment");
@@ -199,7 +187,7 @@ class History extends \Magento\Framework\View\Element\Template
                     []
                 );
 
-                if(isset($search_keyArr[0]) && !isset($search_keyArr[1])) {
+                if (isset($search_keyArr[0]) && !isset($search_keyArr[1])) {
                     $this->orders->join(
                         array('payment' => $sales_order_payment_table),
                         'payment.parent_id = main_table.entity_id',
@@ -239,7 +227,7 @@ class History extends \Magento\Framework\View\Element\Template
                 'desc'
             );
 
-            if(!empty($post['sort-order'])) {
+            if (!empty($post['sort-order'])) {
                 if (($post['sort-order']) === 'created-asc') {
                     $this->orders->setOrder(
                         'created_at',
@@ -254,89 +242,21 @@ class History extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * @inheritDoc
+     * @return $this
      */
     protected function _prepareLayout()
     {
         parent::_prepareLayout();
-        if ($this->getOrders()) {
+        if ($this->getOrderlist()) {
             $pager = $this->getLayout()->createBlock(
                 \Magento\Theme\Block\Html\Pager::class,
-                'sales.order.history.pager'
+                'sales.order.history.pagersearch'
             )->setCollection(
-                $this->getOrders()
+                $this->getOrderlist()
             );
             $this->setChild('pager', $pager);
-            $this->getOrders()->load();
+            $this->getOrderlist()->load();
         }
         return $this;
-    }
-
-    /**
-     * Get Pager child block output
-     *
-     * @return string
-     */
-    public function getPagerHtml()
-    {
-        return $this->getChildHtml('pager');
-    }
-
-    /**
-     * Get order view URL
-     *
-     * @param object $order
-     * @return string
-     */
-    public function getViewUrl($order)
-    {
-        return $this->getUrl('sales/order/view', ['order_id' => $order->getId()]);
-    }
-
-    /**
-     * Get order track URL
-     *
-     * @param object $order
-     * @return string
-     * @deprecated 102.0.3 Action does not exist
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function getTrackUrl($order)
-    {
-        //phpcs:ignore Magento2.Functions.DiscouragedFunction
-        trigger_error('Method is deprecated', E_USER_DEPRECATED);
-        return '';
-    }
-
-    /**
-     * Get reorder URL
-     *
-     * @param object $order
-     * @return string
-     */
-    public function getReorderUrl($order)
-    {
-        return $this->getUrl('sales/order/reorder', ['order_id' => $order->getId()]);
-    }
-
-    /**
-     * Get customer account URL
-     *
-     * @return string
-     */
-    public function getBackUrl()
-    {
-        return $this->getUrl('customer/account/');
-    }
-
-    /**
-     * Get message for no orders.
-     *
-     * @return \Magento\Framework\Phrase
-     * @since 102.1.0
-     */
-    public function getEmptyOrdersMessage()
-    {
-        return __('You have placed no orders.');
     }
 }

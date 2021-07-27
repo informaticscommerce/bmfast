@@ -7,13 +7,16 @@
 // phpcs:disable Magento2.Templates.ThisInTemplate
 // @codingStandardsIgnoreFile
 
-/** @var \Magento\Sales\Block\Order\History $block */
+/** @var History $block */
+
+use Mage4\ExtendMagentoSales\Block\Order\History;
+
 ?>
-<?php $_orders = $block->getOrders(); ?>
+<?php $_orders = $block->getOrderlist(); ?>
 <?= $block->getChildHtml('info') ?>
 <?php
-$compelteUrl = $block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
-$urlArr    = explode("?",$compelteUrl);
+$compeleteUrl = $block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+$urlArr    = explode("?",$compeleteUrl);
 ?>
 
 <?php
