@@ -12,7 +12,7 @@
             <block ifconfig="amstorecredit/general/enabled" after="customer-account-navigation-account-edit-link" class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-amstorecredit-link">
                 <arguments>
                     <argument name="path" xsi:type="string">amstorecredit</argument>
-                    <argument name="label" xsi:type="string" translate="true">Store Credit &amp; RefundsAA</argument>
+                    <argument name="label" xsi:type="string" translate="true">Store Credit &amp; Refunds</argument>
                 </arguments>
             </block>
         </referenceBlock>
