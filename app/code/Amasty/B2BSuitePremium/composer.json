@@ -1,0 +1,25 @@
+{
+    "name": "amasty/module-b2b-suite-premium",
+    "description": "B2B Suite Premium by Amasty",
+    "require": {
+        "php": "^7.1.0",
+        "amasty/base": ">=1.12.9",
+        "amasty/module-sales-reps-and-dealers": ">=1.2.12",
+        "amasty/module-request-quote": ">=2.3.5",
+        "amasty/store-credit": ">=1.0.6",
+        "amasty/color-swatches-pro": ">=2.9.0",
+        "amasty/google-account-login": ">=1.0.0",
+        "amasty/module-company-account": ">=2.0.3",
+        "amasty/module-quick-order": ">=2.0.1",
+        "amasty/module-cancel-order": ">=1.1.6",
+        "amasty/module-multiple-wishlist": ">=1.1.2",
+        "amasty/groupcat": ">=1.5.15",
+        "amasty/payrestriction": ">=2.3.11",
+        "amasty/shiprestriction": ">=2.5.7"
+    },
+    "type": "magento2-module",
+    "version": "1.3.0",
+    "license": [
+        "Commercial"
+    ]
+}

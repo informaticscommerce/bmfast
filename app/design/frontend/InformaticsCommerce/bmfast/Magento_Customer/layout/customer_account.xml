@@ -5,15 +5,8 @@
  * See COPYING.txt for license details.
  */
 -->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
     <body>
-        <referenceContainer name="sidebar.main">
-            <block class="Magento\Cms\Block\Block" name="customer_account_filter" >
-                <arguments>
-                    <argument name="block_id" xsi:type="string">customer_account_filter</argument>
-                </arguments>
-            </block>
-        </referenceContainer>
         <referenceContainer name="content">
             <block class="Magento\Customer\Block\Account\Dashboard\Info" name="customer_account_dashboard_name" template="account/dashboard/name.phtml" before="-"/>
         </referenceContainer>
@@ -34,7 +27,7 @@
         <!-- <referenceBlock name="customer-account-navigation-account-link" remove="true" /> -->
         <referenceBlock name="sidebar.additional" remove="true"/>
         <referenceBlock name="customer-account-navigation-wish-list-link" remove="true" />
-        <referenceBlock name="customer-account-navigation-newsletter-subscriptions-link" remove="true" /> 
+        <referenceBlock name="customer-account-navigation-newsletter-subscriptions-link" remove="true" />
         <referenceBlock name="customer-account-navigation-downloadable-products-link" remove="true" />
         <referenceBlock name="customer-account-navigation-delimiter-1" remove="true"/>
         <referenceBlock name="customer-account-navigation-delimiter-2" remove="true"/>

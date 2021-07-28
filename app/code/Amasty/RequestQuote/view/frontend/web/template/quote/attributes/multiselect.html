@@ -1,0 +1,17 @@
+<div class="field" data-bind="css: {'required': $parent.required}">
+    <label class="label">
+        <span data-bind="i18n: $parent.label"></span>
+    </label>
+    <div class="control">
+        <select multiple data-bind='
+                    attr: {
+                        name: $parent.code + "[]",
+                        "data-validate": $parent.required ? "{required:true}" : "{}"
+                    },
+                    optgroup: $parent.options,
+                    value: $parent.value,
+                    optionsValue: "value",
+                    optionsText: "label"
+               ' />
+    </div>
+</div>

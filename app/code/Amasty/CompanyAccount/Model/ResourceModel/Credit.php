@@ -1,0 +1,22 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_CompanyAccount
+ */
+
+
+declare(strict_types=1);
+
+namespace Amasty\CompanyAccount\Model\ResourceModel;
+
+use Amasty\CompanyAccount\Api\Data\CreditInterface;
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+
+class Credit extends AbstractDb
+{
+    protected function _construct()
+    {
+        $this->_init(CreditInterface::MAIN_TABLE, CreditInterface::ID);
+    }
+}

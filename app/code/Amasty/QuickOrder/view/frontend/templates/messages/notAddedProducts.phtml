@@ -1,0 +1,15 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_QuickOrder
+ */
+?>
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+
+<?= $block->escapeHtml(
+    __('The following products can’t be added to cart: %1. Please try again.', $block->getData('items')),
+    ['a']
+) ?>

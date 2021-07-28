@@ -1,0 +1,59 @@
+//
+//  Product View Page
+//  ____________________________________
+
+//
+//  Common
+//  ------------------------------------
+
+& when (@media-common = true) {
+    .catalog-product-view {
+        .amquote-addto-button {
+            margin: 0;
+        }
+
+        .box-tocart .action.tocart {
+            width: 100%;
+        }
+
+        .product-add-form.-amcaret-active .amquote-addto-button {
+            margin: @amquote__indent 0 0 0;
+            width: 100%;
+        }
+
+        .amtheme-actions-wrap .action.primary {
+            margin-bottom: @amquote__indent__l;
+        }
+    }
+}
+
+//
+//  Mobile
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+    .catalog-product-view .amquote-addto-button {
+        width: auto;
+    }
+}
+
+//
+//  Tablet
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .catalog-product-view {
+        .amquote-addto-button {
+            margin: 0 @amquote__indent__m @amquote__indent__m 0;
+            min-width: 200px;
+        }
+
+        .box-tocart .action.tocart {
+            width: auto;
+        }
+
+        .box-tocart {
+            width: 90%;
+        }
+    }
+}

@@ -1,0 +1,61 @@
+//
+//  Base Styles
+//  ______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amquote-line-block {
+        & {
+            margin: @amquote__indent 0 0 0;
+            padding: @amquote__indent;
+            background: #f1f1f1;
+        }
+        
+        &.-total {
+            text-align: right;
+        }
+    }
+    
+    .col-total.last {
+        text-align: right;
+    }
+    
+    .amquote-approved-title {
+        & {
+            .am-flex(flex-start, center);
+
+            margin: @amquote__indent__xl * 2 0 @amquote__indent;
+        }
+        
+        .action-secondary {
+            margin: 0 0 0 @amquote__indent__xl * 2;
+        }
+        
+        .amquote-title {
+            margin: 0;
+        }
+    }
+    
+    .amquote-order-discount {
+        & {
+            .am-flex(flex-start, center);
+            
+            padding: @amquote__indent 0;
+        }
+        
+        .amquote-coupons {
+            .am-flex;
+
+            .amquote-input {
+                min-width: 8rem;
+            }
+        }
+        
+        .action-secondary {
+            margin: 0 0 0 auto;
+        }
+    }
+}

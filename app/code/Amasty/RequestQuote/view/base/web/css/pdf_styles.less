@@ -1,0 +1,190 @@
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    color: #171737;
+    font-family: Roboto, serif;
+}
+
+.amquote-header-block {
+    display: table;
+    width: 100%;
+}
+
+.amquote-header-block .amquote-details-item > .amquote-title {
+    font-size: 30px;
+}
+
+.amquote-pdf-title {
+    display: table-cell;
+    width: 66.6%;
+    vertical-align: bottom;
+}
+
+.amquote-site-logo {
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.amquote-details-block {
+    display: table;
+    margin: 60px 0;
+    width: 100%;
+}
+
+.amquote-details-item {
+    display: table-cell;
+    width: 33.3%;
+}
+
+.amquote-details-item > .amquote-title {
+    margin: 0 0 10px;
+    font-weight: 600;
+    font-size: 26px;
+}
+
+.amquote-details-item > .amquote-content {
+    margin: 0;
+}
+
+.amquote-details-item > .amquote-content > span {
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.amquote-details-item > .amquote-content > span:after {
+    padding: 0 8px 0 0;
+    content: ':';
+}
+
+.amquote-details-item .amquote-small {
+    display: block;
+    color: #828293;
+    font-size: 20px;
+}
+
+.amquote-table-wrapper {
+    margin-bottom: 150px;
+}
+
+.amquote-table-wrapper table {
+    max-width: 100%;
+    width: 100%;
+    border-spacing: 0;
+}
+
+.amquote-table-wrapper .table-caption {
+    display: none;
+}
+
+.amquote-table-wrapper th,
+.amquote-table-wrapper td {
+    padding: 10px;
+    vertical-align: top;
+    font-size: 20px;
+}
+
+.amquote-table-wrapper thead th {
+    padding-top: 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #bec4d6;
+    color: #a0a7ba;
+    text-align: left;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.amquote-table-wrapper tfoot tr {
+    background: #f6f7fa;
+}
+
+.amquote-table-wrapper tfoot tr.grand_total {
+    background: transparent;
+}
+
+.amquote-table-wrapper tfoot tr.grand_total th {
+    vertical-align: bottom;
+    line-height: 2;
+}
+
+.amquote-table-wrapper tfoot tr.grand_total td {
+    font-size: 50px;
+    line-height: 1;
+}
+
+.amquote-table-wrapper tfoot th,
+.amquote-table-wrapper tfoot td,
+.amquote-table-wrapper .col.subtotal {
+    text-align: right;
+}
+
+.amquote-table-wrapper table > tbody > tr > td.col.subtotal {
+    padding-right: 0;
+    text-align: right;
+}
+
+.amquote-table-wrapper tfoot th {
+    font-weight: 400;
+}
+
+.amquote-table-wrapper tfoot td {
+    font-weight: 600;
+}
+
+.amquote-footer-block {
+    position: absolute;
+    bottom: 0;
+}
+
+.amquote-footer-block > .amquote-item {
+    display: inline-block;
+    width: 49%;
+}
+
+.amquote-footer-block > .amquote-item p {
+    margin: 0;
+    font-size: 18px;
+}
+
+.amquote-footer-block > .amquote-item h2 {
+    margin: 0 0 5px;
+    font-size: 28px;
+}
+
+.amquote-footer-block .amquote-phone {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.amquote-footer-block .amquote-phone > .amquote-title {
+    font-weight: 600;
+}
+
+.amquote-footer-block .amquote-links .amquote-link {
+    margin: 0 25px 0 0;
+    color: #ff4f00;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.amqoute-pager-block {
+    position: fixed;
+    right: 0;
+    bottom: 45px;
+    left: 0;
+}
+
+.amqoute-page-number {
+    display: block;
+    color: #a0a7ba;
+    text-align: right;
+    font-size: 20px;
+}
+
+.amqoute-page-number:before {
+    content: attr(data-text) counter(page);
+}

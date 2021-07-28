@@ -1,0 +1,31 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_RequestQuote
+ */
+?>
+<?php
+    /* phpcs:disable Magento2.Templates.ThisInTemplate.FoundHelper */
+    $skus = $this->helper(\Magento\Catalog\Helper\Data::class)->splitSku($escaper->escapeHtml($block->getItem()->getSku()));
+?>
+<?= /* @noEscape */ $block->getItem()->getName() ?>
+<div><strong><?= /* @noEscape */ __('SKU') ?>:</strong>
+    <?= /* @noEscape */ implode('<br />', $skus) ?>
+</div>
+<?php if ($block->getOrderOptions()): ?>
+    <ul class="item-options">
+    <?php foreach ($block->getOrderOptions() as $option): ?>
+        <li><strong><?= /* @noEscape */ $option['label'] ?>:</strong><br />
+        <?php if (is_array($option['value'])): ?>
+        <?php foreach ($option['value'] as $item): ?>
+            <?= $block->getValueHtml($item) ?><br />
+            <?php endforeach; ?>
+        <?php else: ?>
+            <?= $escaper->escapeHtml($option['value']) ?>
+        <?php endif; ?>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+<?= $escaper->escapeHtml($block->getItem()->getDescription()) ?>
