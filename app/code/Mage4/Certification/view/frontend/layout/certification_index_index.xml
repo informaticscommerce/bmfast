@@ -11,7 +11,7 @@
             </action>
         </referenceBlock>
         <referenceContainer name="content">
-            <block class="Magento\Sales\Block\Order\History" name="customer_account_dashboard_certification"
+            <block class="Magento\Framework\View\Element\Template" name="customer_account_dashboard_certification"
                    template="Mage4_Certification::certification.phtml"/>
         </referenceContainer>
     </body>
