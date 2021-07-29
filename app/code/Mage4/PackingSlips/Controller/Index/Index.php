@@ -1,5 +1,5 @@
 <?php
-namespace Mage4\Invoices\Controller\Index;
+namespace Mage4\PackingSlips\Controller\Index;
 
 class Index extends \Magento\Framework\App\Action\Action
 {

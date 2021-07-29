@@ -25,12 +25,13 @@ class InvoiceList  extends \Magento\Framework\View\Element\Template
      */
     protected $customerSession;
 
-    public function __construct(
+    public function __construct (
         Template\Context $context,
         \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory,
         \Magento\Sales\Model\ResourceModel\Order\Invoice\CollectionFactory $invoiceCollectionFactory ,
         \Magento\Customer\Model\Session $customerSession,
-        array $data = [])
+        array $data = []
+    )
     {
         parent::__construct($context, $data);
         $this->orderCollectionFactory = $orderCollectionFactory;
@@ -59,6 +60,6 @@ class InvoiceList  extends \Magento\Framework\View\Element\Template
     }
     public function getViewInvoiceUrl($orderId)
     {
-        return $this->getUrl('sales/order/view', ['order_id' => $orderId]);
+        return $this->getUrl('sales/order/invoice', ['order_id' => $orderId]);
     }
 }
