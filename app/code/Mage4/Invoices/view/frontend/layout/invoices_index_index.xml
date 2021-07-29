@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
     <update handle="customer_account"/>
+    <head>
+        <title>Invoices</title>
+    </head>
     <body>
         <referenceBlock name="page.main.title">
             <action method="setPageTitle">
@@ -10,7 +13,6 @@
         <referenceContainer name="content">
             <block class="Mage4\Invoices\Block\Order\InvoiceList" name="customer_account_dashboard_invoices"
                    template="Mage4_Invoices::invoice.phtml"/>
-<!--            <block class="Magento\Sales\Block\Order\History" name="invoices_tab" template="Mage4_Invoices::invoice.phtml" />-->
         </referenceContainer>
     </body>
 </page>
