@@ -2,17 +2,17 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
     <update handle="customer_account"/>
     <head>
-        <title>Packing Slips</title>
+        <title>Place an Order</title>
     </head>
     <body>
         <referenceBlock name="page.main.title">
             <action method="setPageTitle">
-                <argument translate="true" name="title" xsi:type="string">Packing Slips</argument>
+                <argument translate="true" name="title" xsi:type="string">Place an Order</argument>
             </action>
         </referenceBlock>
         <referenceContainer name="content">
-            <block class="Mage4\PackingSlips\Block\Order\PackingSlipsList" name="customer_account_dashboard_packing"
-                   template="Mage4_PackingSlips::slips.phtml"/>
+            <block class="Magento\Sales\Block\Order\History" name="customer_account_dashboard_placeanorder"
+                   template="Mage4_PlaceAnOrder::placeorder.phtml"/>
         </referenceContainer>
     </body>
 </page>
