@@ -126,10 +126,8 @@
                                 }
                             }
                             .sort-bar {
-                                max-width: 190px;
-                                width: 100%;
+                                width: auto;
                                 float: right;
-                                border: 2px solid #c7c7c7;
                                 select {
                                     height: 40px;
                                     border: 0;
@@ -137,6 +135,10 @@
                                     font-size: 16px;
                                     color: #444;
                                     text-transform: capitalize;
+                                    border: 2px solid #c7c7c7;
+                                    width: auto;
+                                    display: inline-block;
+                                    margin-left: 10px;
                                 }
                             }
                         }
@@ -663,6 +665,17 @@
             &:extend(.abs-account-title all);
         }
     }
+	
+	.sales-order-history {
+		.table-wrapper.orders-history {
+			.col {
+				&.complete_lines,
+				&.open_lines {
+					text-align: center;
+				}
+			}
+		}
+	}
 
     .account,
     [class^='sales-guest-'],
@@ -917,7 +930,177 @@
     }
 
     //  My account
+    .account.page-layout-1column {
+        .page-main {
+            padding: 0;
+        }
+        .block-collapsible-nav-content {
+            padding: 0;
+			background: none;
+            .nav.items {
+                .nav {
+                    &.item {
+                        display: inline-block;
+                        padding: 0;
+                        margin: 0;
+                        border-left: 1px solid #d9dbe0;
+                        border-top: 1px solid #d9dbe0;
+                        border-bottom: 1px solid #d9dbe0;
+                        strong,
+                        a {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            border-bottom: 4px solid #cdcdd0;
+                            padding: 15px 22px;
+                            background: #f5f5f5;
+                            &:before {
+                                //background-image: url('../media/customer/account/icon-order.png');
+                                content: "";
+                                display: inline-block;
+                                vertical-align: top;
+                                width: 39px;
+                                height: 50px;
+                                background-position: left top;
+                                margin-bottom: 10px;
+                            }
+                            &:hover {
+                                background: #ffd200;
+                                border-bottom: 4px solid #ba9900;
+                            }
+                        }
+                        &:last-child {
+                            border-right: 1px solid #d9dbe0;
+                        }
+                        &.current {
+                            > strong {
+                                background: #ffd200;
+                                border-left: none;
+                            }
+                        }
+                        strong {
+                            border-bottom: 4px solid #ba9900;
+                        }
+                        &.bills-of-lading,
+                        &.my-account {
+                            > strong,
+                            > a {
+                                &:before {
+                                    background-image: url('../images/icon-bill.png');
+                                    width: 33px;
+                                    height: 50px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
+                                }
+                            }
+                        }
+                        &.orders {
+                            > strong,
+                            > a {
+                                &:before {
+                                    background-image: url('../images/icon-order.png');
+                                    background-repeat: no-repeat;
+                                }
+                            }
+                        }
+                        &.certification,
+                        &.address-book {
+                            > strong,
+                            > a {
+                                &:before {
+                                    background-image: url('../images/icon-certf.png');
+                                    width: 50px;
+                                    height: 50px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
+                                }
+                            }
+                        }
+                        &.invoices,
+                        &.account-information {
+                            > strong,
+                            > a {
+                                &:before {
+                                    background-image: url('../images/icon-invoice.png');
+                                    width: 33px;
+                                    height: 50px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
+                                }
+                            }
+                        }
+                        &.packing-slips,
+                        &.stored-payment-methods {
+                            > strong,
+                            > a {
+                                &:before {
+                                    background-image: url('../images/icon-pack.png');
+                                    width: 52px;
+                                    height: 50px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
+                                }
+                            }
+                        }
+                        &.place-an-order,
+                        &.my-product-reviews {
+                            > strong,
+                            > a {
+                                &:before {
+                                    background-image: url('../images/icon-cart.png');
+                                    width: 45px;
+                                    height: 50px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
+                                }
+                            }
+                        }
+                        &.request-a-quote {
+                            > strong,
+                            > a {
+                                &:before {
+                                    background-image: url('../images/icon-quote.png');
+                                    width: 50px;
+                                    height: 50px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
+                                }
+                            }
+                        }
+                        &.my-quotes {
+                            > strong,
+                            > a {
+                                &:before {
+                                    background-image: url('../images/icon-my-quotes.png');
+                                    width: 35px;
+                                    height: 50px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
+                                }
+                            }
+                        }
+                        &.credit-debit-memo {
+                            > strong,
+                            > a {
+                                &:before {
+                                    background-image: url('../images/icon-credit-debit.png');
+                                    width: 48px;
+                                    height: 50px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     .account.page-layout-2columns-left {
+        .page-main {
+            padding: 0;
+        }
         .sidebar-main,
         .sidebar-additional {
             width: 23%;
@@ -935,14 +1118,16 @@
         }
         .block-collapsible-nav-content {
             padding: 0;    
+            background: none;
             .nav.items {
-                border: 1px solid #d9dbe0;
                 .nav {
                     &.item {
                         display: inline-block;
                         padding: 0;
                         margin: 0;
-                        border-right: 1px solid #d9dbe0;
+                        border-left: 1px solid #d9dbe0;
+                        border-top: 1px solid #d9dbe0;
+                        border-bottom: 1px solid #d9dbe0;
                         strong,
                         a {
                             display: flex;
@@ -950,14 +1135,15 @@
                             align-items: center;
                             justify-content: center;
                             border-bottom: 4px solid #cdcdd0;
-                            padding: 15px 35px;
+                            padding: 15px 22px;
+                            background: #f5f5f5;
                             &:before {
                                 //background-image: url('../media/customer/account/icon-order.png');
                                 content: "";
                                 display: inline-block;
                                 vertical-align: top;
                                 width: 39px;
-                                height: 46px;
+                                height: 50px;
                                 background-position: left top;
                                 margin-bottom: 10px;
                             }
@@ -966,7 +1152,7 @@
                                 border-bottom: 4px solid #ba9900;
                             }
                         }
-                        &:not(:last-child) {
+                        &:last-child {
                             border-right: 1px solid #d9dbe0;
                         }
                         &.current {
@@ -978,19 +1164,20 @@
                         strong {
                             border-bottom: 4px solid #ba9900;
                         }
+                        &.bills-of-lading,
                         &.my-account {
                             > strong,
                             > a {
                                 &:before {
                                     background-image: url('../images/icon-bill.png');
                                     width: 33px;
-                                    height: 46px;
+                                    height: 50px;
                                     background-position: left center;
                                     background-repeat: no-repeat;
                                 }
                             }
                         }
-                        &.my-orders {
+                        &.orders {
                             > strong,
                             > a {
                                 &:before {
@@ -999,49 +1186,89 @@
                                 }
                             }
                         }
+                        &.certification,
                         &.address-book {
                             > strong,
                             > a {
                                 &:before {
                                     background-image: url('../images/icon-certf.png');
                                     width: 50px;
-                                    height: 46px;
+                                    height: 50px;
                                     background-position: left center;
                                     background-repeat: no-repeat;
                                 }
                             }
                         }
+                        &.invoices,
                         &.account-information {
                             > strong,
                             > a {
                                 &:before {
                                     background-image: url('../images/icon-invoice.png');
                                     width: 33px;
-                                    height: 46px;
+                                    height: 50px;
                                     background-position: left center;
                                     background-repeat: no-repeat;
                                 }
                             }
                         }
+                        &.packing-slips,
                         &.stored-payment-methods {
                             > strong,
                             > a {
                                 &:before {
                                     background-image: url('../images/icon-pack.png');
                                     width: 52px;
-                                    height: 46px;
+                                    height: 50px;
                                     background-position: left center;
                                     background-repeat: no-repeat;
                                 }
                             }
                         }
+                        &.place-an-order,
                         &.my-product-reviews {
                             > strong,
                             > a {
                                 &:before {
                                     background-image: url('../images/icon-cart.png');
                                     width: 45px;
-                                    height: 46px;
+                                    height: 50px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
+                                }
+                            }
+                        }
+                        &.request-a-quote {
+                            > strong,
+                            > a {
+                                &:before {
+                                    background-image: url('../images/icon-quote.png');
+                                    width: 50px;
+                                    height: 50px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
+                                }
+                            }
+                        }
+                        &.my-quotes {
+                            > strong,
+                            > a {
+                                &:before {
+                                    background-image: url('../images/icon-my-quotes.png');
+                                    width: 35px;
+                                    height: 50px;
+                                    background-position: left center;
+                                    background-repeat: no-repeat;
+                                }
+                            }
+                        }
+                        &.credit-debit-memo {
+                            > strong,
+                            > a {
+                                &:before {
+                                    background-image: url('../images/icon-credit-debit.png');
+                                    width: 48px;
+                                    height: 50px;
                                     background-position: left center;
                                     background-repeat: no-repeat;
                                 }
