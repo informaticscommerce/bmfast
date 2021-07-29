@@ -27,10 +27,26 @@
             </block>
         </referenceBlock>
         <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-bills-tab">
+                <arguments>
+                    <argument name="path" xsi:type="string">bills/</argument>
+                    <argument name="label" xsi:type="string">Bills of Lading</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
             <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-invoices-tab">
                 <arguments>
                     <argument name="path" xsi:type="string">invoices/</argument>
                     <argument name="label" xsi:type="string">Invoices</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-certification-tab">
+                <arguments>
+                    <argument name="path" xsi:type="string">certification/</argument>
+                    <argument name="label" xsi:type="string">Certification</argument>
                 </arguments>
             </block>
         </referenceBlock>
@@ -50,8 +66,10 @@
                 </arguments>
             </block>
         </referenceBlock>
-        <move element="customer-account-invoices-tab" destination="customer_account_navigation" after="customer-account-amstorecredit-link"/>
-        <move element="customer-account-packing-tab" destination="customer_account_navigation" after="customer-account-invoices-tab"/>
+        <move element="customer-account-invoices-tab" destination="customer_account_navigation" after="customer-account-bills-tab"/>
+        <move element="customer-account-packing-tab" destination="customer_account_navigation" after="customer-account-certification-tab"/>
         <move element="customer-account-place-tab" destination="customer_account_navigation" after="customer-account-packing-tab"/>
+        <move element="customer-account-bills-tab" destination="customer_account_navigation" after="customer-account-amstorecredit-link"/>
+        <move element="customer-account-certification-tab" destination="customer_account_navigation" after="customer-account-invoices-tab"/>
     </body>
 </page>
