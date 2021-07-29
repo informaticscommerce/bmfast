@@ -33,7 +33,8 @@ class SortLink extends \Magento\Customer\Block\Account\SortLink
              * custom work,
              * append label in class
              * */
-            $html = '<li class="nav item current '.str_replace(' ', '-', strtolower($this->getLabel())).'">';
+            $labelString = str_replace('/', '-', strtolower($this->getLabel()));
+            $html = '<li class="nav item current '.str_replace(' ', '-', $labelString).'">';
             $html .= '<strong>'
                 . $this->escapeHtml(__($this->getLabel()))
                 . '</strong>';
@@ -43,7 +44,8 @@ class SortLink extends \Magento\Customer\Block\Account\SortLink
              * custom work,
              * append label in class
              * */
-            $html = '<li class="nav item ' .str_replace(' ', '-', strtolower($this->getLabel())). $highlight . '"><a href="' . $this->escapeHtml($this->getHref()) . '"';
+            $labelString = str_replace('/', '-', strtolower($this->getLabel()));
+            $html = '<li class="nav item ' .str_replace(' ', '-', $labelString). $highlight . '"><a href="' . $this->escapeHtml($this->getHref()) . '"';
             $html .= $this->getTitle()
                 ? ' title="' . $this->escapeHtml(__($this->getTitle())) . '"'
                 : '';
