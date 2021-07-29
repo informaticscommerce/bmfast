@@ -21,62 +21,9 @@
             </block>
         </referenceBlock> -->
 
-        <referenceBlock name="customer_account_navigation">
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-credit-tab">
-                <arguments>
-                    <argument name="path" xsi:type="string">routesname/customer/index</argument>
-                    <argument name="label" xsi:type="string">Credit/Debit Memo</argument>
-                </arguments>
-            </block>
-        </referenceBlock>
-        <referenceBlock name="customer_account_navigation">
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-bills-tab">
-                <arguments>
-                    <argument name="path" xsi:type="string">routesname/customer/index</argument>
-                    <argument name="label" xsi:type="string">Bills of Lading</argument>
-                </arguments>
-            </block>
-        </referenceBlock>
-        <referenceBlock name="customer_account_navigation">
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-invoices-tab">
-                <arguments>
-                    <argument name="path" xsi:type="string">routesname/customer/index</argument>
-                    <argument name="label" xsi:type="string">Invoices</argument>
-                </arguments>
-            </block>
-        </referenceBlock>
-        <referenceBlock name="customer_account_navigation">
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-certifications-tab">
-                <arguments>
-                    <argument name="path" xsi:type="string">routesname/customer/index</argument>
-                    <argument name="label" xsi:type="string">Certifications</argument>
-                </arguments>
-            </block>
-        </referenceBlock>
-        <referenceBlock name="customer_account_navigation">
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-packing-tab">
-                <arguments>
-                    <argument name="path" xsi:type="string">routesname/customer/index</argument>
-                    <argument name="label" xsi:type="string">Packing Slips</argument>
-                </arguments>
-            </block>
-        </referenceBlock>
-        <referenceBlock name="customer_account_navigation">
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-place-tab">
-                <arguments>
-                    <argument name="path" xsi:type="string">routesname/customer/index</argument>
-                    <argument name="label" xsi:type="string">Place an Order</argument>
-                </arguments>
-            </block>
-        </referenceBlock>
-        <referenceBlock name="customer_account_navigation">
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-request-tab">
-                <arguments>
-                    <argument name="path" xsi:type="string">routesname/customer/index</argument>
-                    <argument name="label" xsi:type="string">Request a Quote</argument>
-                </arguments>
-            </block>
-        </referenceBlock>
+
+
+
 
         <move element="customer_account_dashboard_name" destination="columns" before="-" />
         <move element="sidebar.main.account_nav" destination="columns" before="-" />

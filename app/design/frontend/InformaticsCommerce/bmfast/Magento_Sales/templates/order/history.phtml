@@ -132,7 +132,12 @@ $sortOption = ($this->getRequest()->getParam('sort-order') !== '') ? $this->getR
             <tbody>
                 <?php foreach ($_orders as $_order) : ?>
                     <tr>
-                        <td data-th="<?= $block->escapeHtml(__('Order #')) ?>" class="col id"><?= $block->escapeHtml($_order->getRealOrderId()) ?></td>
+                        <td data-th="<?= $block->escapeHtml(__('Actions')) ?>" class="col id">
+                            <a href="<?= $block->escapeUrl($block->getViewUrl($_order)) ?>" class="action view">
+                                <span><?= $block->escapeHtml($_order->getRealOrderId()) ?></span>
+                            </a>
+
+                        </td>
                         <td data-th="<?= $block->escapeHtml(__('Customer Name')) ?>" class="col customer_name"><?= $block->escapeHtml($_order->getCustomerName()) ?></td>
                         <td data-th="<?= $block->escapeHtml(__('Customer PO#')) ?>" class="col customer_po"><?= $block->escapeHtml($_order->getPayment()->getPoNumber()) ?></td>
                         <td data-th="<?= $block->escapeHtml(__('Date')) ?>" class="col date"><?= /* @noEscape */ $block->formatDate($_order->getCreatedAt()) ?></td>

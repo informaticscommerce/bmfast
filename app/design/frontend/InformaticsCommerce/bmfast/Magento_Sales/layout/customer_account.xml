@@ -26,5 +26,32 @@
                 </arguments>
             </block>
         </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-invoices-tab">
+                <arguments>
+                    <argument name="path" xsi:type="string">invoices/</argument>
+                    <argument name="label" xsi:type="string">Invoices</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-packing-tab">
+                <arguments>
+                    <argument name="path" xsi:type="string">sales/order/packing</argument>
+                    <argument name="label" xsi:type="string">Packing Slips</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-place-tab">
+                <arguments>
+                    <argument name="path" xsi:type="string">sales/order/reorder</argument>
+                    <argument name="label" xsi:type="string">Place an Order</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <move element="customer-account-invoices-tab" destination="customer_account_navigation" after="customer-account-amstorecredit-link"/>
+        <move element="customer-account-packing-tab" destination="customer_account_navigation" after="customer-account-invoices-tab"/>
+        <move element="customer-account-place-tab" destination="customer_account_navigation" after="customer-account-packing-tab"/>
     </body>
 </page>
