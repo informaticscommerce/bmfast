@@ -1,0 +1,35 @@
+<?php $_invoices = $block->getInvoiceList() ?>
+<?php
+//    echo "<pre>";
+//    print_r($_invoices->getData());exit;
+?>
+<div class="table-wrapper orders-invoices">
+    <table class="data table table-order-items invoices" id="invoices-orders-table">
+        <caption class="table-caption"><?= $block->escapeHtml(__('Invoice')) ?></caption>
+        <thead>
+            <tr>
+                <th scope="col" class="col id"><?= /* @escapeNotVerified */ __('Invoice #') ?></th>
+                <th scope="col" class="col invoice-date"><?= /* @escapeNotVerified */ __('Invoice Date') ?></th>
+                <th scope="col" class="col ord-id"><?= /* @escapeNotVerified */ __('Order #') ?></th>
+                <th scope="col" class="col total"><?= /* @escapeNotVerified */ __('Grand Total') ?></th>
+                <th scope="col" class="col actions"><?= /* @escapeNotVerified */ __('Action') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($_invoices as $_invoice): ?>
+            <tr>
+                <td data-th="<?= /* @escapeNotVerified */ __('Invoice #') ?>" class="col id"><?= $_invoice->getIncrementId() ?></td>
+                <td data-th="<?= /* @escapeNotVerified */ __('Invoice Date') ?>" class="col invoice-date"><?= $block->formatDate($_invoice->getCreatedAt()) ?></td>
+                <td data-th="<?= /* @escapeNotVerified */ __('Order #') ?>" class="col ord-id"><?= str_pad($_invoice->getOrderId(), 9, '0', STR_PAD_LEFT) ?></td>
+                <td data-th="<?= /* @escapeNotVerified */ __('Grand Total') ?>" class="col total"><?= $_invoice->getGrandTotal() ?></td>
+                <td data-th="<?= /* @escapeNotVerified */ __('Action') ?>" class="col actions">
+                    <a href="<?= /* @escapeNotVerified */ $block->getViewInvoiceUrl($_invoice->getOrderId()) ?>"
+                       class="action view">
+                        <span><?= /* @escapeNotVerified */ __('View') ?></span>
+                    </a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
