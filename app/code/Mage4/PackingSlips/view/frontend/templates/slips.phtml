@@ -1,3 +1,12 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate
+// @codingStandardsIgnoreFile
+?>
 <?php $_orders = $block->getPackingSlipsList() ?>
 <div class="table-wrapper orders-packing">
     <table class="data table table-order-items packing" id="packing-orders-table">
@@ -13,24 +22,30 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($_orders as $_order): ?>
-            <?php $tracksCollection = $_order->getTracksCollection(); ?>
-            <?php foreach ($tracksCollection->getItems() as $track): ?>
-                <tr>
-                    <td data-th="<?= /* @escapeNotVerified */ __('Shipment #') ?>" class="col id"><?= str_pad($track->getEntityId(), 9, '0', STR_PAD_LEFT) ?></td>
-                    <td data-th="<?= /* @escapeNotVerified */ __('Shipment Date') ?>" class="col shipment-date"><?= $block->formatDate($track->getCreatedAt()) ?></td>
-                    <td data-th="<?= /* @escapeNotVerified */ __('Order #') ?>" class="col ord-id"><?= str_pad($_order->getEntityId(), 9, '0', STR_PAD_LEFT) ?></td>
-                    <td data-th="<?= /* @escapeNotVerified */ __('Track Number') ?>" class="col track-number"><?= $track->getTrackNumber() ?></td>
-                    <td data-th="<?= /* @escapeNotVerified */ __('Title') ?>" class="col track-title"><?= $track->getTitle() ?></td>
-                    <td data-th="<?= /* @escapeNotVerified */ __('Action') ?>" class="col actions">
-                        <a href="<?= /* @escapeNotVerified */ $block->getViewTracksUrl($_order->getEntityId()) ?>"
-                           class="action view">
-                            <span><?= /* @escapeNotVerified */ __('View') ?></span>
-                        </a>
-                    </td>
-                </tr>
+        <?php if(isset($_invoices)): ?>
+            <?php foreach ($_orders as $_order): ?>
+                <?php $tracksCollection = $_order->getTracksCollection(); ?>
+                <?php foreach ($tracksCollection->getItems() as $track): ?>
+                    <tr>
+                        <td data-th="<?= /* @escapeNotVerified */ __('Shipment #') ?>" class="col id"><?= str_pad($track->getEntityId(), 9, '0', STR_PAD_LEFT) ?></td>
+                        <td data-th="<?= /* @escapeNotVerified */ __('Shipment Date') ?>" class="col shipment-date"><?= $block->formatDate($track->getCreatedAt()) ?></td>
+                        <td data-th="<?= /* @escapeNotVerified */ __('Order #') ?>" class="col ord-id"><?= str_pad($_order->getEntityId(), 9, '0', STR_PAD_LEFT) ?></td>
+                        <td data-th="<?= /* @escapeNotVerified */ __('Track Number') ?>" class="col track-number"><?= $track->getTrackNumber() ?></td>
+                        <td data-th="<?= /* @escapeNotVerified */ __('Title') ?>" class="col track-title"><?= $track->getTitle() ?></td>
+                        <td data-th="<?= /* @escapeNotVerified */ __('Action') ?>" class="col actions">
+                            <a href="<?= /* @escapeNotVerified */ $block->getViewTracksUrl($_order->getEntityId()) ?>"
+                               class="action view">
+                                <span><?= /* @escapeNotVerified */ __('View') ?></span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             <?php endforeach; ?>
-        <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td><span class="no-invoice">You have no packing slips.</span></td>
+            </tr>
+        <?php endif; ?>
         </tbody>
     </table>
 </div>
