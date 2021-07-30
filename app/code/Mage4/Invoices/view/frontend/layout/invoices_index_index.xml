@@ -12,7 +12,7 @@
         </referenceBlock>
         <referenceContainer name="content">
             <block class="Mage4\Invoices\Block\Order\InvoiceList" name="customer_account_dashboard_invoices"
-                   template="Mage4_Invoices::invoice.phtml"/>
+                   template="Mage4_Invoices::invoice.phtml" cacheable="false" />
         </referenceContainer>
     </body>
 </page>

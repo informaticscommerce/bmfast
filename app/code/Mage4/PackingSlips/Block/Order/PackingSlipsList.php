@@ -46,6 +46,7 @@ class PackingSlipsList  extends \Magento\Framework\View\Element\Template
             []
         );
         $orders->addFieldToFilter('track_number', ['neq' => null]);
+        $orders->addFieldToFilter('customer_id', $this->customerSession->getCustomerId());
         return $orders->distinct(true);
     }
     public function getViewTracksUrl($orderId)

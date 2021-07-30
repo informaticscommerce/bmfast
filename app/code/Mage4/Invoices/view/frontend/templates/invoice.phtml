@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php if(isset($_invoices)): ?>
+            <?php if($_invoices): ?>
                 <?php foreach ($_invoices as $_invoice): ?>
                 <tr>
                     <td data-th="<?= /* @escapeNotVerified */ __('Invoice #') ?>" class="col id"><?= $_invoice->getIncrementId() ?></td>

@@ -6,6 +6,7 @@
 
 // phpcs:disable Magento2.Templates.ThisInTemplate
 // @codingStandardsIgnoreFile
+
 ?>
 <?php $_orders = $block->getPackingSlipsList() ?>
 <div class="table-wrapper orders-packing">
@@ -22,7 +23,7 @@
         </tr>
         </thead>
         <tbody>
-        <?php if(isset($_invoices)): ?>
+        <?php if($_orders && count($_orders)): ?>
             <?php foreach ($_orders as $_order): ?>
                 <?php $tracksCollection = $_order->getTracksCollection(); ?>
                 <?php foreach ($tracksCollection->getItems() as $track): ?>
