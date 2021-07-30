@@ -13,6 +13,7 @@
     "version": "2.4.1",
     "require": {
         "amasty/base": "^1.12.9",
+        "amasty/module-b2b-suite-premium": "^1.3",
         "amasty/module-improved-layered-navigation-page": "^2.7",
         "amasty/module-one-step-checkout-pro-package": "^1.0",
         "amasty/shopby": "^2.16",
