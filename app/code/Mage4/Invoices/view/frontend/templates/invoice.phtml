@@ -12,20 +12,26 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($_invoices as $_invoice): ?>
-            <tr>
-                <td data-th="<?= /* @escapeNotVerified */ __('Invoice #') ?>" class="col id"><?= $_invoice->getIncrementId() ?></td>
-                <td data-th="<?= /* @escapeNotVerified */ __('Invoice Date') ?>" class="col invoice-date"><?= $block->formatDate($_invoice->getCreatedAt()) ?></td>
-                <td data-th="<?= /* @escapeNotVerified */ __('Order #') ?>" class="col ord-id"><?= str_pad($_invoice->getOrderId(), 9, '0', STR_PAD_LEFT) ?></td>
-                <td data-th="<?= /* @escapeNotVerified */ __('Grand Total') ?>" class="col total"><?= $_invoice->getGrandTotal() ?></td>
-                <td data-th="<?= /* @escapeNotVerified */ __('Action') ?>" class="col actions">
-                    <a href="<?= /* @escapeNotVerified */ $block->getViewInvoiceUrl($_invoice->getOrderId()) ?>"
-                       class="action view">
-                        <span><?= /* @escapeNotVerified */ __('View') ?></span>
-                    </a>
-                </td>
-            </tr>
-            <?php endforeach; ?>
+            <?php if(isset($_invoices)): ?>
+                <?php foreach ($_invoices as $_invoice): ?>
+                <tr>
+                    <td data-th="<?= /* @escapeNotVerified */ __('Invoice #') ?>" class="col id"><?= $_invoice->getIncrementId() ?></td>
+                    <td data-th="<?= /* @escapeNotVerified */ __('Invoice Date') ?>" class="col invoice-date"><?= $block->formatDate($_invoice->getCreatedAt()) ?></td>
+                    <td data-th="<?= /* @escapeNotVerified */ __('Order #') ?>" class="col ord-id"><?= str_pad($_invoice->getOrderId(), 9, '0', STR_PAD_LEFT) ?></td>
+                    <td data-th="<?= /* @escapeNotVerified */ __('Grand Total') ?>" class="col total"><?= $_invoice->getGrandTotal() ?></td>
+                    <td data-th="<?= /* @escapeNotVerified */ __('Action') ?>" class="col actions">
+                        <a href="<?= /* @escapeNotVerified */ $block->getViewInvoiceUrl($_invoice->getOrderId()) ?>"
+                           class="action view">
+                            <span><?= /* @escapeNotVerified */ __('View') ?></span>
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td><span class="no-invoice">You have no invoice.</span></td>
+                </tr>
+            <?php endif; ?>
         </tbody>
     </table>
 </div>
