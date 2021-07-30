@@ -7,24 +7,6 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
     <body>
-<!--        <referenceContainer name="content">-->
-<!--            <block class="Magento\Customer\Block\Account\Dashboard\Info" name="customer_account_dashboard_name" template="account/dashboard/name.phtml" before="-"/>-->
-<!--        </referenceContainer>-->
-
-        <!-- <referenceBlock name="customer_account_navigation">
-            <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-address-link">
-                <arguments>
-                    <argument name="label" xsi:type="string" translate="true">My awesome menu item</argument>
-                    <argument name="path" xsi:type="string">path/i/need</argument>
-                    <argument name="sortOrder" xsi:type="number">100</argument>
-                </arguments>
-            </block>
-        </referenceBlock> -->
-
-
-
-
-
         <move element="customer_account_dashboard_name" destination="columns" before="-" />
         <move element="sidebar.main.account_nav" destination="columns" before="-" />
         <move element="product_list_toolbar" destination="columns" after="-" />
