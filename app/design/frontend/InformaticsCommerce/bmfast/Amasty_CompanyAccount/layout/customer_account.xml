@@ -18,7 +18,7 @@
                     <argument name="companyContext" xsi:type="object">Amasty\CompanyAccount\Model\CompanyContext</argument>
                 </arguments>
             </block>
-            <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\SortLink"
+            <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\CompanyAccountLink"
                    name="amcompany-customer-account-tab-company-account">
                 <arguments>
                     <argument name="path" xsi:type="string">amasty_company/profile/index</argument>
@@ -27,7 +27,7 @@
 <!--                    <argument name="sortOrder" xsi:type="number">102</argument>-->
                 </arguments>
             </block>
-            <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\SortLink"
+            <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\StoreCreditLink"
                    name="amcompany-customer-account-tab-company-credit">
                 <arguments>
                     <argument name="path" xsi:type="string">amasty_company/credit/index</argument>
@@ -36,7 +36,7 @@
                     <argument name="sortOrder" xsi:type="number">102</argument>
                 </arguments>
             </block>
-            <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\SortLink"
+            <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\UsersLink"
                    name="amcompany-customer-account-tab-company-users">
                 <arguments>
                     <argument name="path" xsi:type="string">amasty_company/user/index</argument>
@@ -45,7 +45,7 @@
 <!--                    <argument name="sortOrder" xsi:type="number">102</argument>-->
                 </arguments>
             </block>
-            <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\SortLink"
+            <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\RolesLink"
                    name="amcompany-customer-account-tab-company-roles">
                 <arguments>
                     <argument name="path" xsi:type="string">amasty_company/role/index</argument>
@@ -54,7 +54,7 @@
 <!--                    <argument name="sortOrder" xsi:type="number">102</argument>-->
                 </arguments>
             </block>
-            <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\SortLink"
+            <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\OrdersLink"
                    name="amcompany-customer-account-tab-company-orders">
                 <arguments>
                     <argument name="path" xsi:type="string">amasty_company/order/index</argument>
