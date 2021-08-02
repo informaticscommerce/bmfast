@@ -1,0 +1,38 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+?>
+<?php
+/** @var \Amasty\CancelOrder\Block\Button $block */
+?>
+
+<?php if ($block->isPopupEnabled()): ?>
+    <button class="amcorder-button -clear -link"
+            type="button"
+            title="<?= $block->escapeHtml($block->getButtonTitle()) ?>"
+            data-amcorder-js="cancel-<?= (int)$block->getOrder()->getId() ?>">
+        <?= $block->escapeHtml($block->getButtonTitle()) ?>
+    </button>
+    <?= $block->getChildBlock('amasty.custom.order.popup')->setOrder($block->getOrder())->toHtml() ?>
+<?php else: ?>
+    <button class="amcorder-button -clear -link"
+            type="button"
+            title="<?= $block->escapeHtml($block->getButtonTitle()) ?>"
+            data-mage-init='{"amcorderPrompt": {
+                "action": "window.location = \"<?= $block->escapeUrl($block->getCancelOrderUrl()) ?>\""
+            }}'>
+        <?= $block->escapeHtml($block->getButtonTitle()) ?>
+    </button>
+<?php endif; ?>
+<?php if ($this->helper(\Magento\Sales\Helper\Reorder::class)->canReorder((int)$block->getOrder()->getId())) : ?>
+    <spa>&nbsp&nbsp|&nbsp&nbsp</spa>
+    <a href="" data-post='<?= /* @noEscape */
+    $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)
+        ->getPostData($block->getBaseUrl().'sales/order/reorder/order_id/'.(int)$block->getOrder()->getId())
+    ?>' class="action order">
+        <span><?= $block->escapeHtml(__('Reorder')) ?></span>
+    </a>
+<?php endif ?>
