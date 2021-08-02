@@ -8,26 +8,12 @@
  * @var \Magento\Customer\Block\Account\AuthorizationLink $block
  * @var \Magento\Framework\Escaper $escaper
  */
-
-$objectManagerlogin = \Magento\Framework\App\ObjectManager::getInstance();
-$baseurl = $objectManagerlogin->get('Magento\Store\Model\StoreManagerInterface')->getStore(0)->getBaseUrl();
-
 $dataPostParam = '';
 if ($block->isLoggedIn()) {
     $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
 }
 ?>
-
-<?php if($block->isLoggedIn() && $baseurl || $block->isLoggedIn() ) : ?>
-    <li class="link authorization-link" >
-        <a class="login-customer logout" href="<?php echo $baseurl .'customer/account/logout'; ?>">Logout</a>
-    </li>
-    <li class="link authorization-link custom-top-link-myaccount-mobile" >
-        <a class="login-customer logout" href="<?php echo $baseurl .'customer/account/'; ?>">My Account</a>
-    </li>
-<?php else : ?>
-    <li class="link authorization-link" data-label="<?= $escaper->escapeHtml(__('or')) ?>">
-        <a class="login-customer logout <?= $block->getLabel() == 'Login' ? 'login-popup-btn': '' ?> "
-            <?= /* @noEscape */ $dataPostParam ?>><?= $escaper->escapeHtml($block->getLabel()) ?></a>
-    </li>
-<?php endif; ?>
+<li class="link authorization-link" data-label="<?= $escaper->escapeHtml(__('or')) ?>">
+    <a class="login-customer logout <?= $block->getLabel() == 'Login' ? 'login-popup-btn': '' ?> "
+        <?= /* @noEscape */ $dataPostParam ?>><?= $escaper->escapeHtml($block->getLabel()) ?></a>
+</li>

@@ -1,0 +1,11 @@
+<form id="order-filter" method='GET'>
+    <ul>
+        <li class="field customer"><label>Customer</label> <input id="customer-name" name="customer-name" type="text" value=""  aria-haspopup="false" aria-autocomplete="both" autocomplete="off"></li>
+        <li class="field order-start calendar_date" id="calendar_start"><label>Order Date Range Start</label> <input id="date-start" name="date-start" type="text" value="" aria-haspopup="false" aria-autocomplete="both" autocomplete="off"></li>
+        <li class="field order-end calendar_date" id="calendar_end"><label>Order Date Range End</label> <input id="date-end" name="date-end" type="text" value="" aria-haspopup="false" aria-autocomplete="both" autocomplete="off"></li>
+        <li class="field msg">OR Search By:</li>
+        <li class="field purchase-order"><label>PO Number</label> <input id="po-num" name="po-num" type="text"  onkeypress="return event.charCode != 32" value="" aria-haspopup="false" aria-autocomplete="both" autocomplete="off"></li>
+        <li class="field sub-btn"><button class="submit" id="submit-btn" type="submit" value="Filter">Submit</button> <button class="clear-filter" id="clear-btn" type="button">Clear Filters</button></li>
+    </ul>
+    <input id="search-order" class="search-keyword" name="search-keyword" type="hidden" value="">
+</form>

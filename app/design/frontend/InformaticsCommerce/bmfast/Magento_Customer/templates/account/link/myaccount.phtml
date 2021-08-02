@@ -1,0 +1,14 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$baseurl = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore(0)->getBaseUrl();
+$customerSession = $objectManager->get('Magento\Customer\Model\Session');
+
+?>
+<?php if($customerSession->isLoggedIn() && $baseurl || $customerSession->isLoggedIn() ) : ?>
+    <div class="customer-account"><a style="color: white;" href="<?php echo $baseurl .'customer/account/'; ?>">My Account</a></div>
+<?php endif; ?>
