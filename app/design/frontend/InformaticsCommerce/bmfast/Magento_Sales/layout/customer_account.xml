@@ -66,10 +66,12 @@
                 </arguments>
             </block>
         </referenceBlock>
+        
         <move element="customer-account-invoices-tab" destination="customer_account_navigation" after="customer-account-bills-tab"/>
         <move element="customer-account-packing-tab" destination="customer_account_navigation" after="customer-account-certification-tab"/>
         <move element="customer-account-place-tab" destination="customer_account_navigation" after="customer-account-packing-tab"/>
         <move element="customer-account-bills-tab" destination="customer_account_navigation" after="customer-account-amstorecredit-link"/>
         <move element="customer-account-certification-tab" destination="customer_account_navigation" after="customer-account-invoices-tab"/>
+
     </body>
 </page>
