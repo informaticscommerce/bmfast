@@ -67,7 +67,7 @@ switch ($type = $block->getType()) {
             $shuffle = (int) $block->isShuffled();
             $isWeightedRandom = (int) $block->getRotation()->isWeightedRandom($block->getProductListType());
 
-            $showAddTo = false;
+            $showAddTo = true;
             $showCart = false;
             $templateType = null;
             $description = false;
@@ -88,7 +88,7 @@ switch ($type = $block->getType()) {
             $shuffle = 0;
             $isWeightedRandom = 0;
 
-            $showAddTo = false;
+            $showAddTo = true;
             $showCart = false;
             $templateType = null;
             $description = false;
@@ -263,15 +263,15 @@ $_item = null;
                                     <?php if($_item->getTypeId() == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE){
 
  $swatchBlock = $this->getLayout()->createBlock("Magento\Swatches\Block\Product\Renderer\Listing\Configurable")->setTemplate("Magento_Swatches::product/listing/renderer_custom.phtml");
-   echo $swatchBlock->setProduct($_item)->toHtml();                           
+   echo $swatchBlock->setProduct($_item)->toHtml();
 } ?>
                                 </div>
 
-                                    
 
-                                    
 
-                                    
+
+
+
                                 </div>
                             </div>
                             </li>
@@ -299,7 +299,7 @@ $_item = null;
 				$(document).ready(function(){
 					$('.products-related .product-items').addClass('owl-carousel');
 					$('.products-related .product-items').owlCarousel({
-						
+
 		                nav: true,
 						loop: true,
 		                dots: false,
@@ -320,6 +320,6 @@ $_item = null;
 			});
 		</script>
 
- 
+
 
         <?php endif;?>
