@@ -1,0 +1,25 @@
+<?php
+
+/** @var CmsPageData $block */
+
+use Mage4\ExtendMagentoCms\Block\CmsPageData;
+
+$currentUrl = $block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+$baseUrl = $block->getBaseUrl();
+$mediaUrl = $this->helper('\Magento\Cms\Helper\Wysiwyg\Images')->getBaseUrl();
+$urlKey = str_replace($baseUrl,"",$currentUrl);
+
+
+
+?>
+<?php if($urlKey !== ''): ?>
+    <?php $cmsPageObj = $block->getCmsPageDetails($urlKey); ?>
+    <?php if(count($cmsPageObj) > 0): ?>
+        <?php foreach ($cmsPageObj as $key => $value): ?>
+            <div class="hero-imgae-content">
+                <img src="<?= $mediaUrl.'cms/heroimage/'.$value->getHeroImage() ?>" />
+                <span class="hero-image-text"><?= $value->getHeroImageText() ?></span>
+            </div>
+        <?php endforeach; ?>
+    <?php  endif; ?>
+<?php  endif; ?>

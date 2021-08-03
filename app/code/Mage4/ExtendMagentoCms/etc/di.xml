@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <virtualType name="Mage4\ExtendMagentoCms\ReferenceImageUpload" type="Mage4\ExtendMagentoCms\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">cms/tmp/heroimage</argument>
+            <argument name="basePath" xsi:type="string">cms/heroimage</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Mage4\ExtendMagentoCms\Controller\Adminhtml\Heroimage\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Mage4\ExtendMagentoCms\ReferenceImageUpload</argument>
+        </arguments>
+    </type>
+</config>
