@@ -6,8 +6,8 @@
 
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $baseurl = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore(0)->getBaseUrl();
-$customerSession = $objectManager->get('Magento\Customer\Model\Session');
-
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+//echo "aaaaaa";exit;
 ?>
 <?php if($customerSession->isLoggedIn() && $baseurl || $customerSession->isLoggedIn() ) : ?>
     <div class="customer-account"><a style="color: white;" href="<?php echo $baseurl .'customer/account/'; ?>">My Account</a></div>
