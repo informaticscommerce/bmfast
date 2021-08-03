@@ -796,6 +796,202 @@
             }
         }
     }
+
+    .about-company-history {
+        .title {
+            h2 {
+                font-size: 44px;
+                margin: 50px 0 40px;
+                span {
+                    color: #2b6b9b;
+                    font-family: @font-family-name__poppins-Bold;
+                }
+            }
+            h3 {
+                font-size: 24px;
+                font-family: @font-family-name__poppins-Bold;
+                color: #e96626;
+                font-weight: 400;
+                margin: 0 0 30px
+            }
+        }
+        .desc {
+            p {
+                font-size: 16px;
+                line-height: 24px;
+                color: #000000;
+            }
+        }
+        .content {
+            //display: grid;
+            //grid-template-columns: 60% 40%;
+            //padding: 40px 70px 70px;
+            margin-top: 40px;
+            margin-bottom: 75px;
+            .right {
+                width: 40%;
+                float: right;
+                padding-right: 75px;
+            }
+            .left {
+                //padding: 50px 75px 0 0;
+                width: 40%;
+                float: left;
+                padding-left: 75px;
+                padding-top: 50px;
+                .heading-1 {
+                    font-size: 22px;
+                    font-family: @font-family-name__roboto-Medium;
+                    color: #666666;
+                    font-weight: 400;
+                }
+                .heading-2 {
+                    font-size: 36px;
+                    font-family: @font-family-name__poppins-Bold;
+                    color: #2a2a2a;
+                    font-weight: 400;
+                    margin-bottom: 40px;
+                    margin-top: 15px;
+                }
+                p {
+                    color: #4a4a4a;
+                    font-size: 16px;
+                    line-height: 25px;
+                }
+            }
+        }
+        .owl-nav {
+            .owl-prev,
+            .owl-next {
+                position: absolute;
+                top: 42%;
+                width: 50px;
+                height: 50px;
+                background: #fff;
+                line-height: 48px;
+                border-radius: 50%;
+                text-align: center;
+                font-size: 24px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            }
+            .owl-prev {
+                left: -13px;
+            }
+            .fa {
+                &:before {
+                    content: "\f060";
+                    font-family: @font-family-name__FontAwesome;
+                    font-style: normal;
+                    color: #717171;
+                }
+            }
+            .owl-next {
+                right: -13px;         
+                .fa-angle-right {
+                    &:before {
+                        content: "\f061";
+                    }    
+                }
+            }
+        }
+    }
+
+    .cms-about-company-history .bm-customer .container {
+        border-top: 1px solid #e2e1e1;
+        border-bottom: none;
+            
+    }
+
+    .cms-main {
+		.cms-container {
+			 max-width: 1190px;
+			 width: 100%; 
+			 padding: 0 10px; 
+			 margin: 0 auto;
+		}
+		h2 { 
+			font-size: 44px; 
+			color: #000; 
+			text-transform: uppercase; 
+			margin: 0 0 20px;
+			trong { 
+				color: #2b6b9b;
+			}
+		}
+		h3 { 
+			color: #e96626; 
+			font-size: 24px; 
+			text-transform: capitalize; 
+			margin: 0 0 20px;
+		}
+		p { 
+			font-size: 16px; 
+			color: #000; 
+			margin: 0 0 15px;
+		}
+		.list-arrow { 
+			list-style: none; 
+			margin: 0; 
+			padding: 0;
+			li { 
+				background: url(images/cms-list-arrow.png) no-repeat 0 5px; 
+				padding-left: 25px; 
+				margin: 0 0 10px; 
+			}
+		}
+		.cms-cols { 
+			overflow: hidden; 
+			margin: 35px -20px; 
+			display: block;
+			h2 { 
+				color: #e96626; 
+				font-size: 36px; 
+				text-transform: capitalize; 
+				margin: 0 0 20px; 
+				text-align: center;
+			}
+			.cms-col { 
+				float: left; 
+				width: 50%; 
+				padding: 0 20px; 
+				box-sizing: border-box;
+				&.cms-img-block {
+					.cms-col { 
+						width: 60%;
+					}
+					.col-img { 
+						float: right; 
+						width: 35%;
+					}
+				}
+			}
+		}
+		.cms-blue-area { 
+			background: #2b6b9b; 
+            padding: 25px 15px;
+			h3 { 
+				color: #fff;
+				margin: 0 0 10px;
+			}
+			p { 
+				color: #fff; 
+				margin: 0;
+			}
+		}
+		.img-box { 
+			overflow: hidden; 
+			margin-bottom: 10px;
+			.img { 
+				float: left; 
+				width: 80px; 
+				text-align: center;
+			}
+			p { 
+				margin-left: 110px; 
+				margin-bottom: 0;
+			}
+		}
+	}
 }
 
 //

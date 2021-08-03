@@ -45,12 +45,16 @@
 
         
         <!-- <move element="category.image" destination="page.wrapper" before="main.content" /> -->
-		<move element="authorization-link-login" destination="header-wrapper" after="minicart"/>
+		
+		
+		<move element="quotecart" destination="header-wrapper" after="minicart"/>
+		<move element="authorization-link-login" destination="header-wrapper" after="quotecart"/>
         <move element="breadcrumbs" destination="page.wrapper" before="main.content"/>
         <move element="footer_cities" destination="before.body.end"/>
         <!-- <referenceBlock name="page.main.title" remove="true"/> -->
         <referenceBlock name="catalog.compare.sidebar" remove="true"/> 
         <referenceBlock name="copyright" remove="true"/>
+        <!-- <referenceBlock name="wish-list-link" remove="true" /> -->
         <referenceBlock name="header.links" remove="true"/>
 		<referenceBlock name="footer_links" remove="true"/>
 		<referenceBlock name="form.subscribe" remove="true"/>
