@@ -10,7 +10,7 @@
         <move element="page.main.title" destination="content" before="-"/>
         <move element="product.info.stock.sku" destination="product.info.price" after="product.price.final"/>
         <!-- <move element="product.info.review" destination="product.info.main" before="product.info.price"/> -->
-       
+
 
          <referenceContainer name="product.info.main">
             <block class="Magento\Cms\Block\Block" name="shipping_quote_pdp"  after="-">
@@ -26,7 +26,6 @@
 				</arguments>
 			</block>
         </referenceContainer>
-
 
         <referenceBlock name="reviews.tab" remove="true" />
         <referenceBlock name="product.info.overview" remove="true" />
