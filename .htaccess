@@ -391,3 +391,34 @@ ErrorDocument 403 /pub/errors/404.php
     </FilesMatch>
 
 </IfModule>
+
+Redirect 301 /about-us.html /about-us
+Redirect 301 /about-us/about-birmingham-fastener.html /about-us/about-birmingham-fastener
+Redirect 301 /about-us/company-history.html /about-us/company-history
+Redirect 301 /industries-served.html /industries-served
+Redirect 301 /industries-served/structural-steel-industry.html /industries-served/structural-steel-industry
+Redirect 301 /industries-served/waterwork-industry.html /industries-served/waterwork-industry
+Redirect 301 /industries-served/metal-building-industry.html /industries-served/metal-building-industry
+Redirect 301 /industries-served/precast-concrete-concrete-foundations.html /industries-served/precast-concrete-concrete-foundations
+Redirect 301 /industries-served/oem-mro.html /industries-served/oem-mro
+Redirect 301 /industries-served/aerospace-defense.html /industries-served/aerospace-defense
+Redirect 301 /industries-served/industrial-distribution.html /industries-served/industrial-distribution
+Redirect 301 /industries-served/utilities-transportation.html /industries-served/utilities-transportation
+Redirect 301 /industries-served/specialty.html /industries-served/specialty
+Redirect 301 /value-added-services.html /value-added-services
+Redirect 301 /value-added-services/manufacturing.html /value-added-services/manufacturing
+Redirect 301 /value-added-services/birmingham-fastener-managed-inventory.html /value-added-services/birmingham-fastener-managed-inventory
+Redirect 301 /value-added-services/lab-testing-services.html /value-added-services/lab-testing-services
+Redirect 301 /value-added-services/packaging-assembly.html /value-added-services/packaging-assembly
+Redirect 301 /fastener-learning-hub.html /fastener-learning-hub
+Redirect 301 /fastener-learning-hub/technical-information.html /fastener-learning-hub/technical-information
+Redirect 301 /fastener-learning-hub/common-questions.html /fastener-learning-hub/common-questions
+Redirect 301 /fastener-learning-hub/coating-blogs.html /fastener-learning-hub/coating-blogs
+Redirect 301 /fastener-learning-hub/structural-bolting.html /fastener-learning-hub/structural-bolting
+Redirect 301 /fastener-learning-hub/waterworks-blogs.html /fastener-learning-hub/waterworks-blogs
+Redirect 301 /fastener-learning-hub/metal-building-blogs.html /fastener-learning-hub/metal-building-blogs
+Redirect 301 /locations.html /locations
+Redirect 301 /resources.html /resources
+Redirect 301 /careers.html /careers
+Redirect 301 /news.html /news
+

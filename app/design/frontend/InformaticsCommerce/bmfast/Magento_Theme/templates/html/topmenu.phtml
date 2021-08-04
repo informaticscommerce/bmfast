@@ -16,40 +16,7 @@ $_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit)
 
 <nav class="navigation" data-action="navigation">
     <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
-        <li class="level0 level-top">
-            <?php
-                echo $this->getLayout()
-                ->createBlock('Magento\Cms\Block\Block')
-                ->setBlockId('main_nav_before')
-                ->toHtml();
-                ?>
-        </li>
-            <?= /* @noEscape */ $_menuHtml?>
-            <?= $block->getChildHtml() ?>
-        <li class="level0 level-top">
-            <?php
-                echo $this->getLayout()
-                ->createBlock('Magento\Cms\Block\Block')
-                ->setBlockId('main_nav_after')
-                ->toHtml();
-                ?>
-        </li>
+        <?= /* @noEscape */ $_menuHtml?>
+        <?= $block->getChildHtml() ?>
     </ul>
 </nav>
-
-<script type="text/javascript">
-require([ "jquery" ], function($){
-
-    $(window).scroll(function () {
-        if( $(window).scrollTop() > $('.panel.wrapper').offset().top && !($('.panel.wrapper').hasClass('sticky'))
-            && $(window).scrollTop() > $('.nav-sections').offset().top && !($('.nav-sections').hasClass('sticky'))){
-        $('.panel.wrapper').addClass('sticky');
-        $('.nav-sections').addClass('sticky');
-
-        } else if ($(window).scrollTop() == 0){
-        $('.panel.wrapper').removeClass('sticky');
-        $('.nav-sections').removeClass('sticky');
-        }
-    });
-    });
-</script>
