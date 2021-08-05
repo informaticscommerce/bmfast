@@ -4,6 +4,7 @@
     <module name="Mage4_ExtendMagentoCustomer" setup_version="1.0.0">
         <sequence>
             <module name="Magento_Customer"/>
+            <module name="Amasty_CompanyAccount"/>
         </sequence>
     </module>
 </config>

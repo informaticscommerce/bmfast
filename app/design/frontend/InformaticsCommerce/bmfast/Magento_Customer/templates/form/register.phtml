@@ -26,6 +26,10 @@ $formData = $block->getFormData();
     if ($params) {
         $type = $params['type'];
     }
+
+//    echo "<pre>";
+//    print_r($block->getData());
+//    exit;
 ?>
 
 
@@ -45,8 +49,9 @@ $formData = $block->getFormData();
       id="form-validate"
       enctype="multipart/form-data"
       autocomplete="off">
+
     <?= /* @noEscape */ $block->getBlockHtml('formkey') ?>
-    
+
     <?php if ($type === 'business'): ?>
         <?php $cityValidationClass = $addressHelper->getAttributeValidationClass('city'); ?>
         <?php $postcodeValidationClass = $addressHelper->getAttributeValidationClass('postcode'); ?>
@@ -56,24 +61,57 @@ $formData = $block->getFormData();
             <p>If you have an account with us, please log In.</p>
         </div>
         <fieldset class="fieldset organization">
-            <?php $_company = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Company::class) ?>
-            <?= $_company->setCompany($formData->getCompany())->toHtml() ?>
-            <div class="field company_email ">
-                <label for="company_email" class="label"><span>Company Email</span></label>
+            <?php //$_company = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Company::class) ?>
+            <?php //$_company->setCompany($formData->getCompany())->toHtml() ?>
+            <div class="field company-name _required">
+                <label class="label" for="company_name">
+                    <span><?= $block->escapeHtml(__('Company Name')) ?></span>
+                </label>
                 <div class="control">
-                    <input type="text" name="company_email" id="company_email" value="" title="Company Email" class="input-text " autocomplete="off">
+                    <input type="text" name="company[company_name]" id="company_name"
+                           title="<?= $block->escapeHtmlAttr(__('Company Name')) ?>"
+                           class="input-text" data-validate="{required:true}">
                 </div>
             </div>
-            <div class="field ein_id ">
-                <label for="ein_id" class="label"><span>EIN ID</span></label>
+            <div class="field legal-name">
+                <label class="label" for="legal_name">
+                    <span><?= $block->escapeHtml(__('Company Legal Name')) ?></span>
+                </label>
                 <div class="control">
-                    <input type="text" name="ein_id" id="ein_id" value="" title="EIN ID" class="input-text " autocomplete="off">
+                    <input type="text" name="company[legal_name]" id="legal_name"
+                           title="<?= $block->escapeHtmlAttr(__('Company Legal Name')) ?>"
+                           class="input-text">
                 </div>
             </div>
-            <div class="field reseller_id ">
-                <label for="reseller_id" class="label"><span>Reseller ID</span></label>
+            <div class="field company-email _required">
+                <label class="label" for="company_email">
+                    <span><?= $block->escapeHtml(__('Company Email')) ?></span>
+                </label>
                 <div class="control">
-                    <input type="text" name="reseller_id" id="reseller_id" value="" title="RESELLER ID" class="input-text " autocomplete="off">
+                    <input type="email" name="company[company_email]" id="company_email"
+                           title="<?= $block->escapeHtmlAttr(__('Company Email')) ?>"
+                           class="input-text validate-email required-entry"
+                           data-role="email">
+                </div>
+            </div>
+            <div class="field vat-tax-id">
+                <label class="label" for="vat_tax_id">
+                    <span><?= $block->escapeHtml(__('VAT/TAX ID')) ?></span>
+                </label>
+                <div class="control">
+                    <input type="text" name="company[vat_tax_id]" id="vat_tax_id"
+                           title="<?= $block->escapeHtmlAttr(__('VAT/TAX ID')) ?>"
+                           class="input-text">
+                </div>
+            </div>
+            <div class="field reseller-id">
+                <label class="label" for="reseller_id">
+                    <span><?= $block->escapeHtml(__('Re-seller ID')) ?></span>
+                </label>
+                <div class="control">
+                    <input type="text" name="company[reseller_id]" id="reseller_id"
+                           title="<?= $block->escapeHtmlAttr(__('Re-seller ID')) ?>"
+                           class="input-text">
                 </div>
             </div>
         </fieldset>
@@ -88,7 +126,7 @@ $formData = $block->getFormData();
                 </label>
                 <div class="control">
                     <input type="text"
-                           name="street[]"
+                           name="company[street][]"
                            value="<?= $escaper->escapeHtmlAttr($formData->getStreet(0)) ?>"
                            title="<?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('street') ?>"
                            id="street_1"
@@ -105,7 +143,7 @@ $formData = $block->getFormData();
                                 </label>
                                 <div class="control">
                                     <input type="text"
-                                           name="street[]"
+                                           name="company[street][]"
                                            value="<?= $escaper->escapeHtml($formData->getStreetLine($_i - 1)) ?>"
                                            title="<?= $escaper->escapeHtmlAttr(__('Street Address %1', $_i)) ?>"
                                            id="street_<?= /* @noEscape */ $_i ?>"
@@ -122,7 +160,7 @@ $formData = $block->getFormData();
                 </label>
                 <div class="control">
                     <input type="text"
-                           name="city"
+                           name="company[city]"
                            value="<?= $escaper->escapeHtmlAttr($formData->getCity()) ?>"
                            title="<?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('city') ?>"
                            class="input-text <?= $escaper->escapeHtmlAttr($cityValidationClass) ?>"
@@ -134,7 +172,7 @@ $formData = $block->getFormData();
                     <span><?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('country_id') ?></span>
                 </label>
                 <div class="control">
-                    <?= $block->getCountryHtmlSelect() ?>
+                    <?= $block->getCountryHtmlSelect(null, 'company[country_id]') ?>
                 </div>
             </div>
             <div class="field region required">
@@ -143,7 +181,7 @@ $formData = $block->getFormData();
                 </label>
                 <div class="control">
                     <select id="region_id"
-                            name="region_id"
+                            name="company[region_id]"
                             title="<?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('region') ?>"
                             class="validate-select region_id">
                         <option value="">
@@ -153,25 +191,34 @@ $formData = $block->getFormData();
                     <?= /* @noEscape */ $secureRenderer->renderStyleAsTag("display: none;", 'select#region_id') ?>
                     <input type="text"
                            id="region"
-                           name="region"
-                           value="<?= $escaper->escapeHtml($block->getRegion()) ?>"
+                           name="company[region]"
                            title="<?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('region') ?>"
                            class="input-text <?= $escaper->escapeHtmlAttr($regionValidationClass) ?>">
                     <?= /* @noEscape */ $secureRenderer->renderStyleAsTag("display: none;", 'input#region') ?>
                 </div>
             </div>
-            <div class="field zip required">
+            <div class="field postcode required">
                 <label for="zip" class="label">
                     <span><?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('postcode') ?></span>
                 </label>
                 <div class="control">
                     <input type="text"
-                           name="postcode"
+                           name="company[postcode]"
                            value="<?= $escaper->escapeHtmlAttr($formData->getPostcode()) ?>"
                            title="<?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('postcode') ?>"
                            id="zip"
                            class="input-text validate-zip-international
                         <?= $escaper->escapeHtmlAttr($postcodeValidationClass) ?>">
+                </div>
+            </div>
+            <div class="field telephone _required">
+                <label class="label" for="telephone">
+                    <span><?= $block->escapeHtml(__('Phone Number')) ?></span>
+                </label>
+                <div class="control">
+                    <input type="text" name="company[telephone]" id="telephone"
+                           title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>"
+                           class="input-text" data-validate="{required:true}">
                 </div>
             </div>
             <?php $addressAttributes = $block->getChildBlock('customer_form_address_user_attributes');?>
@@ -221,18 +268,14 @@ $formData = $block->getFormData();
             <?= $_gender->setGender($formData->getGender())->toHtml() ?>
         <?php endif ?>
 
-        <?php if ($type === 'business'): ?>
-            <div class="field job_position ">
-                <label for="job_position" class="label"><span>Job Position</span></label>
-                <div class="control">
-                    <input type="text" name="job_position" id="job_position" value="" title="Job Position" class="input-text " autocomplete="off">
-                </div>
-            </div>
-        <?php endif ?>
-        <?php $_telephone = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Telephone::class) ?>
-        <?php if ($type === 'business'): ?>
-            <?= $_telephone->setTelephone($formData->getTelephone())->toHtml() ?>
-        <?php endif ?>
+        <?php //if ($type === 'business'): ?>
+<!--            <div class="field job_position ">-->
+<!--                <label for="job_position" class="label"><span>Job Position</span></label>-->
+<!--                <div class="control">-->
+<!--                    <input type="text" name="job_position" id="job_position" value="" title="Job Position" class="input-text " autocomplete="off">-->
+<!--                </div>-->
+<!--            </div>-->
+        <?php //endif ?>
         <?php if ($block->isNewsletterEnabled()): ?>
             <div class="field choice newsletter">
                 <input type="checkbox"
@@ -328,7 +371,7 @@ $formData = $block->getFormData();
                 <span><?= $escaper->escapeHtml(__('Register')) ?></span>
             </button>
         </div>
-        
+
     </div>
 </form>
 <?php $ignore = /* @noEscape */ $_dob->isEnabled() ? '\'input[id$="full"]\'' : 'null';
@@ -407,4 +450,14 @@ script;
             }
         }
     }
+</script>
+<script>
+    require(['jquery'], function($) {
+        $( document ).ready(function() {
+            $('select#region_id').on('change', function() {
+                var selectedRegion = $(this).children("option:selected").html();
+                $('#region').val(selectedRegion);
+            });
+        });
+    });
 </script>

@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace Mage4\ExtendMagentoCustomer\Controller\Account;
 
+
 use Magento\Customer\Api\CustomerRepositoryInterface as CustomerRepository;
 use Magento\Framework\App\Action\HttpPostActionInterface as HttpPostActionInterface;
 use Magento\Customer\Model\Account\Redirect as AccountRedirect;
@@ -40,6 +41,14 @@ use Magento\Framework\Exception\StateException;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Data\Form\FormKey\Validator;
 use Magento\Customer\Controller\AbstractAccount;
+
+use Magento\User\Model\ResourceModel\User\CollectionFactory;
+use Amasty\CompanyAccount\Api\Data\CompanyInterfaceFactory;
+use Amasty\CompanyAccount\Api\CompanyRepositoryInterface;
+use Amasty\CompanyAccount\Model\CompanyContext;
+use Amasty\CompanyAccount\Model\ConfigProvider;
+use Amasty\CompanyAccount\Api\Data\CompanyInterface;
+use Amasty\CompanyAccount\Model\Source\Company\Status as CompanyStatus;
 
 /**
  * Post create customer action
@@ -145,6 +154,11 @@ class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, Ht
     private $formKeyValidator;
 
     /**
+     * @var CollectionFactory
+     */
+    private $userCollectionFactory;
+
+    /**
      * @var CustomerRepository
      */
     private $customerRepository;
@@ -153,6 +167,26 @@ class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, Ht
      * @var ScopeConfigInterface
      */
     private $scopeConfig;
+
+    /**
+     * @var CompanyInterfaceFactory
+     */
+    private $companyFactory;
+
+    /**
+     * @var CompanyRepositoryInterface
+     */
+    private $companyRepository;
+
+    /**
+     * @var CompanyContext
+     */
+    private $companyContext;
+
+    /**
+     * @var ConfigProvider
+     */
+    private $configProvider;
 
     /**
      * @param Context $context
@@ -175,6 +209,11 @@ class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, Ht
      * @param AccountRedirect $accountRedirect
      * @param CustomerRepository $customerRepository
      * @param Validator $formKeyValidator
+     * @param CollectionFactory $userCollectionFactory
+     * @param CompanyInterfaceFactory $companyFactory
+     * @param CompanyRepositoryInterface $companyRepository
+     * @param CompanyContext $companyContext
+     * @param ConfigProvider $configProvider
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -198,7 +237,12 @@ class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, Ht
         DataObjectHelper $dataObjectHelper,
         AccountRedirect $accountRedirect,
         CustomerRepository $customerRepository,
-        Validator $formKeyValidator = null
+        Validator $formKeyValidator = null,
+        CollectionFactory $userCollectionFactory,
+        CompanyInterfaceFactory $companyFactory,
+        CompanyRepositoryInterface $companyRepository,
+        CompanyContext $companyContext,
+        ConfigProvider $configProvider
     ) {
         $this->session = $customerSession;
         $this->scopeConfig = $scopeConfig;
@@ -218,7 +262,11 @@ class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, Ht
         $this->dataObjectHelper = $dataObjectHelper;
         $this->accountRedirect = $accountRedirect;
         $this->formKeyValidator = $formKeyValidator ?: ObjectManager::getInstance()->get(Validator::class);
-        $this->customerRepository = $customerRepository;
+        $this->userCollectionFactory = $userCollectionFactory;
+        $this->companyFactory = $companyFactory;
+        $this->companyRepository = $companyRepository;
+        $this->companyContext = $companyContext;
+        $this->configProvider = $configProvider;
         parent::__construct($context);
     }
 
@@ -348,6 +396,10 @@ class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, Ht
      */
     public function execute()
     {
+//        $companyData = $this->getRequest()->getParam('company', []);
+//        echo "<pre>";
+//        print_r($companyData);
+//        exit;
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($this->session->isLoggedIn() || !$this->registration->isAllowed()) {
@@ -373,10 +425,7 @@ class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, Ht
             $redirectUrl = $this->session->getBeforeAuthUrl();
             $this->checkPasswordConfirmation($password, $confirmation);
 
-            $customer->setCustomAttribute('company_email',$this->getRequest()->getParam('company_email'))
-                ->setCustomAttribute('ein_id',$this->getRequest()->getParam('ein_id'))
-                ->setCustomAttribute('reseller_id',$this->getRequest()->getParam('reseller_id'))
-                ->setCustomAttribute('job_position',$this->getRequest()->getParam('job_position'));
+            $customer->setCustomAttribute('job_position',$this->getRequest()->getParam('job_position'));
 
             $extensionAttributes = $customer->getExtensionAttributes();
             $extensionAttributes->setIsSubscribed($this->getRequest()->getParam('is_subscribed', false));
@@ -389,8 +438,18 @@ class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, Ht
                 'customer_register_success',
                 ['account_controller' => $this, 'customer' => $customer]
             );
+
+            // company account form data saver
+            $companyData = $this->getRequest()->getParam('company', []);
+            $companyCollection = $this->companyFactory->create();
+            $companyCollection->setData($companyData);
+            $this->prepareCompanyData($companyCollection, $customer->getId(), $customer->getGroupId());
+            $this->companyRepository->save($companyCollection);
+
             $confirmationStatus = $this->accountManagement->getConfirmationStatus($customer->getId());
             if ($confirmationStatus === AccountManagementInterface::ACCOUNT_CONFIRMATION_REQUIRED) {
+
+
                 $this->messageManager->addComplexSuccessMessage(
                     'confirmAccountSuccessMessage',
                     [
@@ -517,5 +576,74 @@ class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, Ht
         }
 
         return $message;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @throws LocalizedException
+     */
+    protected function validateEmail(array $data)
+    {
+        if (isset($data[CompanyInterface::COMPANY_EMAIL])
+            && $this->isEmailExist($data[CompanyInterface::COMPANY_EMAIL])
+            && !isset($data[CompanyInterface::COMPANY_ID])
+        ) {
+            throw new LocalizedException(
+                __('There is already a company account associated with this email address.'
+                    . ' Please enter a different email address.')
+            );
+        }
+    }
+
+    /**
+     * @param CompanyInterface $company
+     */
+    private function prepareCompanyData(CompanyInterface $company, $customerId, $customerGroupId)
+    {
+        if (!$company->getCompanyId()) {
+            $company->setSuperUserId($customerId);
+            $company->setCustomerGroupId($customerGroupId);
+            $this->setStatus($company);
+            $userCollection = $this->userCollectionFactory->create();
+            $userCollection->getSelect()->limit(1);
+            $company->setSalesRepresentativeId($userCollection->getFirstItem()->getId());
+        }
+
+        $this->setStreet($company);
+    }
+
+    /**
+     * @param CompanyInterface $company
+     */
+    private function setStatus(CompanyInterface $company)
+    {
+        if ($this->configProvider->isAutoApprove()) {
+            $company->setStatus(CompanyStatus::STATUS_ACTIVE);
+        } else {
+            $company->setStatus(CompanyStatus::STATUS_PENDING);
+        }
+    }
+
+    /**
+     * @param CompanyInterface $company
+     */
+    private function setStreet(CompanyInterface $company)
+    {
+        $street = $company->getStreet();
+        if (is_array($street) && count($street)) {
+            $company->setStreet(trim(implode("\n", $street)));
+        }
+    }
+
+    /**
+     * @param string $email
+     * @return bool
+     */
+    private function isEmailExist($email)
+    {
+        $company = $this->companyRepository->getByField(CompanyInterface::COMPANY_EMAIL, $email);
+
+        return (bool)$company->getCompanyId();
     }
 }
