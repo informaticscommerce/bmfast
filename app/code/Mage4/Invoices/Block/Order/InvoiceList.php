@@ -1,11 +1,6 @@
 <?php
-/**
- * User: Amit Bera
- * Email: dev.amitbera@gmail.com
- */
 
 namespace Mage4\Invoices\Block\Order;
-
 
 use Magento\Framework\View\Element\Template;
 

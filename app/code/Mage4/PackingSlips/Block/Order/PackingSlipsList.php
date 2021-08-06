@@ -1,8 +1,4 @@
 <?php
-/**
- * User: Amit Bera
- * Email: dev.amitbera@gmail.com
- */
 
 namespace Mage4\PackingSlips\Block\Order;
 

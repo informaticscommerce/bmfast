@@ -16,10 +16,14 @@ $urlKey = str_replace($baseUrl,"",$currentUrl);
     <?php $cmsPageObj = $block->getCmsPageDetails($urlKey); ?>
     <?php if(count($cmsPageObj) > 0): ?>
         <?php foreach ($cmsPageObj as $key => $value): ?>
-            <?php if($value->getHeroImage()): ?>
+            <?php if($value->getHeroImage() || $value->getHeroImageText()): ?>
                 <div class="hero-imgae-content">
-                    <img src="<?= $mediaUrl.'cms/heroimage/'.$value->getHeroImage() ?>" />
-                    <span class="hero-image-text"><?= $value->getHeroImageText() ?></span>
+                    <?php if($value->getHeroImage()): ?>
+                        <img src="<?= $mediaUrl.'cms/heroimage/'.$value->getHeroImage() ?>" />
+                    <?php  endif; ?>
+                    <?php if($value->getHeroImageText()): ?>
+                        <span class="hero-image-text"><?= $value->getHeroImageText() ?></span>
+                    <?php  endif; ?>
                 </div>
             <?php  endif; ?>
         <?php endforeach; ?>
