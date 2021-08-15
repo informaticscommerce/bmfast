@@ -421,4 +421,5 @@ Redirect 301 /locations.html /locations
 Redirect 301 /resources.html /resources
 Redirect 301 /careers.html /careers
 Redirect 301 /news.html /news
+Redirect 301 /placeorder/ /quick-order
 
