@@ -27,7 +27,7 @@
 <!--                    <argument name="sortOrder" xsi:type="number">102</argument>-->
                 </arguments>
             </block>
-            <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\StoreCreditLink"
+<!--             <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\StoreCreditLink"
                    name="amcompany-customer-account-tab-company-credit">
                 <arguments>
                     <argument name="path" xsi:type="string">amasty_company/credit/index</argument>
@@ -35,7 +35,7 @@
                     <argument name="resource" xsi:type="string">Amasty_CompanyAccount::use_credit</argument>
                     <argument name="sortOrder" xsi:type="number">102</argument>
                 </arguments>
-            </block>
+            </block> -->
             <block class="Mage4\ExtendAmastyCompanyAccount\Block\Link\UsersLink"
                    name="amcompany-customer-account-tab-company-users">
                 <arguments>
@@ -67,6 +67,7 @@
 
         <referenceBlock name="customer-account-navigation-delimiter-1" remove="true"/>
         <referenceBlock name="customer-account-navigation-delimiter-2" remove="true"/>
+        <referenceBlock name="amcompany-customer-account-tab-company-credit" remove="true"/>        
 
         <move element="amcompany-customer-account-tab-company-account" destination="customer_account_navigation" after="customer-account-request-tab"/>
         <move element="amcompany-customer-account-tab-company-users" destination="customer_account_navigation" after="amcompany-customer-account-tab-company-account"/>
