@@ -6,7 +6,14 @@
 
 // phpcs:disable Magento2.Templates.ThisInTemplate
 // @codingStandardsIgnoreFile
+
+/** @var InvoiceList $block */
+
+use Mage4\Invoices\Block\Order\InvoiceList;
+
 ?>
+<a href="<?= $block->getBaseUrl().'certification/' ?>">Certification</a>
+<a href="<?= $block->getBaseUrl().'packing/' ?>">Packing Slips</a>
 <?php $_invoices = $block->getInvoiceList() ?>
 <div class="table-wrapper orders-invoices">
     <table class="data table table-order-items invoices" id="invoices-orders-table">

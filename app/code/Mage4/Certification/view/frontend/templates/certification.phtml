@@ -1,4 +1,17 @@
 <?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
 
+// phpcs:disable Magento2.Templates.ThisInTemplate
+// @codingStandardsIgnoreFile
+
+/** @var CertificationList $block */
+
+use Mage4\Certification\Block\Order\CertificationList;
 ?>
-<h3 style="text-align: center;">No Certification Found!</h3>
+
+<a href="<?= $block->getBaseUrl().'invoices/' ?>">Invoices</a>
+<a href="<?= $block->getBaseUrl().'packing/' ?>">Packing Slips</a>
+<h3>No Certification Found!</h3>

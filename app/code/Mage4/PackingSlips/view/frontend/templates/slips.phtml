@@ -7,7 +7,14 @@
 // phpcs:disable Magento2.Templates.ThisInTemplate
 // @codingStandardsIgnoreFile
 
+/** @var PackingSlipsList $block */
+
+use Mage4\PackingSlips\Block\Order\PackingSlipsList;
 ?>
+
+<a href="<?= $block->getBaseUrl().'invoices/' ?>">Invoices</a>
+<a href="<?= $block->getBaseUrl().'certification/' ?>">Certification</a>
+
 <?php $_orders = $block->getPackingSlipsList() ?>
 <div class="table-wrapper orders-packing">
     <table class="data table table-order-items packing" id="packing-orders-table">
