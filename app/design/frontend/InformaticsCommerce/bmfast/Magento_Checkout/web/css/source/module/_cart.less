@@ -22,7 +22,7 @@
         .page-wrapper {
             overflow: hidden;
         }
-        
+
         .page-main {
             padding-left: 0;
             padding-right: 0;
@@ -71,7 +71,7 @@
         }
         .cart {
             &.item {
-                .col {                  
+                .col {
                     .product-item-name {
                         font-size: 16px;
                         color: #313233;
@@ -90,14 +90,14 @@
                     .price {
                         font-size: 16px;
                         line-height: 24px;
-                        font-weight: 400 !important; 
+                        font-weight: 400 !important;
                         color: #69a872;
-                    }  
+                    }
                     &.subtotal {
                         .price {
                             color: #333333;
                         }
-                    }                
+                    }
                     &.qty {
                         padding: 35px 11px 10px;
                         .random-plus {
@@ -109,7 +109,7 @@
                             font-size: 20px;
                             height: 46px;
                             width: 34px;
-                            text-align: center; 
+                            text-align: center;
                             font-weight: 700;
                             line-height: 45px;
                             border: 1px solid #c7c7c7;
@@ -127,13 +127,13 @@
                             font-weight: 700;
                             line-height: 45px;
                             border: 1px solid #c7c7c7;
-                            }
-                        .control {  
+                        }
+                        .control {
                             &.qty {
                                 position: relative;
                                 display: inline-block;
-                            }   
-                        }   
+                            }
+                        }
                     }
                 }
             }
@@ -384,13 +384,13 @@
                     right: 20px;
                     top: -50px;
                     .lib-icon-font(
-                    @icon-edit,
-                    @_icon-font-size: 18px,
-                    @_icon-font-line-height: 20px,
-                    @_icon-font-text-hide: true,
-                    @_icon-font-color: @minicart-icons-color,
-                    @_icon-font-color-hover: @primary__color,
-                    @_icon-font-color-active: @minicart-icons-color
+                        @icon-edit,
+                        @_icon-font-size: 18px,
+                        @_icon-font-line-height: 20px,
+                        @_icon-font-text-hide: true,
+                        @_icon-font-color: @minicart-icons-color,
+                        @_icon-font-color-hover: @primary__color,
+                        @_icon-font-color-active: @minicart-icons-color
                     );
                 }
 
@@ -398,9 +398,9 @@
                     &:extend(.abs-action-button-as-link all);
                     right: 0;
                     .lib-icon-font-symbol(
-                    @_icon-font-content: @icon-trash
+                        @_icon-font-content: @icon-trash
                     );
-                    
+
                     &:hover {
                         .lib-css(text-decoration, @link__text-decoration);
                     }
@@ -559,6 +559,93 @@
             text-align: right;
         }
     }
+
+    //My Quote//
+    //------------//
+
+    .amasty_quote-cart-index {
+        #form-validate {
+            width: 70%;
+        }
+        .cart-summary {
+            width: 27%;
+            top: 0 !important;
+            background: #fff;
+            border: 4px solid #80888e;
+            margin-bottom: 20px;
+            .title {
+                font-size: 20px;
+                font-family: @font-family-name__roboto-Medium;
+            }
+            .grand.totals {
+                strong {
+                    font-size: 20px;
+                    font-family: @font-family-name__roboto-Bold;
+                }
+            }
+            .totals.sub,
+            .totals-tax {
+                font-size: 16px;
+                .mark {
+                    font-family: @font-family-name__roboto-Medium;
+                }
+            }
+            .quote-details {
+                .form-login {
+                    .field-tooltip {
+                        padding: 10px 7px;
+                        top: 0;
+                        right: -4px;
+                        .field-tooltip-action {
+                            &:before {
+                                color: #000;
+                            }
+                            &:hover {
+                                &:before {
+                                    color: #bbbbbb;
+                                }
+                            }
+                        }
+                    }
+                }
+                .fieldset {
+                    margin-top: 20px;
+                    .field {
+                        .label {
+                            font-size: 16px;
+                            font-weight: 400;
+                            margin: 0;
+                            font-family: @font-family-name__roboto-Medium;
+                        }
+                        input {
+                            height: 54px !important;
+                            border: 2px solid #c7c7c7 !important;
+                        }
+                        textarea {
+                            border: 2px solid #c7c7c7 !important;
+                        }
+                    }
+                }
+            }
+            .seprator {
+                height: 4px;
+                background: #80888e;
+                margin: 0 -20px;
+            }
+        }
+        .action {
+            &.primary{
+                &.checkout {
+                    font-size: 20px !important;
+                    font-weight: 400;
+                    background: #44924f;
+                    border: #44924f;
+                    text-transform: uppercase;
+                    font-family: @font-family-name__poppins-Bold;
+                }
+            }
+        }
+    }
 }
 
 //
@@ -590,7 +677,7 @@
 
     .cart-container {
         .form-cart {
-            .actions.main { 
+            .actions.main {
                 display: flex;
             }
         }
@@ -627,7 +714,7 @@
         }
         .cart {
             &.item {
-                .col {                  
+                .col {
                     .product-item-photo {
                         .product-image-container {
                             max-width: 70px;
@@ -635,7 +722,7 @@
                     }
                 }
                 .product-item-details {
-                    padding-left: 10px; 
+                    padding-left: 10px;
                     padding-top: 5px;
                 }
                 .item-info {
@@ -770,6 +857,27 @@
         }
     }
 
+    .amasty_quote-cart-index {
+        .cart-container {
+            .form-cart {
+                .actions.main {
+                    display: inline-block;
+                    margin: 0;
+                }
+            }
+        }
+        #form-validate {
+            width: auto;
+        }
+        .cart-summary {
+            .cart-totals {
+                border: 0;
+            }
+            .seprator {
+                margin: 0;
+            }
+        }
+    }
 }
 
 //
@@ -831,14 +939,14 @@
 
         .widget {
             float: left;
-            
+
             &.block {
                 margin-bottom: @indent__base;
             }
         }
         .cart {
             &.item {
-                .col {                  
+                .col {
                     .product-item-photo {
                         .product-image-container {
                             max-width: 135px;
@@ -1010,7 +1118,7 @@
             }
             &.discount {
                 width: 48%;
-                float: left; 
+                float: left;
             }
             .content {
                 display: block !important;
