@@ -1,0 +1,32 @@
+<?php
+
+/** @var History $block */
+
+use Mage4\ExtendAmastyRequestQuote\Block\Adminhtml\Quote\View\History;
+?>
+<?php /** @var \Magento\Framework\Escaper $escaper */ ?>
+
+<div id="order_history_block" class="edit-order-comments">
+    <?php if ($block->getNotes()): ?>
+    <ul class="note-list">
+        <?php if ($block->getNotes()->getCustomerNote()): ?>
+            <li class="note-list-item">
+                <strong><?= $escaper->escapeHtml(__('Customer Remarks'))?></strong>
+                <div class="note-list-comment"><?= /* @noEscape */ nl2br($escaper->escapeHtml($block->getNotes()->getCustomerNote(), ['b', 'br', 'strong', 'i', 'u', 'a'])) ?></div>
+            </li>
+        <?php endif; ?>
+        <?php if ($block->getNotes()->getAdminNote()): ?>
+            <li class="note-list-item">
+                <strong><?= $escaper->escapeHtml(__('Admin Remarks'))?></strong>
+                <div class="note-list-comment"><?= /* @noEscape */ nl2br($escaper->escapeHtml($block->getNotes()->getAdminNote(), ['b', 'br', 'strong', 'i', 'u', 'a'])) ?></div>
+            </li>
+        <?php endif; ?>
+    </ul>
+    <?php endif; ?>
+    <?php if ($block->getFile()): ?>
+        <strong><?= $escaper->escapeHtml(__('Attachment'))?></strong>
+        <div class="attachment-file-comment">
+            <a href="<?= $block->getMediaUrl().'mage4/requestquote/'.$block->getFile() ?>" target="_blank"><?= $block->getFile() ?></a>
+        </div>
+    <?php endif; ?>
+</div>

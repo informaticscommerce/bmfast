@@ -1,0 +1,18 @@
+<div class="field" data-bind="css: {'required': $parent.required}">
+    <label class="label">
+        <span data-bind="i18n: $parent.label"></span>
+    </label>
+    <div class="control">
+        <input class="input-text" type="text" data-bind="
+            hasFocus: focused,
+            datepicker: { storage: $parent.value, options: options },
+            attr: {
+                name: $parent.code,
+                placeholder: placeholder,
+                'aria-describedby': getDescriptionId(),
+                'aria-required': required,
+                'aria-invalid': error() ? true : 'false',
+                disabled: disabled
+            }" />
+    </div>
+</div>
