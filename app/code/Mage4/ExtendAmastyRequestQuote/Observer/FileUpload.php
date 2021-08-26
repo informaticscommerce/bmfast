@@ -55,7 +55,7 @@ class FileUpload implements \Magento\Framework\Event\ObserverInterface
 
         try {
             if ($_FILES['quote_file']['name']) {
-                $mediaUrl = $this->filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('mage4/requestquote/');
+                $mediaUrl = $this->filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('informaticscommerce/requestquote/');
 
                 $uploader = $this->uploaderFactory->create(['fileId' => 'quote_file']);
                 $uploader->setAllowedExtensions(['pdf', 'doc', 'docs', 'csv', 'txt']);
@@ -66,9 +66,11 @@ class FileUpload implements \Magento\Framework\Event\ObserverInterface
                 $this->saveAmastyQuote($quote);
             }
         } catch (LocalizedException $e) {
-            $this->messageManager->addErrorMessage($e->getMessage());
+            $connection = $this->resource->getConnection();
+            $connection->query(sprintf('DELETE FROM amasty_quote WHERE quote_id = %s',$quote->getId()));
+            throw new \Magento\Framework\Exception\CouldNotDeleteException(__("Please upload correct format!"));
         } catch (\Exception $e) {
-            $this->messageManager->addErrorMessage(__('Something went wrong'));
+            throw new \Magento\Framework\Exception\CouldNotDeleteException(__("Please upload correct format!!"));
             $this->getLogger()->error($e->getMessage());
         }
     }
@@ -79,6 +81,8 @@ class FileUpload implements \Magento\Framework\Event\ObserverInterface
     private function saveAmastyQuote(\Magento\Quote\Model\Quote $quote)
     {
         $connection = $this->resource->getConnection();
-        $connection->query(sprintf('update amasty_quote set custom_file=\'%s\' where quote_id = %s', $quote->getCustomFile(), $quote->getId()));
+        if ($quote->getCustomFile() != '') {
+            $connection->query(sprintf('update amasty_quote set custom_file=\'%s\' where quote_id = %s', $quote->getCustomFile(), $quote->getId()));
+        }
     }
 }
