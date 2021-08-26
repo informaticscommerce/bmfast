@@ -440,11 +440,13 @@ class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, Ht
             );
 
             // company account form data saver
-            $companyData = $this->getRequest()->getParam('company', []);
-            $companyCollection = $this->companyFactory->create();
-            $companyCollection->setData($companyData);
-            $this->prepareCompanyData($companyCollection, $customer->getId(), $customer->getGroupId());
-            $this->companyRepository->save($companyCollection);
+            if($this->getRequest()->getParam('company', [])) {
+                $companyData = $this->getRequest()->getParam('company', []);
+                $companyCollection = $this->companyFactory->create();
+                $companyCollection->setData($companyData);
+                $this->prepareCompanyData($companyCollection, $customer->getId(), $customer->getGroupId());
+                $this->companyRepository->save($companyCollection);
+            }
 
             $confirmationStatus = $this->accountManagement->getConfirmationStatus($customer->getId());
             if ($confirmationStatus === AccountManagementInterface::ACCOUNT_CONFIRMATION_REQUIRED) {
