@@ -65,7 +65,6 @@
             </block>
         </referenceBlock>
 
-        
         <referenceBlock name="customer-account-navigation-delimiter-1" remove="true"/>
         <referenceBlock name="customer-account-navigation-delimiter-2" remove="true"/>
         <referenceBlock name="amcompany-customer-account-tab-company-credit" remove="true"/>
