@@ -27,6 +27,8 @@ class SortLink extends \Magento\Customer\Block\Account\SortLink
         $customerSession = $objectManager->get('Magento\Customer\Model\Session');
         $customerID = $customerSession->getCustomer()->getId();//get id of customer
 
+        // custom work
+        // check individual customer or Company Account
         $model = $objectManager->create('Amasty\CompanyAccount\Model\Company');
         $collection = $model->getCollection();
         $collection->addFieldToFilter('super_user_id', $customerID);

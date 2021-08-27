@@ -1,0 +1,39 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_RequestQuote
+ */
+//echo "aaaaaaaaa";
+?>
+<?php /** @var $block \Amasty\RequestQuote\Block\Account\Quote\Info */ ?>
+<?php /** @var \Magento\Framework\Escaper $escaper */ ?>
+
+<?php if ($block->getNotes()): ?>
+<div class="block block-order-details-commentsBBB">
+    <div class="block-title"><strong><?= $escaper->escapeHtml(__('Remarks')) ?></strong></div>
+    <div class="block-content">
+        <ul class="note-list amquote-report-container">
+            <?php if ($block->getNotes()->getCustomerNote()): ?>
+                <li class="note-list-item amquote-item">
+                    <?= $escaper->escapeHtml(__('Сustomer Remarks:'))?>
+                    <div class="note-list-comment amquote-comment"><?= /* @noEscape  */ nl2br($escaper->escapeHtml($block->getNotes()->getCustomerNote(), ['b', 'br', 'strong', 'i', 'u', 'a'])) ?></div>
+                </li>
+            <?php endif; ?>
+            <?php if ($block->getNotes()->getAdminNote()): ?>
+                <li class="note-list-item amquote-item">
+                    <?= $escaper->escapeHtml(__('Administrator Remarks:'))?>
+                    <div class="note-list-comment amquote-comment"><?= /* @noEscape  */ nl2br($escaper->escapeHtml($block->getNotes()->getAdminNote(), ['b', 'br', 'strong', 'i', 'u', 'a'])) ?></div>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </div>
+</div>
+<?php endif; ?>
+<?php if ($block->getFile()): ?>
+    <strong><?= $escaper->escapeHtml(__('Attachment'))?></strong>
+    <div class="attachment-file-comment">
+        <a href="<?= $block->getMediaUrl().'informaticscommerce/requestquote/'.$block->getFile() ?>" target="_blank"><?= $block->getFile() ?></a>
+    </div>
+<?php endif; ?>
+
