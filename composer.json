@@ -17,6 +17,7 @@
         "amasty/module-improved-layered-navigation-page": "^2.7",
         "amasty/module-one-step-checkout-pro-package": "^1.0",
         "amasty/shopby": "^2.16",
+        "dompdf/dompdf": "^1.0",
         "magento/composer-root-update-plugin": "~1.0",
         "magento/product-community-edition": "2.4.1",
         "mageplaza/module-lazy-loading": "^1.0",
