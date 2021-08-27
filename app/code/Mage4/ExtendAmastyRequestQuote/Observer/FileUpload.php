@@ -2,13 +2,18 @@
 
 namespace Mage4\ExtendAmastyRequestQuote\Observer;
 
-use Amasty\RequestQuote\Api\Data\QuoteInterface;
+use Exception;
+use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\ResourceConnection;
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filesystem;
 use Magento\MediaStorage\Model\File\UploaderFactory;
+use Magento\Quote\Model\Quote;
 
-class FileUpload implements \Magento\Framework\Event\ObserverInterface
+class FileUpload implements ObserverInterface
 {
     /**
      * Uploadfactory
@@ -49,13 +54,13 @@ class FileUpload implements \Magento\Framework\Event\ObserverInterface
         $this->filesystem = $filesystem;
     }
 
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(Observer $observer)
     {
         $quote = $observer->getQuote();
 
         try {
             if ($_FILES['quote_file']['name']) {
-                $mediaUrl = $this->filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('informaticscommerce/requestquote/');
+                $mediaUrl = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA)->getAbsolutePath('informaticscommerce/requestquote/');
 
                 $uploader = $this->uploaderFactory->create(['fileId' => 'quote_file']);
                 $uploader->setAllowedExtensions(['pdf', 'doc', 'docs', 'csv', 'txt']);
@@ -67,21 +72,21 @@ class FileUpload implements \Magento\Framework\Event\ObserverInterface
             }
         } catch (LocalizedException $e) {
             $connection = $this->resource->getConnection();
-            $connection->query(sprintf('DELETE FROM amasty_quote WHERE quote_id = %s',$quote->getId()));
-            throw new \Magento\Framework\Exception\CouldNotDeleteException(__("Please upload correct format!"));
-        } catch (\Exception $e) {
-            throw new \Magento\Framework\Exception\CouldNotDeleteException(__("Please upload correct format!!"));
+            $connection->query(sprintf('DELETE FROM amasty_quote WHERE quote_id = %s', $quote->getId()));
+            throw new CouldNotDeleteException(__("Unable to submit. " . $e->getMessage()));
+        } catch (Exception $e) {
+            throw new CouldNotDeleteException(__("Unable to submit. " . $e->getMessage()));
             $this->getLogger()->error($e->getMessage());
         }
     }
 
     /**
-     * @param \Magento\Quote\Model\Quote $quote
+     * @param Quote $quote
      */
-    private function saveAmastyQuote(\Magento\Quote\Model\Quote $quote)
+    private function saveAmastyQuote(Quote $quote)
     {
         $connection = $this->resource->getConnection();
-        if ($quote->getCustomFile() != '') {
+        if (!empty($quote->getCustomFile())) {
             $connection->query(sprintf('update amasty_quote set custom_file=\'%s\' where quote_id = %s', $quote->getCustomFile(), $quote->getId()));
         }
     }
